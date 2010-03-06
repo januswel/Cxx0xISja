@@ -142,7 +142,7 @@
         - all non-static data members and base classes of literal types; or
     - an array of literal type.
 
-10 以下の条件に当てはまる場合その型はリテラル型である。
+10 以下の条件に当てはまる場合その型は { リテラル型 } である。
 
     - スカラー型
     - 以下のすべてを持つクラス型 ( 9 条 )
@@ -154,5 +154,5 @@
 
 11 If two types T1 and T2 are the same type, then T1 and T2 are layout-compatible types. [ Note: Layout-compatible enumerations are described in 7.2. Layout-compatible standard-layout structs and standard-layout unions are described in 9.2. -end note ]
 
-11 ふたつの型 T1 と T2 が同じ型である場合、 T1 と T2 は割り付け互換型である。 [ 注: 割り付け互換な列挙は 7.2 で記述されている。割り付け互換な標準割り付け構造体と標準割り付け共用体は 9.2 で記述されている。 ]
+11 ふたつの型 T1 と T2 が同じ型である場合、 T1 と T2 は { 割り付け互換 } な型である。 [ 注: 割り付け互換な列挙は 7.2 で記述されている。割り付け互換な標準割り付け構造体と標準割り付け共用体は 9.2 で記述されている。 ]
 
