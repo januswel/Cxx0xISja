@@ -1,15 +1,28 @@
 1.6 Syntax notation [syntax]
 
-1 In the syntax notation used in this International Standard, syntactic categories are indicated by italic type, and literal words and characters in constant width type. Alternatives are listed on separate lines except in a few cases where a long set of alternatives is marked by the phrase “one of.” If the text of an alternative is too long to fit on a line, the text is continued on subsequent lines indented from the first one. An optional terminal or nonterminal symbol is indicated by the subscript “opt ”, so
+1 In the syntax notation used in this International Standard, syntactic categories are indicated by italic type, and literal words and characters in constant width type. Alternatives are listed on separate lines except in a few cases where a long set of alternatives is marked by the phrase "one of." If the text of an alternative is too long to fit on a line, the text is continued on subsequent lines indented from the first one. An optional terminal or nonterminal symbol is indicated by the subscript "opt ", so
 
-{ expressionopt }
+{ expression<sub>opt</sub> }
 
 indicates an optional expression enclosed in braces.
 
+1 この国際標準で使用されている構文表記において、構文カテゴリーはイタリック体で、リテラルの語と文字は固定幅字体で示される。「のうちのひとつ」という表現によって示される選択肢がたくさんある数件を除いて選択肢は別の行として一覧表示されている。選択肢の文字列が長すぎて行に収まらない場合、その文字列は最初の行に比べ字下げされて次行に継続する。任意の終端もしくは非終端シンボルは下付き文字 "opt" によって示され、
+
+{ expression<sub>opt</sub> }
+
+は中括弧で括られた任意の式を示している。
+
 2 Names for syntactic categories have generally been chosen according to the following rules:
 
-— X-name is a use of an identifier in a context that determines its meaning (e.g., class-name, typedefname).
-— X-id is an identifier with no context-dependent meaning (e.g., qualified-id).
-— X-seq is one or more X’s without intervening delimiters (e.g., declaration-seq is a sequence of declarations).
-— X-list is one or more X’s separated by intervening commas (e.g., expression-list is a sequence of expressions separated by commas).
+- X-name is a use of an identifier in a context that determines its meaning (e.g., class-name, typedefname).
+- X-id is an identifier with no context-dependent meaning (e.g., qualified-id).
+- X-seq is one or more X's without intervening delimiters (e.g., declaration-seq is a sequence of declarations).
+- X-list is one or more X's separated by intervening commas (e.g., expression-list is a sequence of expressions separated by commas).
+
+2 構文カテゴリーにおける名前は一般に以下の規則に従って選ばれている。
+
+- X-name はその意味を決定する文脈における識別子の使用である ( 例えば、 class-name 、 typedefname ) 。
+- X-id は文脈に依存しない意味を持つ識別子である ( 例えば、 qualified-id ) 。
+- X-seq は途中に区切り文字を挟まないひとつ以上の X である ( 例えば、 declaration-seq は宣言の連続である ) 。
+- X-list はカンマ区切りのひとつ以上の X である ( 例えば、 expression-list はカンマ区切りの式の連続である。 ) 。
 
