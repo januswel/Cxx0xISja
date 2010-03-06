@@ -6,9 +6,15 @@
 
 2 [ Note: the representation of types is described in 3.9. —end note ]
 
+2 [ 注: 型の表現は 3.9 で記述されている。 ]
+
 3 A memory location is either an object of scalar type or a maximal sequence of adjacent bit-fields all having non-zero width. [ Note: Various features of the language, such as references and virtual functions, might involve additional memory locations that are not accessible to programs but are managed by the implementation.  —end note ] Two threads of execution (1.10) can update and access separate memory locations without interfering with each other.
 
+3 { 記憶領域: memory location } とはスカラー型のオブジェクトもしくはすべて零でない幅を持つ隣接したビットフィールドの最長列のどちらか一方である。 [ 注: 言語の様々な機能、例えば参照や仮想関数、はプログラムはアクセスできないが実装が管理する追加の記憶領域を含んでもよい。 ] ふたつの実行スレッド ( 1.10 ) はお互いの干渉なしに隣接していない記憶領域に対して更新もしくはアクセスが可能である。
+
 4 [ Note: Thus a bit-field and an adjacent non-bit-field are in separate memory locations, and therefore can be concurrently updated by two threads of execution without interference. The same applies to two bit-fields, if one is declared inside a nested struct declaration and the other is not, or if the two are separated by a zero-length bit-field declaration, or if they are separated by a non-bit-field declaration. It is not safe to concurrently update two bit-fields in the same struct if all fields between them are also bit-fields of non-zero width. —end note ]
+
+4 [ 注: 従ってビットフィールドもしくは隣接するビットフィールドでないものは隣接していない記憶領域に配置され、その結果ふたつの実行スレッドによって干渉なしに同時に更新されることが可能である。ひとつが入れ子の構造体宣言であり他方がそうでないように宣言されている場合、もしくはふたつが零幅のビットフィールド宣言によって分割されている場合、もしくはそれらがビットフィールドでない宣言によって分割されている場合、同じことがふたつのビットフィールドに適用される。それらの間のすべての領域も零幅でないビットフィールドである場合同じ構造体のふたつのビットフィールドを同時に更新することは安全ではない。 ]
 
 5 [ Example: A structure declared as
 
@@ -22,4 +28,17 @@ struct {
 }
 
 contains four separate memory locations: The field a and bit-fields d and e.ee are each separate memory locations, and can be modified concurrently without interfering with each other. The bit-fields b and c together constitute the fourth memory location. The bit-fields b and c cannot be concurrently modified, but b and a, for example, can be. —end example ]
+
+5 [ 例: 以下のように宣言されている構造体は
+
+struct {
+    char a;
+    int b:5,
+    c:11,
+    :0,
+    d:8;
+    struct {int ee:8;} e;
+}
+
+よっつの隣接していない記憶領域を保持する。 a という領域とビットフィールド b と e.ee は各々が隣接していない記憶領域であり、お互いの干渉なしに同時に変更可能である。ビットフィールド b と c はともに第四の記憶領域を構成する。ビットフィールド b と c は同時に変更することが不可能であるが、例えば、 b と a 、は同時に変更可能である。 ]
 
