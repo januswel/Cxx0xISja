@@ -1,0 +1,102 @@
+1.3 Definitions [intro.defs]
+
+1 For the purposes of this International Standard, the definitions given in ISO/IEC 2382 and the following definitions apply. 17.3 defines additional terms that are used only in Clauses 17 through 27 and Annex D.
+
+1 この国際標準のために、 ISO/IEC 2382 で与えられる定義と以下の定義が利用される。 17.3 節ではさらに 17 条から 27 条までと付録 D でのみ使用される語句が定義されている。
+
+2 Terms that are used only in a small portion of this International Standard are defined where they are used and italicized where they are defined.
+
+2 この国際標準のほんの一部でのみ使われる語句はそれらが使われている場所でイタリック体で定義される。
+
+{ 訳注: 日本語訳において中括弧 {} で括っているものが定義された語句である。 }
+
+1.3.1 argument [defns.argument]
+an expression in the comma-separated list bounded by the parentheses in a function call expression; a sequence of preprocessing tokens in the comma-separated list bounded by the parentheses in a function-like macro invocation; the operand of throw; or an expression, type-id or template-name in the comma-separated list bounded by the angle brackets in a template instantiation.  Also known as an actual argument or actual parameter.
+
+1.3.1 引数 [defns.argument]
+関数呼び出し式における小括弧によって括られたコンマ区切りリストの中の式か、関数形式マクロの起動における小括弧によって括られたコンマ区切りリストの中の前処理トークンの連続か、 throw の演算対象か、もしくはテンプレート実体化における山括弧によって括られたコンマ区切りリストの中の式、 { 型識別名: type-id } 、 { テンプレート名 } 。 { 実引数 } もしくは { 実パラメーター } としても知られている。
+
+1.3.2 conditionally-supported [defns.cond.supp]
+a program construct that an implementation is not required to support. [ Note: Each implementation documents all conditionally-supported constructs that it does not support.-end note ]
+
+1.3.2 条件付き被サポート [defns.cond.supp]
+実装がサポートすることを要求しないプログラム構成。 [ 注: 各々の実装はサポートしていないすべての条件付き被サポート構成を明言する。 ]
+
+1.3.3 diagnostic message [defns.diagnostic]
+a message belonging to an implementation-defined subset of the implementation's output messages.
+
+1.3.3 診断メッセージ [defns.diagnostic]
+実装が出力するメッセージのうち実装時定義の一部に属するメッセージ。
+
+1.3.4 dynamic type [defns.dynamic.type]
+the type of the most derived object (1.8) to which the lvalue denoted by an lvalue expression refers. [ Example: if a pointer (8.3.1) p whose static type is “pointer to class B” is pointing to an object of class D, derived from B (Clause 10), the dynamic type of the expression *p is “D.” References (8.3.2) are treated similarly. -end example ] The dynamic type of an rvalue expression is its static type.
+
+1.3.4 動的な型 [defns.dynamic.type]
+左辺値式の参照によって示される左辺値であるほとんどの継承オブジェクト ( 1.8 ) の型。 [ 例: 静的な型が「クラス B へのポインター」であるポインター ( 8.3.1 ) p がクラス D のオブジェクトを指し示している場合、 B から派生した ( 10 条 ) 、 式 *p の動的な型は "D" である。参照 ( 8.3.2 ) も同様に扱われる。 ] 右辺値式の動的な型はその静的な型である。
+
+1.3.5 ill-formed program [defns.ill.formed]
+<del>input to a C++ implementation that is not a well-formed program.</del><ins>a wannabe C++ program that is not well-formed.</ins>
+
+1.3.5 不適格なプログラム [defns.ill.formed]
+<del>適格なプログラムでない C++ 実装への入力。</del><ins>適格でない C++ プログラム状のもの。</ins>
+
+1.3.6 implementation-defined behavior [defns.impl.defined]
+behavior, for a well-formed program construct and correct data, that depends on the implementation and that each implementation documents.
+
+1.3.6 実装時定義の挙動 [defns.impl.defined]
+適格なプログラム構成または正しいデータに対する、実装に依存し各々の実装が明言する、挙動。
+
+1.3.7 implementation limits [defns.impl.limits]
+restrictions imposed upon programs by the implementation.
+
+1.3.7 実装限界 [defns.impl.limits]
+実装によってプログラムに課せられる制約。
+
+1.3.8 locale-specific behavior [defns.locale.specific]
+behavior that depends on local conventions of nationality, culture, and language that each implementation documents.
+
+1.3.8 ロカール固有の挙動 [defns.locale.specific]
+各々の実装が明言する国民性、文化、言語の地域の決まりに依存した挙動。
+
+1.3.9 multibyte character [defns.multibyte]
+a sequence of one or more bytes representing a member of the extended character set of either the source or the execution environment. The extended character set is a superset of the basic character set (2.3).
+
+1.3.9 マルチバイト文字 [defns.multibyte]
+ソースもしくは実行環境の拡張文字集合の構成文字を表現している一バイト以上の連続。拡張文字集合は基本文字集合の上位集合である ( 2.3 ) 。
+
+1.3.10 parameter [defns.parameter]
+an object or reference declared as part of a function declaration or definition, or in the catch Clause of an exception handler, that acquires a value on entry to the function or handler; an identifier from the commaseparated list bounded by the parentheses immediately following the macro name in a function-like macro definition; or a template-parameter. Parameters are also known as formal arguments or formal parameters.
+
+1.3.10 パラメーター [defns.parameter]
+関数もしくは例外処理への入力値を取得するための、関数宣言、関数定義、 catch 節の一部として宣言されるオブジェクトもしくは参照か、関数形式マクロ定義におけるマクロ名直後の小括弧で括られたカンマ区切りの一覧の中の識別子か、もしくは { テンプレートパラメーター } 。パラメーターは { 仮引数 } もしくは { 仮パラメーター } としても知られている。
+
+1.3.11 シグネチャ [defns.signature]
+the name and the parameter type list (8.3.5) of a function, as well as the class or namespace of which it is a member. If a function or function template is a class member its signature additionally includes the cv-qualifiers (if any) and the ref-qualifier (if any) on the function or function template itself. The signature of a function template additionally includes its return type and its template parameter list. The signature of a function template specialization includes the signature of the template of which it is a specialization and its template arguments (whether explicitly specified or deduced). [ Note: Signatures are used as a basis for name mangling and linking.-end note ]
+
+1.3.11 signature [defns.signature]
+関数の名前とパラメーターの型一覧 ( 8.3.5 ) 、およびその関数がメンバーであるクラスもしくは名前空間。関数もしくは関数テンプレートがクラスのメンバーである場合そのシグネチャは関数や関数テンプレート自体の ( 存在するならば ) { cv } 修飾子と ( 存在するならば ) { ref 修飾子 } をも含む。関数テンプレートのシグネチャはその返り値の型とパラメータの一覧をも含む。特殊化された関数テンプレートのシグネチャは特殊化のテンプレートのシグネチャとそのテンプレート引数を含む ( 明示的な指定、推定を問わず ) 。 [ 注: シグネチャは名前圧縮とリンクの基準として使用される。 ]
+
+1.3.12 static type [defns.static.type]
+the type of an expression (3.9), which type results from analysis of the program without considering execution semantics. The static type of an expression depends only on the form of the program in which the expression appears, and does not change while the program is executing.
+
+1.3.12 静的な型 [defns.static.type]
+実行時の意味を考慮しないプログラムの分析の結果として生じる、式の型 ( 3.9 ) 。式の静的な型は式が出現するプログラムの形式にのみ依存し、プログラムを実行している間は変更されない。
+
+1.3.13 undefined behavior [defns.undefined]
+behavior, such as might arise upon use of an erroneous program construct or erroneous data, for which this International Standard imposes no requirements. Undefined behavior may also be expected when this International Standard omits the description of any explicit definition of behavior. [ Note: permissible undefined behavior ranges from ignoring the situation completely with unpredictable results, to behaving during translation or program execution in a documented manner characteristic of the environment (with or without the issuance of a diagnostic message), to terminating a translation or execution (with the issuance of a diagnostic message). Many erroneous program constructs do not engender undefined behavior; they are required to be diagnosed. -end note ]
+
+1.3.13 未定義の挙動 [defns.undefined]
+この国際標準が要件を課していない、誤ったプログラム構成もしくは誤ったデータの使用によって発生するような、挙動。未定義の挙動はこの国際標準が挙動の明示的な定義の記述を省略した場合においても要求される。 [ 注: 黙認される未定義の挙動の範囲は予想できない結果とともに完全に無視するというものから、翻訳もしくはプログラム実行中にその環境に特有の、文書化された振る舞いをする ( 診断メッセージの発行ありなしを問わず ) というもの、翻訳もしくは実行を終了させる ( 診断メッセージの発行とともに ) というものに及ぶ。多くの誤ったプログラム構成が未定義の挙動を生じることはない。それらは診断されるべきである。 ]
+
+1.3.14 unspecified behavior [defns.unspecified]
+behavior, for a well-formed program construct and correct data, that depends on the implementation. The implementation is not required to document which behavior occurs. [ Note: usually, the range of possible behaviors is delineated by this International Standard. -end note ]
+
+1.3.14 明示されない挙動 [defns.unspecified]
+適格なプログラム構成もしくは正しいデータにおいて、実装に依存する、挙動。実装は挙動の発生について明言する義務はない。 [ 注: 通常、取り得る挙動の範囲はこの国際標準で説明されている。 ]
+
+1.3.15 well-formed program [defns.well.formed]
+a C++ program constructed according to the syntax rules, diagnosable semantic rules, and the One Definition Rule (3.2).
+
+1.3.15 適格なプログラム [defns.well.formed]
+構文規則、診断可能な意味規則、単一定義規則 ( 3.2 ) に従って構成される C++ プログラム。
+

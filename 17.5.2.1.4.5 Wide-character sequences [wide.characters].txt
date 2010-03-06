@@ -1,0 +1,30 @@
+17.5.2.1.4.5 Wide-character sequences [wide.characters]
+
+1 A wide-character sequence is an array object (8.3.4) A that can be declared as T A[N ], where T is type wchar_t (3.9.1), optionally qualified by any combination of const or volatile. The initial elements of the array have defined contents up to and including an element determined by some predicate. A wide-character sequence can be designated by a pointer value S that designates its first element.
+
+1 { ワイド文字の連続 } は配列オブジェクト ( 8.3.4 ) である。 T が wchar_t 型 ( 3.9.1 ) である T A[N] として宣言可能な A 、は const もしくは volatile のいずれの組によっても任意に修飾される。配列の最初の要素はいくつかの述語によって決定された要素を含む明確な内容までを持つ。ワイド文字の連続はその最初の要素を指定するポインター値 S によって指定可能である。
+
+2 A null-terminated wide-character string, or NTWCS, is a wide-character sequence whose highest-addressed element with defined content has the value zero.171
+
+171) Many of the objects manipulated by function signatures declared in <cwchar> are wide-character sequences or NTWCSs.
+
+2 { 終端が空値のワイド文字の一続き: Null-Terminated Wide-Character String } 、 もしくは NTWCS 、は定義された内容の最高位アドレスの要素が値零を持つワイド文字の連続である。
+
+171)  <cwchar> において宣言されている関数シグネチャによって操作されるオブジェクトの多くはワイド文字の連続もしくは NTWCS である.
+
+3 The length of an NTWCS is the number of elements that precede the terminating null wide character. An empty NTWCS has a length of zero.
+
+3 NTWCS の長さは末尾の空値ワイド文字に先行する要素の数である。空の NTWCS は零の長さを持つ。
+
+4 The value of an NTWCS is the sequence of values of the elements up to and including the terminating null character.
+
+4 NTWCS の値は終端の空値文字を含む要素までの値の連続である。
+
+5 A static NTWCS is an NTWCS with static storage duration.172
+
+172) A wide string literal, such as L"abc" is a static NTWCS.
+
+5 静的な NTWCS は静的記憶域期間である 172 。
+
+172) ワイド文字列リテラル、例えば L"abc" は静的な NTWCS である。
+

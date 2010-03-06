@@ -1,0 +1,26 @@
+8.5.2 Character arrays [dcl.init.string]
+
+1 A char array (whether plain char, signed char, or unsigned char), char16_t array, char32_t array, or wchar_t array can be initialized by a narrow character literal, char16_t string literal, char32_t string literal, or wide string literal, respectively, or by an appropriately-typed string literal enclosed in braces.  Successive characters of the value of the string literal initialize the elements of the array. [ Example:
+
+char msg[] = "Syntax error on line %s\n";
+
+shows a character array whose members are initialized with a string-literal. Note that because '\n' is a single character and because a trailing '\0' is appended, sizeof(msg) is 25. -end example ]
+
+1 char の配列 ( ただの char 、 signed char 、 unsigned char を問わず ) 、 char16_t の配列 、 char32_t の配列 、 wchar_t の配列はそれぞれ、ナロウ文字リテラル、 char16_t 文字列リテラル、 char32_t 文字列リテラル、ワイド文字リテラルによって、もしくは中括弧で括られた適切な型の文字列リテラルによって初期化可能である。文字列リテラル値の連続する文字群は配列の要素を初期化する。 [ 例:
+
+char msg[] = "Syntax error on line %s\n";
+
+は文字列リテラルで初期化されたメンバーを持つ文字配列を示す。 '\n' は単独の文字であり '\0' が末尾に付加されるため、 sizeof(msg) は 25 となることに注意せよ。 ]
+
+2 There shall not be more initializers than there are array elements. [ Example: char cv[4] = "asdf"; // error is ill-formed since there is no space for the implied trailing '\0'. -end example ]
+
+2 配列の要素以上の初期化子が存在するべきではない。 [ 例:
+
+char cv[4] = "asdf"; // error
+
+は暗黙に末尾に付加される '\0' のスペースがないため不適格である。 ]
+
+3 If there are fewer initializers than there are array elements, each element not explicitly initialized shall be zero-initialized (8.5).
+
+3 配列の要素以下の初期化子が存在する場合、明示的に初期化されない各々の要素は零初期化 ( 8.5 ) されるべきである。
+

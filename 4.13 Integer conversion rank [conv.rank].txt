@@ -1,0 +1,31 @@
+4.13 Integer conversion rank [conv.rank]
+
+1 Every integer type has an integer conversion rank defined as follows:
+
+    - No two signed integer types other than char and signed char (if char is signed) shall have the same rank, even if they have the same representation.
+    - The rank of a signed integer type shall be greater than the rank of any signed integer type with a smaller size.
+    - The rank of long long int shall be greater than the rank of long int, which shall be greater than the rank of int, which shall be greater than the rank of short int, which shall be greater than the rank of signed char.
+    - The rank of any unsigned integer type shall equal the rank of the corresponding signed integer type.
+    - The rank of any standard integer type shall be greater than the rank of any extended integer type with the same size.
+    - The rank of char shall equal the rank of signed char and unsigned char.
+    - The rank of bool shall be less than the rank of all other standard integer types.
+    - The ranks of char16_t, char32_t, and wchar_t shall equal the ranks of their underlying types (3.9.1).
+    - The rank of any extended signed integer type relative to another extended signed integer type with the same size is implementation-defined, but still subject to the other rules for determining the integer conversion rank.
+    - For all integer types T1, T2, and T3, if T1 has greater rank than T2 and T2 has greater rank than T3, then T1 shall have greater rank than T3.
+
+[ Note: The integer conversion rank is used in the definition of the integral promotions (4.5) and the usual arithmetic conversions (5). -end note ]
+
+1 すべての整数型は以下で定義される整数変換ランクを持つ。
+
+    - char と signed char ( もし char が符号ありである場合 ) 以外のふたつの符号あり整数型はたとえそれが同じ表現であっても、同等のランクを持つべきではない。
+    - 符号あり整数型のランクはそれより小さいサイズのいずれの符号あり整数型のランクより大きくなるべきである。
+    - long long int のランクは long int のランクより大きくなるべきであり、 long int のランクは int のランクより大きくなるべきであり、 int のランクは short int のランクより大きくなるべきであり、 short int のランクは signed char のランクより大きくなるべきである。
+    - いずれの符号なし整数型のランクは対応する符号あり整数型と同等であるべきである。
+    - いずれの標準整数型のランクは同一のサイズを持ついずれの拡張整数型のランクよりも大きくなるべきである。
+    - char のランクは signed char と unsigned char のランクと同等であるべきである。
+    - bool のランクはすべての他の標準整数型より小さくなるべきである。
+    - char16_t 、 char32_t 、 wchar_t のランクはそれらの基底型 ( 3.9.1 ) のランクと同等であるべきである。
+    - 同一のサイズを持つその他の拡張符号あり整数型と拡張符号あり整数型の相対的なランクは実装時定義であるが、整数変換ランクを決定するためのその他の規則は議論中である。
+    - すべて整数型である T1 、 T2 、 T3 において、 T1 が T2 より大きいランクを持ち T2 が T3 より大きいランクを持つ場合、 T1 は T3 より大きいランクを持つべきである。
+
+[ 注: 整数変換ランクは整数昇格 ( 4.5 ) と一般算術変換 ( 5 ) の定義において使われる。 ]

@@ -1,0 +1,8 @@
+3.7.3 Automatic storage duration [basic.stc.auto]
+
+1 Local objects explicitly declared register or not explicitly declared static or extern have automatic storage duration. The storage for these objects lasts until the block in which they are created exits.
+
+2 [ Note: these objects are initialized and destroyed as described in 6.7. —end note ]
+
+3 If a named automatic object has initialization or a destructor with side effects, it shall not be destroyed before the end of its block, nor shall it be eliminated as an optimization even if it appears to be unused, except that a class object or its copy may be eliminated as specified in 12.8.
+

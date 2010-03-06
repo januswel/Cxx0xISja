@@ -1,0 +1,10 @@
+3.9 Types [basic.types]
+
+4 The object representation of an object of type T is the sequence of N unsigned char objects taken up by the object of type T, where N equals sizeof(T). The value representation of an object is the set of bits that hold the value of type T. For trivially copyable types, the value representation is a set of bits in the object representation that determines a value, which is one discrete element of an implementation-defined set of values.41
+
+41) The intent is that the memory model of C++ is compatible with that of ISO/IEC 9899 Programming Language C.
+
+4 型 T のオブジェクトの { オブジェクト表現: object representation } は型 T のオブジェクトによって取り込まれる N 個の unsigned char オブジェクトの連続である。ここで N は sizeof(T) と等しい。オブジェクトの { 値表現: value representation } は型 T の値が保持するビット集合である。コピー可能であることが自明な型では、値表現は、実装時定義の値集合の離散要素のひとつである値を決定するオブジェクト表現のビット集合である 41 。
+
+41) C++ のメモリーモデルの意図は ISO/IEC 9899 Programming Language C のそれとの互換である。
+

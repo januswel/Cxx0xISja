@@ -1,0 +1,6 @@
+3.7.2 Thread storage duration [basic.stc.thread]
+
+1 All objects and references declared with the thread_local keyword have thread storage duration. The storage for these objects and references shall last for the duration of the thread in which they are created.  There is a distinct object or reference per thread, and use of the declared name refers to the object or reference associated with the current thread.
+
+2 An object or reference with thread storage duration shall be initialized before its first use and, if constructed, shall be destroyed on thread exit.
+

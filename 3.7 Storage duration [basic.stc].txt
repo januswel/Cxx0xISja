@@ -1,0 +1,13 @@
+3.7 Storage duration [basic.stc]
+
+1 Storage duration is the property of an object that defines the minimum potential lifetime of the storage containing the object. The storage duration is determined by the construct used to create the object and is one of the following:
+
+    — static storage duration
+    — thread storage duration
+    — automatic storage duration
+    — dynamic storage duration
+
+2 Static, thread, and automatic storage durations are associated with objects introduced by declarations (3.1) and implicitly created by the implementation (12.2). The dynamic storage duration is associated with objects created with operator new (5.3.4).
+
+3 The storage duration categories apply to references as well. The lifetime of a reference is its storage duration.
+

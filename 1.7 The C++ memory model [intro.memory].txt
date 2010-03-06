@@ -1,0 +1,25 @@
+1.7 The C++ memory model [intro.memory]
+
+1 The fundamental storage unit in the C++ memory model is the byte. A byte is at least large enough to contain any member of the basic execution character set and the eight-bit code units of the Unicode UTF-8 encoding form and is composed of a contiguous sequence of bits, the number of which is implementationdefined.  The least significant bit is called the low-order bit; the most significant bit is called the high-order bit. The memory available to a C++ program consists of one or more sequences of contiguous bytes. Every byte has a unique address.
+
+1 C++ メモリーモデルにおける基本的な格納単位は { バイト } である。バイトは少なくとも基本実行文字集合のいずれの文字と Unicode UTF-8 符号化方式の 8 ビット符号単位も格納できる程度に十分に大きく、実装時定義の数のビットの隣接する連続から成る。最下位ビットは { 低位: low-order } ビットと呼ばれ、最上位ビットは { 高位: high-order } ビットと呼ばれる。 C++ プログラムが利用可能なメモリーはひとつ以上の隣接したバイトの連続から成る。すべてのバイトは一意なアドレスを持っている。
+
+2 [ Note: the representation of types is described in 3.9. —end note ]
+
+3 A memory location is either an object of scalar type or a maximal sequence of adjacent bit-fields all having non-zero width. [ Note: Various features of the language, such as references and virtual functions, might involve additional memory locations that are not accessible to programs but are managed by the implementation.  —end note ] Two threads of execution (1.10) can update and access separate memory locations without interfering with each other.
+
+4 [ Note: Thus a bit-field and an adjacent non-bit-field are in separate memory locations, and therefore can be concurrently updated by two threads of execution without interference. The same applies to two bit-fields, if one is declared inside a nested struct declaration and the other is not, or if the two are separated by a zero-length bit-field declaration, or if they are separated by a non-bit-field declaration. It is not safe to concurrently update two bit-fields in the same struct if all fields between them are also bit-fields of non-zero width. —end note ]
+
+5 [ Example: A structure declared as
+
+struct {
+    char a;
+    int b:5,
+    c:11,
+    :0,
+    d:8;
+    struct {int ee:8;} e;
+}
+
+contains four separate memory locations: The field a and bit-fields d and e.ee are each separate memory locations, and can be modified concurrently without interfering with each other. The bit-fields b and c together constitute the fourth memory location. The bit-fields b and c cannot be concurrently modified, but b and a, for example, can be. —end example ]
+

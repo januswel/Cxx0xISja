@@ -1,0 +1,94 @@
+3.10 Lvalues and rvalues [basic.lval]
+
+1 Every expression is either an lvalue or an rvalue.
+
+1 すべての式は { 左辺値: lvalue } もしくは { 右辺値: rvalue } のどちらかである。
+
+2 An lvalue refers to an object or function. Some rvalue expressions - those of (possibly cv-qualified) class or array type - also refer to objects.51
+
+51) Expressions such as invocations of constructors and of functions that return a class type refer to objects, and the implementation can invoke a member function upon such objects, but the expressions are not lvalues.
+
+2 左辺値はオブジェクトもしくは関数を参照する。いくつかの右辺値式 --- ( 場合によっては被 cv 修飾の ) クラス型もしくは配列型 --- もまたオブジェクトを指し示す。*
+
+51) コンストラクターを起動するような式やオブジェクトを参照するクラス型を返す関数を起動するような式があり、さらに実装がそういったオブジェクトのメンバー関数を起動できる場合、その式は左辺値とならない。
+
+3 [ Note: some built-in operators and function calls yield lvalues. [ Example: if E is an expression of pointer type, then *E is an lvalue expression referring to the object or function to which E points. As another example, the function
+
+int& f();
+
+yields an lvalue, so the call f() is an lvalue expression. -end example ] -end note ]
+
+3 [ 注: いくつかの組み込み演算子や組み込み関数の呼び出しは左辺値を与える。 [ 例: E がポインター型の式である場合、 *E は E が指し示しているオブジェクトや関数を参照する左辺値の式となる。他の例を挙げると、以下の関数、
+
+int& f();
+
+は左辺値を与えるため、f() の呼び出しは左辺値式である。] ]
+
+4 [ Note: some built-in operators expect lvalue operands. [ Example: built-in assignment operators all expect their left-hand operands to be lvalues. -end example ] Other built-in operators yield rvalues, and some expect them. [ Example: the unary and binary + operators expect rvalue arguments and yield rvalue results. -end example ] The discussion of each built-in operator in Clause 5 indicates whether it expects lvalue operands and whether it yields an lvalue. -end note ]
+
+4 [ 注: いくつかの組み込み演算子は左辺値である演算対象を要求する。 [ 例: 組み込み代入演算子はすべて左辺の演算対象に左辺値を要求する。 ] 他の組み込み演算子は右辺値を与え、そのうちのいくつかは右辺値を要求する。 [ 例: 単項もしくは二項である加算演算子は右辺値である引数を要求し、右辺値である値を与える。 ] 各々の組み込み演算子に対する 5 条内での記述はそれが左辺値である演算対象を要求するかどうかと左辺値を与えるかどうかを示している。 ]
+
+5 The result of calling a function that does not return an lvalue reference is an rvalue. User defined operators are functions, and whether such operators expect or yield lvalues is determined by their parameter and return types.
+
+5 左辺値参照を返さない関数呼び出しの結果は右辺値となる。ユーザー定義演算子は関数であり、そしてその演算子が左辺値を要求するもしくは左辺値を与えるかどうかはその関数の引数と返り値の型によって決定される。
+
+6 An expression which holds a temporary object resulting from a cast to a type other than an lvalue reference type is an rvalue (this includes the explicit creation of an object using functional notation (5.2.3)).
+
+6 左辺値参照型以外の型へキャストした結果として一時オブジェクトを保持する式は右辺値である ( これは関数的記法を使うことによるオブジェクトの明示的な生成を含んでいる ( 5.2.3 ) )。
+
+7 Whenever an lvalue appears in a context where an rvalue is expected, the lvalue is converted to an rvalue; see 4.1, 4.2, and 4.3.
+
+7 右辺値が要求されている文脈において左辺値が出現した場合は常に、左辺値は右辺値に変換される。 4.1 、 4.2 、 4.3 を参照せよ。
+
+8 The discussion of reference initialization in 8.5.3 and of temporaries in 12.2 indicates the behavior of lvalues and rvalues in other significant contexts.
+
+8 8.5.3 における参照の初期化についての記述と 12.2 における一時オブジェクトについての記述はそのほかの重要な意味を持つ文脈における左辺値と右辺値の挙動を示している。
+
+9 Class rvalues can have cv-qualified types; non-class rvalues always have cv-unqualified types. Rvalues shall always have complete types or the void type; in addition to these types, lvalues can also have incomplete types.
+
+9 右辺値クラスは被 cv 修飾型を持つことが出来、クラスでない右辺値は常に被 cv 修飾でない型を持つ。右辺値は常に完全型か void 型を持つべきである。これらの型に加えて、左辺値は不完全型も持つことが出来る。
+
+10 An lvalue for an object is necessary in order to modify the object except that an rvalue of class type can also be used to modify its referent under certain circumstances. [ Example: a member function called for an object (9.3) can modify the object. -end example ]
+
+10 特定の状況下においてクラス型の右辺値がその指示物を変更するために使われうる場合を除いて、オブジェクトとしての左辺値はそのオブジェクトを変更するために必要である。 [ 例: オブジェクトに対して呼び出されたメンバー関数 ( 9.3 ) はそのオブジェクトを変更できる。 ]
+
+11 Functions cannot be modified, but pointers to functions can be modifiable.
+
+11 関数は変更され得ないが、関数へのポインターは変更可能である。
+
+12 A pointer to an incomplete type can be modifiable. At some point in the program when the pointed to type is complete, the object at which the pointer points can also be modified.
+
+12 不完全型へのポインターは変更可能となりうる。プログラム中のいくつかの場所において指し示されている型が完全である場合、ポインターが指し示しているオブジェクトは変更可能となりうる。
+
+13 The referent of a const-qualified expression shall not be modified (through that expression), except that if it is of class type and has a mutable component, that component can be modified (7.1.6.1).
+
+13 クラス型のその構成要素が変更可能となりうる、かつ変わりやすい構成要素を持っている場合を除いて、被 const 修飾の式の指示物は ( その式を通して ) 変更可能であるべきではない ( 7.1.6.1 ) 。
+
+14 If an expression can be used to modify the object to which it refers, the expression is called modifiable. A program that attempts to modify an object through a nonmodifiable lvalue or rvalue expression is ill-formed.
+
+14 式がそのオブジェクトを参照するものへ変更するために使われうる場合、その式は { 変更可能である: modifiable } と呼ばれる。変更不可能な左辺値もしくは右辺値の式によってオブジェクトを変更しようとするプログラムは不適格である。
+
+15 If a program attempts to access the stored value of an object through an lvalue of other than one of the following types the behavior is undefined52
+
+    - the dynamic type of the object,
+    - a cv-qualified version of the dynamic type of the object,
+    - a type similar (as defined in 4.4) to the dynamic type of the object,
+    - a type that is the signed or unsigned type corresponding to the dynamic type of the object,
+    - a type that is the signed or unsigned type corresponding to a cv-qualified version of the dynamic type of the object,
+    - an aggregate or union type that includes one of the aforementioned types among its elements or nonstatic data members (including, recursively, an element or non-static data member of a subaggregate or contained union),
+    - a type that is a (possibly cv-qualified) base class type of the dynamic type of the object,
+    - a char or unsigned char type.
+
+52) The intent of this list is to specify those circumstances in which an object may or may not be aliased.
+
+15 プログラムが以下の型以外の左辺値を通してオブジェクトに格納されている値へのアクセスを行おうとする場合、その挙動は未定義である 52 。
+
+    - オブジェクトの動的な型
+    - オブジェクトの動的な型の被 cv 修飾版
+    - オブジェクトの動的な型に対応する符号ありもしくは符号なしである型
+    - オブジェクトの動的な型に対応する符号ありもしくは符号なしである型の被 cv 修飾版
+    - そのメンバーに上記の型のうちのひとつを含む集合型もしくは結合型 ( 再帰的に、副集合のメンバーがそうであるもしくは結合を包含する場合を含む )
+    - オブジェクトの動的な型の ( 場合により cv 型である ) ベースクラス型である型
+    - char 型もしくは unsigned char 型
+
+52) この一覧の意図はオブジェクトが別名を持っても良いかどうかの詳細を示すことである。

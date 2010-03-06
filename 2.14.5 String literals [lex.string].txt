@@ -1,0 +1,6 @@
+2.14.5 String literals [lex.string]
+
+10 A string literal that begins with L, such as L"asdf", is a wide string literal. A wide string literal has type "array of n const wchar_t", where n is the size of the string as defined below; it has static storage duration and is initialized with the given characters.
+
+10 L で始まる文字列リテラル、 例えば L"asdf" 、はワイド文字列リテラルである。ワイド文字列リテラルは「 const wchar_t の n 個の配列」型を持つ。ここで n は以下で定義されている文字列のサイズである。それは静的記憶域期間を持ち与えられた文字群で初期化される。
+

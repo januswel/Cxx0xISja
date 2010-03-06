@@ -1,0 +1,10 @@
+3.7.1 Static storage duration [basic.stc.static]
+
+1 All objects which do not have dynamic storage duration, do not have thread storage duration, and are not local have static storage duration. The storage for these objects shall last for the duration of the program (3.6.2, 3.6.3).
+
+2 If an object of static storage duration has initialization or a destructor with side effects, it shall not be eliminated even if it appears to be unused, except that a class object or its copy may be eliminated as specified in 12.8.
+
+3 The keyword static can be used to declare a local variable with static storage duration. [ Note: 6.7 describes the initialization of local static variables; 3.6.3 describes the destruction of local static variables. —end note ]
+
+4 The keyword static applied to a class data member in a class definition gives the data member static storage duration.
+

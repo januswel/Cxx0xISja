@@ -1,0 +1,41 @@
+3.9.3 CV-qualifiers [basic.type.qualifier]
+
+1 A type mentioned in 3.9.1 and 3.9.2 is a cv-unqualified type. Each type which is a cv-unqualified complete or incomplete object type or is void (3.9) has three corresponding cv-qualified versions of its type: a const-qualified version, a volatile-qualified version, and a const-volatile-qualified version. The term object type (1.8) includes the cv-qualifiers specified when the object is created. The presence of a const specifier in a decl-specifier-seq declares an object of const-qualified object type; such object is called a const object. The presence of a volatile specifier in a decl-specifier-seq declares an object of volatile-qualified object type; such object is called a volatile object. The presence of both cv-qualifiers in a decl-specifier-seq declares an object of const-volatile-qualified object type; such object is called a const volatile object. The cv-qualified or cv-unqualified versions of a type are distinct types; however, they shall have the same representation and alignment requirements (3.9).50
+
+50) The same representation and alignment requirements are meant to imply interchangeability as arguments to functions,
+return values from functions, and non-static data members of unions.
+
+1 3.9.1 と 3.9.2 において述べられている型は { 非被 cv 修飾型 } である。被 cv 修飾完全もしくは被 cv 修飾不完全のオブジェクト型である、もしくは void ( 3.9 ) である各々の型は三つの対応する被 cv 修飾版を持つ。 { 被 const 修飾 } 版、 { 被 volatile 修飾 } 版、 { 被 const-volatile 修飾 } 版である。 { オブジェクト型 } ( 1.8 ) という語句はオブジェクトが生成された際に指定された cv 修飾子も含む。 decl-specifier-seq における const 指定子の存在は { 被 const 修飾オブジェクト型 } のオブジェクトを宣言する。そのようなオブジェクトは { const オブジェクト } と呼ばれる。 decl-specifier-seq における volatile 指定子の存在は { 被 volatile 修飾オブジェクト型 } のオブジェクトを宣言する。そのようなオブジェクトは { volatile オブジェクト } と呼ばれる。 decl-specifier-seq における cv 修飾子両方の存在は被 const-volatile 修飾オブジェクト型のオブジェクトを宣言する。そのようなオブジェクトは { const volatile オブジェクト } と呼ばれる。型の被 cv 修飾版もしくは非被 cv 修飾版は別個の型である。しかし、それらは同等の表現と配置要件を持つ ( 3.9 ) 。*
+
+50) 同等の表現と配置要件とは関数への引数、関数からの返り値、集合体のメンバーにおける暗黙の型変換が可能であるということを意味する。
+
+2 A compound type (3.9.2) is not cv-qualified by the cv-qualifiers (if any) of the types from which it is compounded. Any cv-qualifiers applied to an array type affect the array element type, not the array type (8.3.4).
+
+2 複合型 ( 3.9.2 ) はそれを構成する型の cv 修飾子 ( もしあるのなら ) によって被 cv 修飾とはならない。配列型に適用されるすべての cv 修飾子は配列の要素型に作用し、配列型には作用しない ( 8.3.4 ) 。
+
+3 Each non-static, non-mutable, non-reference data member of a const-qualified class object is const-qualified, each non-static, non-reference data member of a volatile-qualified class object is volatile-qualified and similarly for members of a const-volatile class. See 8.3.5 and 9.3.2 regarding function types that have cv-qualifiers.
+
+3 被 const 修飾のクラスオブジェクトの各々の静的でなく、変更可能でなく、参照でないデータメンバーは被 const 修飾であり、被 volatile 修飾のクラスオブジェクトの各々の静的でなく、参照でないデータメンバーは被 volatile 修飾であり、 const-volatile クラスのメンバーも同様である。 cv 修飾子を持つ関数型については 8.3.5 と 9.3.2 を参照せよ。
+
+4 There is a partial ordering on cv-qualifiers, so that a type can be said to be more cv-qualified than another. Table 8 shows the relations that constitute this ordering.
+
+Table 8 - Relations on const and volatile
+no cv-qualifier < const
+no cv-qualifier < volatile
+no cv-qualifier < const volatile
+const < const volatile
+volatile < const volatile
+
+4 型が { より被 cv 修飾 } として言及されることができるように、 cv 修飾子における部分的な優先順位がある。表 8 はこの優先順位を構成する関係を示している。
+
+表 8 - const と volatile の関係
+cv 修飾子なし < const
+cv 修飾子なし < volatile
+cv 修飾子なし < const volatile
+const         < const volatile
+volatile      < const volatile
+
+5 In this International Standard, the notation cv (or cv1, cv2, etc.), used in the description of types, represents an arbitrary set of cv-qualifiers, i.e., one of {const}, {volatile}, {const, volatile}, or the empty set. Cv-qualifiers applied to an array type attach to the underlying element type, so the notation “cv T,” where T is an array type, refers to an array whose elements are so-qualified. Such array types can be said to be more (or less) cv-qualified than other types based on the cv-qualification of the underlying element types.
+
+5 この国際標準において、 cv ( もしくは cv1, cv2 など ) という表記は、型の説明として使われ、 cv 修飾子の任意の集合、例えば {const}, {volatile}, {const, volatile}, もしくは空集合を表現する。配列型に適用される cv 修飾子は基礎要素型に結合するため、 T が配列型である "cv T" という表記は要素がかなり限定された配列を参照する。そのような配列型は基礎要素型の cv 修飾に基づく他の型に比べてより被 cv 修飾 ( またはより非被 cv 修飾 ) に言及されうる。
+

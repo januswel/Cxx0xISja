@@ -1,0 +1,10 @@
+5.3.3 Sizeof [expr.sizeof]
+
+1 The sizeof operator yields the number of bytes in the object representation of its operand. The operand is either an expression, which is an unevaluated operand (Clause 5), or a parenthesized type-id. The sizeof operator shall not be applied to an expression that has function or incomplete type, to an enumeration type whose underlying type is not fixed before all its enumerators have been declared, to the parenthesized name of such types, or to an lvalue that designates a bit-field. sizeof(char), sizeof(signed char) and sizeof(unsigned char) are 1. The result of sizeof applied to any other fundamental type (3.9.1) is implementation-defined. [ Note: in particular, sizeof(bool), sizeof(char16_t), sizeof(char32_t), and sizeof(wchar_t) are implementation-defined.73 -end note ] [ Note: See 1.7 for the definition of byte and 3.9 for the definition of object representation. -end note ]
+
+73) sizeof(bool) is not required to be 1.
+
+1 sizeof 演算子はその演算対象のオブジェクト表現におけるバイト数を与える。演算対象は評価されていない演算対象 ( 5 条 ) もしくは括弧で括られた型識別子のどちらでも良い。 sizeof 演算子は関数もしくは不完全型を持つ式、すべての列挙子が宣言される以前の基底型が固定でない列挙型、そのような型の括弧で括られた名前、ビットフィールドを指定する左辺値に適用されるべきではない。 sizeof(char) 、 sizeof(signed char) 、 sizeof(unsigned char) は 1 である。他の基本型 ( 3.9.1 ) に sizeof を適用した結果は実装時定義である。 [ 注: 特に、 sizeof(bool) 、 sizeof(char16_t) 、 sizeof(char32_t) 、 sizeof(wchar_t) は実装時定義である 73 。 ] [ 注: バイトの定義は 1.7 を、オブジェクト表現の定義は 3.9 を参照せよ。 ]
+
+73) sizeof(bool) は 1 である必要はない。
+

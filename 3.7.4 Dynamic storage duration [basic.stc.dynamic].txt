@@ -1,0 +1,15 @@
+3.7.4 Dynamic storage duration [basic.stc.dynamic]
+
+1 Objects can be created dynamically during program execution (1.9), using new-expressions (5.3.4), and destroyed using delete-expressions (5.3.5). A C++ implementation provides access to, and management of, dynamic storage via the global allocation functions operator new and operator new[] and the global deallocation functions operator delete and operator delete[].
+
+2 The library provides default definitions for the global allocation and deallocation functions. Some global allocation and deallocation functions are replaceable (18.6.1). A C++ program shall provide at most one definition of a replaceable allocation or deallocation function. Any such function definition replaces the default version provided in the library (17.6.3.6). The following allocation and deallocation functions (18.6) are implicitly declared in global scope in each translation unit of a program.
+
+    void* operator new(std::size_t) throw(std::bad_alloc);
+    void* operator new[](std::size_t) throw(std::bad_alloc);
+    void operator delete(void*) throw();
+    void operator delete[](void*) throw();
+
+These implicit declarations introduce only the function names operator new, operator new[], operator delete, operator delete[]. [ Note: the implicit declarations do not introduce the names std, std::bad_- alloc, and std::size_t, or any other names that the library uses to declare these names. Thus, a newexpression, delete-expression or function call that refers to one of these functions without including the header <new> is well-formed. However, referring to std, std::bad_alloc, and std::size_t is ill-formed unless the name has been declared by including the appropriate header. —end note ] Allocation and/or deallocation functions can also be declared and defined for any class (12.5).
+
+3 Any allocation and/or deallocation functions defined in a C++ program, including the default versions in the library, shall conform to the semantics specified in 3.7.4.1 and 3.7.4.2.
+
