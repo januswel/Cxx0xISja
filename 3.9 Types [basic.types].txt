@@ -1,5 +1,55 @@
 3.9 Types [basic.types]
 
+1 [ Note: 3.9 and the subclauses thereof impose requirements on implementations regarding the representation of types. There are two kinds of types: fundamental types and compound types. Types describe objects (1.8), references (8.3.2), or functions (8.3.5).
+
+1 [ 注: 3.9 とその従属節は型の表現についてのその要件を実装に課す。二種類の型が存在する。基本型と複合型である。型はオブジェクト ( 1.8 ) 、参照 ( 8.3.2 ) 、関数 ( 8.3.5 ) を表わす。
+
+2 For any object (other than a base-class subobject) of trivially copyable type T, whether or not the object holds a valid value of type T, the underlying bytes (1.7) making up the object can be copied into an array of char or unsigned char.39 If the content of the array of char or unsigned char is copied back into the object, the object shall subsequently hold its original value. [ Example:
+
+    #define N sizeof(T)
+    char buf[N];
+    T obj;                      // obj initialized to its original value
+    std::memcpy(buf, &obj, N);  // between these two calls to std::memcpy,
+                                // obj might be modified
+
+-end example ]
+
+39) By using, for example, the library functions (17.6.1.2) std::memcpy or std::memmove.
+
+2 自明にコピー可能である型 T のいずれのオブジェクト ( 基底クラスのサブオブジェクト以外 ) において、そのオブジェクトが型 T の有効な値を保持するかどうかを問わず、そのオブジェクトを構成している実際のバイト ( 1.7 ) は char もしくは unsigned char の配列へコピー可能である 39 。 char もしくは unsigned char の配列の内容を再びオブジェクトへコピーした場合、そのオブジェクトは引き続いてその元の値を保持すべきである。 [ 例:
+
+    #define N sizeof(T)
+    char buf[N];
+    T obj;                      // obj がそのオリジナルの値に初期化される
+    std::memcpy(buf, &obj, N);  // これらふたつに対する std::memcpy の呼び出し
+                                // obj は変更可能であってよい
+
+ ]
+
+39) 例えば、ライブラリ関数 ( 17.6.1.2 ) std::memcpy もしくは std::memmove 、を使用することによって。
+
+3 For any trivially copyable type T, if two pointers to T point to distinct T objects obj1 and obj2, where neither obj1 nor obj2 is a base-class subobject, if the underlying bytes (1.7) making up obj1 are copied into obj2,40 obj2 shall subsequently hold the same value as obj1. [ Example:
+
+    T* t1p;
+    T* t2p;
+        // provided that t2p points to an initialized object ...
+    std::memcpy(t1p, t2p, sizeof(T));
+        // at this point, every subobject of trivially copyable type in *t1p contains
+        // the same value as the corresponding subobject in *t2p
+
+-end example ]
+
+3 自明にコピー可能な型 T において、 T を指し示すふたつのポインターが別個の T オブジェクト obj1 と obj2 を指し示す場合、 obj1 も obj2 も基底クラスのサブオブジェクトではなく、 obj1 を構成する実際のバイト ( 1.7 ) が obj2 へコピー可能である場合 40 、 obj2 は引き続いて obj1 と同じ値を保持するべきである。 [ 例:
+
+    T* t1p;
+    T* t2p;
+        // t2p が初期化されたオブジェクトを指し示すようにする ...
+    std::memcpy(t1p, t2p, sizeof(T));
+        // この時点で、 *t1p の自明にコピー可能な型のすべてのサブオブジェクトは
+        // 対応する *t2p のサブオブジェクトと同じ値を保持する。
+
+ ]
+
 4 The object representation of an object of type T is the sequence of N unsigned char objects taken up by the object of type T, where N equals sizeof(T). The value representation of an object is the set of bits that hold the value of type T. For trivially copyable types, the value representation is a set of bits in the object representation that determines a value, which is one discrete element of an implementation-defined set of values.41
 
 41) The intent is that the memory model of C++ is compatible with that of ISO/IEC 9899 Programming Language C.
@@ -7,4 +57,102 @@
 4 型 T のオブジェクトの { オブジェクト表現: object representation } は型 T のオブジェクトによって取り込まれる N 個の unsigned char オブジェクトの連続である。ここで N は sizeof(T) と等しい。オブジェクトの { 値表現: value representation } は型 T の値が保持するビット集合である。コピー可能であることが自明な型では、値表現は、実装時定義の値集合の離散要素のひとつである値を決定するオブジェクト表現のビット集合である 41 。
 
 41) C++ のメモリーモデルの意図は ISO/IEC 9899 Programming Language C のそれとの互換である。
+
+5 A class that has been declared but not defined, or an array of unknown size or of incomplete element type, is an incompletely-defined object type.42 Incompletely-defined object types and the void types are incomplete types (3.9.1). Objects shall not be defined to have an incomplete type.
+
+42) The size and layout of an instance of an incompletely-defined object type is unknown.
+
+5 宣言されているが定義されていないクラス、容量のわからないもしく不完全な要素型の配列、は不完全に定義されたオブジェクト型である 42 。不完全に定義されたオブジェクト型と void 型は不完全型 ( 3.9.1 ) である。オブジェクトは不完全型を持つように定義されるべきではない。
+
+42) 不完全に定義されたオブジェクト型の実体の容量と配置は不明である。
+
+6 A class type (such as "class X") might be incomplete at one point in a translation unit and complete later on; the type "class X" is the same type at both points. The declared type of an array object might be an array of incomplete class type and therefore incomplete; if the class type is completed later on in the translation unit, the array type becomes complete; the array type at those two points is the same type. The declared type of an array object might be an array of unknown size and therefore be incomplete at one point in a translation unit and complete later on; the array types at those two points ("array of unknown bound of T" and "array of N T") are different types. The type of a pointer to array of unknown size, or of a type defined by a typedef declaration to be an array of unknown size, cannot be completed. [ Example:
+
+    class X;                // X is an incomplete type
+    extern X* xp;           // xp is a pointer to an incomplete type
+    extern int arr[];       // the type of arr is incomplete
+    typedef int UNKA[];     // UNKA is an incomplete type
+    UNKA* arrp;             // arrp is a pointer to an incomplete type
+    UNKA** arrpp;
+    
+    void foo() {
+        xp++;               // ill-formed: X is incomplete
+        arrp++;             // ill-formed: incomplete type
+        arrpp++;            // OK: sizeof UNKA* is known
+    }
+    
+    struct X { int i; };    // now X is a complete type
+    int arr[10];            // now the type of arr is complete
+    X x;
+    void bar() {
+        xp = &x;            // OK; type is "pointer to X"
+        arrp = &arr;        // ill-formed: different types
+        xp++;               // OK: X is complete
+        arrp++;             // ill-formed: UNKA can't be completed
+    }
+
+-end example ]
+
+6 クラス型 ( "class X" のような ) は翻訳単位の一時点において不完全である場合その後に完結してもよい。型 "class X" は両方の時点において同じ型を示す。配列オブジェクトの宣言された型は不完全なクラス型の配列つまり不完全であってよい。クラス型がその後の翻訳単位で完結する場合、その配列型は完結する。そのふたつの時点で配列型は同じ型である。配列オブジェクトの宣言された型は翻訳単位の一時点において容量のわからない配列つまり不完全である場合その後に完結してもよい。そのふたつの時点で配列型 ( 「不明な範囲 T の配列」と「 N T の配列」 ) は違う方である。容量のわからない配列へのポインターの型、もしくは typedef 宣言によって定義された容量のわからない配列へのポインターの型、は完結不可能である。 [ 例:
+
+    class X;                // X は不完全型
+    extern X* xp;           // xp は不完全型へのポインター
+    extern int arr[];       // arr の型は不完全
+    typedef int UNKA[];     // UNKA は不完全型
+    UNKA* arrp;             // arrp は不完全型へのポインター
+    UNKA** arrpp;
+    
+    void foo() {
+        xp++;               // 不適格: X は不完全
+        arrp++;             // 不適格: 不完全型
+        arrpp++;            // OK: sizeof UNKA* は既知
+    }
+    
+    struct X { int i; };    // ここで X は完全型
+    int arr[10];            // ここで arr の型は完全
+    X x;
+    void bar() {
+        xp = &x;            // OK; 型は「 X へのポインター」
+        arrp = &arr;        // 不適格: 違う型
+        xp++;               // OK: X は完全
+        arrp++;             // 不適格: UNKA は完結できない
+    }
+
+-end example ]
+
+7 [ Note: the rules for declarations and expressions describe in which contexts incomplete types are prohibited.  -end note ]
+
+7 [ 注: 宣言と式のための規則は不完全型が禁止された文脈において記述される。 ]
+
+8 An object type is a (possibly cv-qualified) type that is not a function type, not a reference type, and not a void type.
+
+8 { オブジェクト型 } とは ( 場合によっては被 cv 修飾である ) 関数型ではなく、参照型ではなく、 void 型ではない型である。
+
+9 Arithmetic types (3.9.1), enumeration types, pointer types, pointer to member types (3.9.2), std::nullptr_- t, and cv-qualified versions of these types (3.9.3) are collectively called scalar types. Scalar types, POD classes (Clause 9), arrays of such types and cv-qualified versions of these types (3.9.3) are collectively called POD types. Scalar types, trivially copyable class types (Clause 9), arrays of such types, and cv-qualified versions of these types (3.9.3) are collectively called trivially copyable types. Scalar types, trivial class types (Clause 9), arrays of such types and cv-qualified versions of these types (3.9.3) are collectively called trivial types. Scalar types, standard-layout class types (Clause 9), arrays of such types and cv-qualified versions of these types (3.9.3) are collectively called standard-layout types.
+
+9 算術型 ( 3.9.1 ) 、列挙型、ポインター型、メンバーへのポインター型 ( 3.9.2 ) 、 std::nullptr_t 、これらの型の被 cv 修飾版 ( 3.9.3 ) は総じて { スカラー型 } と呼ばれる。スカラー型、 POD クラス ( 9 条 ) 、そのような型の配列とこれらの型の被 cv 修飾版 ( 3.9.3 ) は総じて { POD 型 } と呼ばれる。スカラー型、自明にコピー可能なクラス型 ( 9 条 ) そのような型の配列、これらの型の被 cv 修飾版 ( 3.9.3 ) は総じて { 自明にコピー可能な型 } と呼ばれる。スカラー型、自明なクラス型 ( 9 条 ) 、そのような型の配列、これらの型の被 cv 修飾版 ( 3.9.3 ) は総じて { 自明型 } と呼ばれる。スカラー型、標準割り付けクラス型 ( 9 条 ) 、そのような型の配列、これらの型の被 cv 修飾版 ( 3.9.3 ) は総じて { 標準割り付け型 } と呼ばれる。
+
+10 A type is a literal type if it is:
+
+    - a scalar type; or
+        - a class type (Clause 9) with
+        - a trivial copy constructor,
+        - a trivial destructor,
+        - a trivial default constructor or at least one constexpr constructor other than the copy constructor, and
+        - all non-static data members and base classes of literal types; or
+    - an array of literal type.
+
+10 以下の条件に当てはまる場合その型はリテラル型である。
+
+    - スカラー型
+    - 以下のすべてを持つクラス型 ( 9 条 )
+        - 自明なコピーコンストラクター
+        - 自明なデストラクター
+        - 自明なデフォルトコンストラクターもしくは少なくともひとつのコピーコンストラクター以外の constexpr コンストラクター
+        - すべて静的でないデータメンバーとリテラル型の基底クラス
+    - リテラル型の配列
+
+11 If two types T1 and T2 are the same type, then T1 and T2 are layout-compatible types. [ Note: Layout-compatible enumerations are described in 7.2. Layout-compatible standard-layout structs and standard-layout unions are described in 9.2. -end note ]
+
+11 ふたつの型 T1 と T2 が同じ型である場合、 T1 と T2 は割り付け互換型である。 [ 注: 割り付け互換な列挙は 7.2 で記述されている。割り付け互換な標準割り付け構造体と標準割り付け共用体は 9.2 で記述されている。 ]
 
