@@ -2,5 +2,9 @@
 
 1 All objects and references declared with the thread_local keyword have thread storage duration. The storage for these objects and references shall last for the duration of the thread in which they are created.  There is a distinct object or reference per thread, and use of the declared name refers to the object or reference associated with the current thread.
 
+1 thread_local という語を伴って宣言されたすべてのオブジェクトと参照は { スレッド記憶域期間 } を持つ。これらのオブジェクトと参照の記憶はそれらを生成したスレッドの継続中ずっと存続していなければならない。スレッド毎に別個のオブジェクトもしくは参照が存在し、宣言された名前の使用は現在のスレッドに付随するオブジェクトもしくは参照を指す。
+
 2 An object or reference with thread storage duration shall be initialized before its first use and, if constructed, shall be destroyed on thread exit.
+
+2 スレッド記憶域期間を持つオブジェクトもしくは参照はそれらが最初に使用される前に初期化されなければならず、生成された場合、スレッド終了時に破壊されなくてはならない。
 
