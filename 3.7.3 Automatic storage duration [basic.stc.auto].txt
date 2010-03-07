@@ -2,7 +2,13 @@
 
 1 Local objects explicitly declared register or not explicitly declared static or extern have automatic storage duration. The storage for these objects lasts until the block in which they are created exits.
 
-2 [ Note: these objects are initialized and destroyed as described in 6.7. 窶覇nd note ]
+1 明示的に register が宣言されているもしくは明示的に static もしくは extern が宣言されていない局所オブジェクトは { 自動記憶域期間 } を持つ。これらのオブジェクトの記憶はそれらが生成されたブロックが終了するまでの間存続する。
+
+2 [ Note: these objects are initialized and destroyed as described in 6.7. -end note ]
+
+2 [ 注: これらのオブジェクトは 6.7 で記述されたように初期化され破壊される。 ]
 
 3 If a named automatic object has initialization or a destructor with side effects, it shall not be destroyed before the end of its block, nor shall it be eliminated as an optimization even if it appears to be unused, except that a class object or its copy may be eliminated as specified in 12.8.
+
+3 名前のついた自動オブジェクトが初期化されるもしくは副作用を持つデストラクターを持つ場合、 12.8 で示されているクラスオブジェクトもしくはそのコピーを消去してよい場合を除いて、それはそのブロックの終了以前に破壊されてはならず、たとえ使われることがなくとも最適化の結果消去されてはならない。
 
