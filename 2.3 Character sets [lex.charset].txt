@@ -9,6 +9,15 @@ _ { } [ ] # ( ) < > % : ; . ? * + - / ^ & | ~ ! = , \ " ’
 
 14) The glyphs for the members of the basic source character set are intended to identify characters from the subset of ISO/IEC 10646 which corresponds to the ASCII character set. However, because the mapping from source file characters to the source character set (described in translation phase 1) is specified as implementation-defined, an implementation is required to document how the basic source characters are represented in source files.
 
+1 { 基本ソース文字集合 } は 96 文字から成る。半角スペースと水平タブ、垂直タブ、改ページ、改行などの制御文字に加えて以下の 91 文字である 14 。
+
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+0 1 2 3 4 5 6 7 8 9
+_ { } [ ] # ( ) < > % : ; . ? * + - / ^ & | ~ ! = , \ " ’
+
+14) 基本ソース文字集合の文字の字形は ASCII 文字集合に対応する ISO/IEC 10646 の部分集合における文字を特定することを目的としている。しかし、ソースファイルの文字から ( 翻訳フェイズ 1 において記述されている ) ソース文字集合への写像は実装時定義において示されるため、実装は基本ソース文字がソースファイルにおいてどのように表現されるかを明示することが必須である。
+
 2 The universal-character-name construct provides a way to name other characters.
 
     hex-quad:
@@ -19,5 +28,17 @@ _ { } [ ] # ( ) < > % : ; . ? * + - / ^ & | ~ ! = , \ " ’
 
 The character designated by the universal-character-name \UNNNNNNNN is that character whose character short name in ISO/IEC 10646 is NNNNNNNN; the character designated by the universal-character-name \uNNNN is that character whose character short name in ISO/IEC 10646 is 0000NNNN. If the hexadecimal value for a universal-character-name corresponds to a surrogate code point (in the range 0xD800–0xDFFF, inclusive), the program is ill-formed. Additionally, if the hexadecimal value for a universal-character-name outside a character or string literal corresponds to a control character (in either of the ranges 0x00–0x1F or 0x7F–0x9F, both inclusive) or to a character in the basic source character set, the program is ill-formed.
 
+2 { 共通文字名 } という概念は他の文字に名前を付ける方法を提供する。
+
+    hex-quad:
+        hexadecimal-digit hexadecimal-digit hexadecimal-digit hexadecimal-digit
+    universal-character-name:
+        \u hex-quad
+        \U hex-quad hex-quad
+
+共通文字名 \UNNNNNNNN によって指定された文字は ISO/IEC 10646 における文字短縮名が NNNNNNNN である文字となる。共通文字名 \uNNNN によって指定された文字は ISO/IEC 10646 における文字短縮名が 0000NNNN である文字となる。共通文字名における十六進値がサロゲートコードポイント ( 0xD800–0xDFFF の範囲 ) にあたる場合、そのプログラムは不適格となる。さらに、文字リテラルもしくは文字列リテラルでない共通文字名における十六進値が制御文字 ( 0x00–0x1F もしくは 0x7F–0x9F の範囲 ) 、もしくは基本ソース文字集合の文字にあたる場合、そのプログラムは不適格である。
+
 3 The basic execution character set and the basic execution wide-character set shall each contain all the members of the basic source character set, plus control characters representing alert, backspace, and carriage return, plus a null character (respectively, null wide character), whose representation has all zero bits. For each basic execution character set, the values of the members shall be non-negative and distinct from one another. In both the source and execution basic character sets, the value of each character after 0 in the above list of decimal digits shall be one greater than the value of the previous. The execution character set and the execution wide-character set are supersets of the basic execution character set and the basic execution wide-character set, respectively. The values of the members of the execution character sets are implementation-defined, and any additional members are locale-specific.
+
+3 基本実行文字集合と基本実行ワイド文字集合はともに基本ソース文字集合のすべての文字に加えて、ベル、バックスペース、復帰などの制御文字、すべて零のビットを表現として持つ空値文字 ( 空値ワイド文字 ) を含むべきである。各々の基本実行文字集合において、文字の値は非負でありそれぞれ別個の値を持つべきである。基本ソース文字集合と基本実行文字集合ともに、上記の一覧における十進数の 0 以降の各文字の値はひとつ前のものよりひとつずつ大きくなるべきある。実行文字集合と実行ワイド文字集合はそれぞれ、基本実行文字集合と基本実行ワイド文字集合の上位集合である。実行文字集合の文字の値は実装時定義であり、いずれの追加文字もロカール固有となる。
 
