@@ -2,9 +2,17 @@
 
 1 All objects which do not have dynamic storage duration, do not have thread storage duration, and are not local have static storage duration. The storage for these objects shall last for the duration of the program (3.6.2, 3.6.3).
 
+1 動的記憶域期間を持たず、スレッド記憶域期間を持たず、局所的でないすべてのオブジェクトは { 静的記憶域期間 } を持つ。これらのオブジェクトの記憶はプログラムの継続中 ( 3.6.2 、 3.6.3 ) ずっと存続していなければならない。
+
 2 If an object of static storage duration has initialization or a destructor with side effects, it shall not be eliminated even if it appears to be unused, except that a class object or its copy may be eliminated as specified in 12.8.
 
-3 The keyword static can be used to declare a local variable with static storage duration. [ Note: 6.7 describes the initialization of local static variables; 3.6.3 describes the destruction of local static variables. 窶覇nd note ]
+2 静的記憶域期間のオブジェクトが初期化されるもしくは副作用を持つデストラクターを持つ場合、たとえ使われることがなくとも、12.8 で示されているクラスオブジェクトもしくはそのコピーが消去されてよい場合を除いて、それは消去されてはならない。
+
+3 The keyword static can be used to declare a local variable with static storage duration. [ Note: 6.7 describes the initialization of local static variables; 3.6.3 describes the destruction of local static variables. -end note ]
+
+3 static という語を静的記憶域期間を持つ局所変数を宣言するために使ってよい。 [ 注: 6.7 において局所静的変数の初期化について、 3.6.3 において局所静的変数の破壊について記述している。 ]
 
 4 The keyword static applied to a class data member in a class definition gives the data member static storage duration.
+
+4 クラス定義においてクラスデータメンバーに対して適用された static という語はそのデータメンバーに静的記憶域期間を与える。
 
