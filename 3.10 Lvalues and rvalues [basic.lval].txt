@@ -46,7 +46,7 @@ int& f();
 
 9 Class rvalues can have cv-qualified types; non-class rvalues always have cv-unqualified types. Rvalues shall always have complete types or the void type; in addition to these types, lvalues can also have incomplete types.
 
-9 右辺値クラスは被 cv 修飾型を持つことが出来、クラスでない右辺値は常に被 cv 修飾でない型を持つ。右辺値は常に完全型か void 型を持つべきである。これらの型に加えて、左辺値は不完全型も持つことが出来る。
+9 右辺値クラスは被 cv 修飾型を持つことが出来、クラスでない右辺値は常に被 cv 修飾でない型を持つ。右辺値は常に完全型か void 型を持たなければならない。これらの型に加えて、左辺値は不完全型も持つことが出来る。
 
 10 An lvalue for an object is necessary in order to modify the object except that an rvalue of class type can also be used to modify its referent under certain circumstances. [ Example: a member function called for an object (9.3) can modify the object. -end example ]
 
@@ -62,7 +62,7 @@ int& f();
 
 13 The referent of a const-qualified expression shall not be modified (through that expression), except that if it is of class type and has a mutable component, that component can be modified (7.1.6.1).
 
-13 クラス型のその構成要素が変更可能となりうる、かつ変わりやすい構成要素を持っている場合を除いて、被 const 修飾の式の指示物は ( その式を通して ) 変更可能であるべきではない ( 7.1.6.1 ) 。
+13 クラス型のその構成要素が変更可能となりうる、かつ変わりやすい構成要素を持っている場合を除いて、被 const 修飾の式の指示物は ( その式を通して ) 変更不可能でなければならない ( 7.1.6.1 ) 。
 
 14 If an expression can be used to modify the object to which it refers, the expression is called modifiable. A program that attempts to modify an object through a nonmodifiable lvalue or rvalue expression is ill-formed.
 

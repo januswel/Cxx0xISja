@@ -5,7 +5,7 @@
 50) The same representation and alignment requirements are meant to imply interchangeability as arguments to functions,
 return values from functions, and non-static data members of unions.
 
-1 3.9.1 と 3.9.2 において述べられている型は { 非被 cv 修飾型 } である。被 cv 修飾完全もしくは被 cv 修飾不完全のオブジェクト型である、もしくは void ( 3.9 ) である各々の型は三つの対応する被 cv 修飾版を持つ。 { 被 const 修飾 } 版、 { 被 volatile 修飾 } 版、 { 被 const-volatile 修飾 } 版である。 { オブジェクト型 } ( 1.8 ) という語句はオブジェクトが生成された際に指定された cv 修飾子も含む。 decl-specifier-seq における const 指定子の存在は { 被 const 修飾オブジェクト型 } のオブジェクトを宣言する。そのようなオブジェクトは { const オブジェクト } と呼ばれる。 decl-specifier-seq における volatile 指定子の存在は { 被 volatile 修飾オブジェクト型 } のオブジェクトを宣言する。そのようなオブジェクトは { volatile オブジェクト } と呼ばれる。 decl-specifier-seq における cv 修飾子両方の存在は被 const-volatile 修飾オブジェクト型のオブジェクトを宣言する。そのようなオブジェクトは { const volatile オブジェクト } と呼ばれる。型の被 cv 修飾版もしくは非被 cv 修飾版は別個の型である。しかし、それらは同等の表現と配置要件を持つ ( 3.9 ) 。*
+1 3.9.1 と 3.9.2 において述べられている型は { 非被 cv 修飾型 } である。被 cv 修飾完全もしくは被 cv 修飾不完全のオブジェクト型である、もしくは void ( 3.9 ) である各々の型は三つの対応する被 cv 修飾版を持つ。 { 被 const 修飾 } 版、 { 被 volatile 修飾 } 版、 { 被 const-volatile 修飾 } 版である。 { オブジェクト型 } ( 1.8 ) という語句はオブジェクトが生成された際に指定された cv 修飾子も含む。 decl-specifier-seq における const 指定子の存在は { 被 const 修飾オブジェクト型 } のオブジェクトを宣言する。そのようなオブジェクトは { const オブジェクト } と呼ばれる。 decl-specifier-seq における volatile 指定子の存在は { 被 volatile 修飾オブジェクト型 } のオブジェクトを宣言する。そのようなオブジェクトは { volatile オブジェクト } と呼ばれる。 decl-specifier-seq における cv 修飾子両方の存在は被 const-volatile 修飾オブジェクト型のオブジェクトを宣言する。そのようなオブジェクトは { const volatile オブジェクト } と呼ばれる。型の被 cv 修飾版もしくは非被 cv 修飾版は別個の型である。しかし、それらは同等の表現と配置要件を持たなければならない ( 3.9 ) 。*
 
 50) 同等の表現と配置要件とは関数への引数、関数からの返り値、集合体のメンバーにおける暗黙の型変換が可能であるということを意味する。
 

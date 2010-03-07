@@ -24,7 +24,7 @@
 
 5 Unless it is a bit-field (9.6), a most derived object shall have a non-zero size and shall occupy one or more bytes of storage. Base class subobjects may have zero size. An object of trivially copyable or standard-layout type (3.9) shall occupy contiguous bytes of storage.
 
-5 ビットフィールド ( 9.6 ) でない場合、直派生オブジェクトは非零の容量を持つべきであり記憶装置の一バイト以上を占有すべきである。基底クラスサブオブジェクトは零の容量であってよい。自明にコピー可能もしくは標準割り付け型 ( 3.9 ) のオブジェクトは記憶装置の連続したバイトを占有すべきである。
+5 ビットフィールド ( 9.6 ) でない場合、直派生オブジェクトは非零の容量を持たなければならず記憶装置の一バイト以上を占有しなければならない。基底クラスサブオブジェクトは零の容量であってよい。自明にコピー可能もしくは標準割り付け型 ( 3.9 ) のオブジェクトは記憶装置の連続したバイトを占有すべきである。
 
 6 [ Note: C++ provides a variety of built-in types and several ways of composing new types from existing types (3.9). -end note ]
 
