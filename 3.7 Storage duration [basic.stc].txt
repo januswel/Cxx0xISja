@@ -7,7 +7,19 @@
     - automatic storage duration
     - dynamic storage duration
 
+1 記憶域期間とはオブジェクトを保持する記憶装置の最小可能生存期間を定義するオブジェクトの特性である。
+記憶域期間はオブジェクトを生成する概念によって決定され以下のうちのひとつである。
+
+    - 静的記憶域期間
+    - スレッド記憶域期間
+    - 自動記憶域期間
+    - 動的記憶域期間
+
 2 Static, thread, and automatic storage durations are associated with objects introduced by declarations (3.1) and implicitly created by the implementation (12.2). The dynamic storage duration is associated with objects created with operator new (5.3.4).
 
+2 静的記憶域期間、スレッド記憶域期間、自動記憶域期間は宣言 ( 3.1 ) によって指示され実装 ( 12.2 ) によって明示的に生成されるオブジェクトに付随する。動的記憶域期間は new 演算子 ( 5.3.4 ) によって生成されるオブジェクトに付随する。
+
 3 The storage duration categories apply to references as well. The lifetime of a reference is its storage duration.
+
+3 記憶域期間の区分は同様に参照にも適用される。参照の生存期間はその記憶域期間となる。
 
