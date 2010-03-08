@@ -17,7 +17,7 @@
     static const enumerated C3 (V3 );
         .....
 
-2 { 数え上げる } 列挙型は以下のように記述できる。
+2 列挙型 enumerated は以下のように記述できる。
 
     enum enumerated { V0 , V1 , V2 , V3 , .....};
     static const enumerated C0 (V0 );
