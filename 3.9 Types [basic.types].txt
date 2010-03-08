@@ -74,13 +74,13 @@
     typedef int UNKA[];     // UNKA is an incomplete type
     UNKA* arrp;             // arrp is a pointer to an incomplete type
     UNKA** arrpp;
-    
+
     void foo() {
         xp++;               // ill-formed: X is incomplete
         arrp++;             // ill-formed: incomplete type
         arrpp++;            // OK: sizeof UNKA* is known
     }
-    
+
     struct X { int i; };    // now X is a complete type
     int arr[10];            // now the type of arr is complete
     X x;
@@ -101,13 +101,13 @@
     typedef int UNKA[];     // UNKA は不完全型
     UNKA* arrp;             // arrp は不完全型へのポインター
     UNKA** arrpp;
-    
+
     void foo() {
         xp++;               // 不適格: X は不完全
         arrp++;             // 不適格: 不完全型
         arrpp++;            // OK: sizeof UNKA* は既知
     }
-    
+
     struct X { int i; };    // ここで X は完全型
     int arr[10];            // ここで arr の型は完全
     X x;
