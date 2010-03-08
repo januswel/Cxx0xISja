@@ -1,0 +1,15 @@
+22.1 General [localization.general]
+
+1 This Clause describes components that C++ programs may use to encapsulate (and therefore be more portable when confronting) cultural differences. The locale facility includes internationalization support for character classification and string collation, numeric, monetary, and date/time formatting and parsing, and message retrieval.
+
+1 この条項では文化的な違いをカプセル化するために C++ プログラムで使用できる ( 従って文化的な違いにおいてより移植性が高くなる ) 構成部品について記述している。ロカール部品は文字分類と文字列照合、数値、日付 / 時間の書式と解析、メッセージ検索などの国際化サポートを含む。
+
+2 以下の節では表 75 で示されているようにロカールそのもの、標準ファセット、 ISO C ライブラリからの部品などの構成部品を記述している。
+
+表 75 - 地域化ライブラリ要約
+節      ヘッダー
+22.3    ロカール <locale>
+22.4    標準ロカールの区分
+22.5    標準符号変換ファセット <codecvt>
+22.6    C ライブラリロカール <clocale>
+
