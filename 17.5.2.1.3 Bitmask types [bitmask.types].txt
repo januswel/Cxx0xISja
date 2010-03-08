@@ -1,0 +1,108 @@
+17.5.2.1.3 Bitmask types [bitmask.types]
+
+1 Several types defined in Clauses 18 through 30 and Annex D are bitmask types. Each bitmask type can be implemented as an enumerated type that overloads certain operators, as an integer type, or as a bitset (20.5).
+
+1 18 条から 30 条と付録 D において定義されているいくつかの型はビットマスク型である。それぞれのビットマスク型は特定の演算子をオーバーロードした列挙型か、整数型、ビットセット ( 20.5 ) として実装可能である。
+
+2 The bitmask type bitmask can be written:
+
+    enum bitmask {
+        V0 = 1 << 0, V1 = 1 << 1, V2 = 1 << 2, V3 = 1 << 3, .....
+    };
+
+    static const bitmask C0 (V0 );
+    static const bitmask C1 (V1 );
+    static const bitmask C2 (V2 );
+    static const bitmask C3 (V3 );
+        .....
+
+    // For exposition only.
+    // int_type is an integral type capable of
+    // representing all values of bitmask
+    bitmask operator& (bitmask X , bitmask Y ) {
+        return static_cast<bitmask >(
+        static_cast<int_type>(X ) &
+        static_cast<int_type>(Y ));
+    }
+    bitmask operator| (bitmask X , bitmask Y ) {
+        return static_cast<bitmask >(
+        static_cast<int_type>(X ) |
+        static_cast<int_type>(Y ));
+    }
+    bitmask operator^ (bitmask X , bitmask Y ){
+        return static_cast<bitmask >(
+        static_cast<int_type>(X ) ^
+        static_cast<int_type>(Y ));
+    }
+    bitmask operator~ (bitmask X ){
+        return static_cast<bitmask >(~static_cast<int_type>(X ));
+    }
+    bitmask & operator&=(bitmask & X , bitmask Y ){
+        X = X &Y ; return X ;
+    }
+    bitmask & operator|=(bitmask & X , bitmask Y ) {
+        X = X |Y ; return X ;
+    }
+    bitmask & operator^=(bitmask & X , bitmask Y ) {
+        X = X ^Y ; return X ;
+    }
+
+2 ビットマスク型 bitmask は以下のように記述できる。
+
+    enum bitmask {
+        V0 = 1 << 0, V1 = 1 << 1, V2 = 1 << 2, V3 = 1 << 3, .....
+    };
+
+    static const bitmask C0 (V0 );
+    static const bitmask C1 (V1 );
+    static const bitmask C2 (V2 );
+    static const bitmask C3 (V3 );
+        .....
+
+    // 解説のみ。
+    // int_type はビットマスクの
+    // すべての値を表現可能な汎整数型
+    bitmask operator& (bitmask X , bitmask Y ) {
+        return static_cast<bitmask >(
+        static_cast<int_type>(X ) &
+        static_cast<int_type>(Y ));
+    }
+    bitmask operator| (bitmask X , bitmask Y ) {
+        return static_cast<bitmask >(
+        static_cast<int_type>(X ) |
+        static_cast<int_type>(Y ));
+    }
+    bitmask operator^ (bitmask X , bitmask Y ){
+        return static_cast<bitmask >(
+        static_cast<int_type>(X ) ^
+        static_cast<int_type>(Y ));
+    }
+    bitmask operator~ (bitmask X ){
+        return static_cast<bitmask >(~static_cast<int_type>(X ));
+    }
+    bitmask & operator&=(bitmask & X , bitmask Y ){
+        X = X &Y ; return X ;
+    }
+    bitmask & operator|=(bitmask & X , bitmask Y ) {
+        X = X |Y ; return X ;
+    }
+    bitmask & operator^=(bitmask & X , bitmask Y ) {
+        X = X ^Y ; return X ;
+    }
+
+3 Here, the names C0, C1, etc. represent bitmask elements for this particular bitmask type. All such elements have distinct values such that, for any pair Ci and Cj, Ci & Ci is nonzero and Ci & Cj is zero.
+
+3 ここで、名前 C0 、 C1 などはこの特定のビットマスク型におけるビットマスク要素を表現している。そのような要素はすべて任意の組 Ci と Cj において Ci & Ci が非零かつ Ci & Cj が零であるような、別個の値を持っている。
+
+4 The following terms apply to objects and values of bitmask types:
+
+    - To set a value Y in an object X is to evaluate the expression X |= Y.
+    - To clear a value Y in an object X is to evaluate the expression X &= ~Y.
+    - The value Y is set in the object X if the expression X & Y is nonzero.
+
+4 以下の語句はビットマスク型のオブジェクトと値に対して用いる。
+
+    - オブジェクト X に値 Y を設定するとは式 X |= Y を評価することである。
+    - オブジェクト X から値 Y を除去するとは式 X &= ~Y を評価することである。
+    - 式 X & Y が非零である場合値 Y はオブジェクト X において設定されている。
+
