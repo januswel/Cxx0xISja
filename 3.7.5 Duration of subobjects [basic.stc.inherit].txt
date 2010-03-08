@@ -2,3 +2,5 @@
 
 1 The storage duration of member subobjects, base class subobjects and array elements is that of their complete object (1.8).
 
+1 メンバーサブオブジェクト、基底クラスサブオブジェクト、配列要素の記憶域期間はそれらの完全オブジェクト ( 1.8 ) のそれと同様である。
+
