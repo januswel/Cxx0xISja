@@ -2,6 +2,8 @@
 
 1 Objects can be created dynamically during program execution (1.9), using new-expressions (5.3.4), and destroyed using delete-expressions (5.3.5). A C++ implementation provides access to, and management of, dynamic storage via the global allocation functions operator new and operator new[] and the global deallocation functions operator delete and operator delete[].
 
+1 オブジェクトはプログラム実行時 ( 1.9 ) に動的に { new 式 } を用いることで ( 5.3.4 ) 生成可能であり、 { delete 式 } を用いることで破壊可能である。 C++ 実装は大域的な { メモリ確保関数 } new 演算子もしくは new[] 演算子と大域的な { メモリ解放関数 } delete 演算子もしくは delete[] 演算子を通じて動的記憶領域へのアクセス、管理を提供する。
+
 2 The library provides default definitions for the global allocation and deallocation functions. Some global allocation and deallocation functions are replaceable (18.6.1). A C++ program shall provide at most one definition of a replaceable allocation or deallocation function. Any such function definition replaces the default version provided in the library (17.6.3.6). The following allocation and deallocation functions (18.6) are implicitly declared in global scope in each translation unit of a program.
 
     void* operator new(std::size_t) throw(std::bad_alloc);
@@ -9,7 +11,19 @@
     void operator delete(void*) throw();
     void operator delete[](void*) throw();
 
-These implicit declarations introduce only the function names operator new, operator new[], operator delete, operator delete[]. [ Note: the implicit declarations do not introduce the names std, std::bad_- alloc, and std::size_t, or any other names that the library uses to declare these names. Thus, a newexpression, delete-expression or function call that refers to one of these functions without including the header <new> is well-formed. However, referring to std, std::bad_alloc, and std::size_t is ill-formed unless the name has been declared by including the appropriate header. 窶覇nd note ] Allocation and/or deallocation functions can also be declared and defined for any class (12.5).
+These implicit declarations introduce only the function names operator new, operator new[], operator delete, operator delete[]. [ Note: the implicit declarations do not introduce the names std, std::bad_alloc, and std::size_t, or any other names that the library uses to declare these names. Thus, a new-expression, delete-expression or function call that refers to one of these functions without including the header <new> is well-formed. However, referring to std, std::bad_alloc, and std::size_t is ill-formed unless the name has been declared by including the appropriate header. -end note ] Allocation and/or deallocation functions can also be declared and defined for any class (12.5).
+
+2 ライブラリは大域的なメモリ確保関数もしくはメモリ解放関数における既定の定義を提供する。いくつかのメモリ確保関数とメモリ解放関数は置き換え可能である ( 18.6.1 ) 。 C++ プログラムは最大でひとつの置き換え可能なメモリ確保関数もしくはメモリ解放関数の定義を規定しなければならない。そのような関数定義のいずれもライブラリによる既定動作を置き換える ( 17.6.3.6 ) 。以下のメモリ確保もしくはメモリ解放 ( 18.6 ) がプログラムの各々の翻訳単位の大域スコープにおいて暗黙的に宣言されている。
+
+    void* operator new(std::size_t) throw(std::bad_alloc);
+    void* operator new[](std::size_t) throw(std::bad_alloc);
+    void operator delete(void*) throw();
+    void operator delete[](void*) throw();
+
+これらの暗黙的な宣言は関数名 operator new 、 operator new[] 、 operator delete 、 operator delete[] のみを導入する。
+[ 注: 暗黙的な宣言は名前 std 、 std::bad_alloc 、 std::size_t やこれらの名前を宣言するためにライブラリが使用している他のいっさいの名前を導入しない。従って、 new 式 、 delete 式 、ヘッダー <new> を include せずにこれらの関数のうちひとつを使用している関数の呼び出しは適格である。しかし、適切なヘッダーを include によってその名前が宣言されていない場合 std 、 std::bad_alloc 、 std::size_t への言及は不適格となる。 ] メモリ確保関数もしくはメモリ解放関数はいずれのクラスにおいても定義可能である ( 12.5 ) 。
 
 3 Any allocation and/or deallocation functions defined in a C++ program, including the default versions in the library, shall conform to the semantics specified in 3.7.4.1 and 3.7.4.2.
+
+3 C++ プログラムにおいて定義された、もしくはライブラリにおける既定動作を include したいずれのメモリ確保関数もしくはメモリ解放関数は 3.7.4.1 と 3.7.4.2 において記述されている意味に従わなければならない。
 
