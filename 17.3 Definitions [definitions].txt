@@ -1,0 +1,152 @@
+17.3 Definitions [definitions]
+
+17.3.1 arbitrary-positional stream [defns.arbitrary.stream]
+a stream (described in Clause 27) that can seek to any integral position within the length of the stream.  Every arbitrary-positional stream is also a repositional stream.
+
+17.3.1 任意に移動可能なストリーム [defns.arbitrary.stream]
+そのストリーム内のいずれの位置へも移動可能なストリーム ( 27 条で記述されている ) 。すべての任意に移動可能なストリームは再移動可能なストリームでもある。
+
+17.3.2 blocked thread [defns.blocked]
+a thread that is waiting for some condition (other than the availability of a processor) to be satisfied before it can continue execution.154 As a verb, to block is to place a thread in the blocked state, and to unblock is to place a thread in the unblocked state.
+
+154) This definition is taken from POSIX.
+
+17.3.2 ブロックされたスレッド [defns.blocked]
+実行を継続する前に満たされる ( プロセッサーの利用権利以外の ) 何らかの条件を待っているスレッド 154 。動詞としては、ブロックするとはスレッドを実行を阻害された状態におくことであり、アンブロックするとはスレッドを実行を再開できる状態におくことである。
+
+154) この定義は POSIX からの引用である。
+
+17.3.3 character [defns.character]
+in Clauses 21, 22, 27, and 28, means any object which, when treated sequentially, can represent text. The term does not only mean char, char16_t, char32_t, and wchar_t objects, but any value that can be represented by a type that provides the definitions specified in these Clauses.
+
+17.3.3 文字 [defns.character]
+21 、 22 、 27 、 28 条における、連続して取り扱われる任意のオブジェクトであり、テキストを表現可能なもの。この語句は char 、 char16_t 、 char32_t 、 wchar_t オブジェクトのみではなく、これらの条項で示される定義を提供する型によって表現可能な任意の値を意味する。
+
+17.3.4 character container type [defns.character.container]
+a class or a type used to represent a character. It is used for one of the template parameters of the string, iostream, and regular expression class templates. A character container type shall be a POD (3.9) type.
+
+17.3.4 文字コンテナー型 [defns.character.container]
+{ 文字 } を表現するために使用されるクラスもしくは型。 string 、 iostream 、 正規表現クラステンプレートのテンプレートパラメーターのひとつとして使用される。文字コンテナー型は POD ( 3.9 ) 型でなければならない。
+
+17.3.5 comparison function [defns.comparison]
+an operator function (13.5) for any of the equality (5.10) or relational (5.9) operators.
+
+17.3.5 比較関数 [defns.comparison]
+等値演算子 ( 5.10 ) もしくは関係演算子 ( 5.9 ) のいずれかの演算子関数 ( 13.5 ) 。
+
+17.3.6 component [defns.component]
+a group of library entities directly related as members, parameters, or return types. For example, the class template basic_string and the non-member function templates that operate on strings are referred to as the string component.
+
+17.3.6 構成部品 [defns.component]
+メンバー、パラメーター、戻り値の型として直接関係するライブラリ実体のグループ。例えば、文字列を操作するクラステンプレート basic_string と メンバーでない関数テンプレートは文字列構成部品として参照される。
+
+17.3.7 deadlock [defns.deadlock]
+two or more threads are unable to continue execution because each is blocked waiting for one or more of the others to satisfy some condition.
+
+17.3.7 デッドロック [defns.deadlock]
+それぞれのスレッドが何らかの条件を満たすために他のスレッドを待ちブロックされているためふたつ以上のスレッドが実行を継続できない状態。
+
+17.3.8 default behavior [defns.default.behavior]
+a description of replacement function and handler function semantics. Any specific behavior provided by the implementation, within the scope of the required behavior.
+
+17.3.8 既定の挙動 [defns.default.behavior]
+置換関数もしくはハンドラー関数の記述。必須の挙動の範囲内で、実装によって提供される任意の特定の挙動。
+
+17.3.9 handler function [defns.handler]
+a non-reserved function whose definition may be provided by a C++ program. A C++ program may designate a handler function at various points in its execution, by supplying a pointer to the function when calling any of the library functions that install handler functions (Clause 18).
+
+17.3.9 handler function [defns.handler]
+定義が C++ プログラムによって提供されてよい予約されていない関数。 C++ プログラムはハンドラー関数を導入する任意のライブラリ関数の呼び出し時にその関数を指し示すポインターを提供することで、その実行の様々な点においてハンドラー関数を指定してよい ( 18 条 ) 。
+
+17.3.10 iostream class templates [defns.iostream.templates]
+templates, defined in Clause 27, that take two template arguments: charT and traits. The argument charT is a character container class, and the argument traits is a class which defines additional characteristics and functions of the character type represented by charT necessary to implement the iostream class templates.
+
+17.3.10 iostream クラステンプレート [defns.iostream.templates]
+charT と traits というふたつのテンプレート引数を取る、 27 条において定義されている、テンプレート。引数 charT は文字コンテナークラスであり、引数 traits は iostream クラステンプレートを実装するために必要な charT によって表現されている文字型の追加的な特性と関数を定義しているクラスである。
+
+17.3.11 modifier function [defns.modifier]
+a class member function (9.3), other than constructors, assignment, or destructor, that alters the state of an object of the class.
+
+17.3.11 変更関数 [defns.modifier]
+そのクラスのオブジェクトの状態を変更する、コンストラクター、代入演算子、デストラクター以外の、クラスのメンバー関数 ( 9.3 ) 。
+
+17.3.12 move assignment [defns.move.assign]
+use of a move assignment operator.
+
+17.3.12 移動代入 [defns.move.assign]
+移動代入演算子の使用。
+
+17.3.13 move assignment operator [defns.move.assign.op]
+an assignment operator which accepts only an rvalue argument of the type being assigned to and might modify the argument as a side effect during the assignment.
+
+17.3.13 移動代入演算子 [defns.move.assign.op]
+引数を代入されそして代入時の副作用としてその引数を変更する可能性のあるその型の右辺値引数のみを受け入れる代入演算子。
+
+17.3.14 move constructor [defns.move.ctor]
+a constructor which accepts only an rvalue argument of the type being constructed and might modify the argument as a side effect during construction.
+
+17.3.14 移動コンストラクター [defns.move.ctor]
+構築されそして構築時の副作用としてその引数を変更する可能性のあるその型の右辺値引数のみを受け入れるコンストラクター。
+
+17.3.15 object state [defns.obj.state]
+the current value of all non-static class members of an object (9.2). The state of an object can be obtained by using one or more observer functions.
+
+17.3.15 オブジェクトの状態 [defns.obj.state]
+オブジェクトのすべての静的でないクラスメンバーの現在の値 ( 9.2 ) 。オブジェクトの状態はひとつ以上の観測関数を使用することで取得可能である。
+
+17.3.16 NTCTS [defns.ntcts]
+a sequence of values that have character type, that precede the terminating null character type value charT().
+
+17.3.16 NTCTS [defns.ntcts]
+終端の値 charT() である空値文字に先行する、文字型を持つ値の連続。
+
+17.3.17 observer function [defns.observer]
+a class member function (9.3) that accesses the state of an object of the class, but does not alter that state.  Observer functions are specified as const member functions (9.3.2).
+
+17.3.17 観測関数 [defns.observer]
+そのクラスのオブジェクトの状態にアクセスするが、変更はしないクラスメンバー関数 ( 9.3 ) 。観測関数は const メンバー関数 ( 9.3.2 ) として示される。
+
+17.3.18 replacement function [defns.replacement]
+a non-reserved function whose definition is provided by a C++ program. Only one definition for such a function is in effect for the duration of the program's execution, as the result of creating the program (2.2) and resolving the definitions of all translation units (3.5).
+
+17.3.18 置換関数 [defns.replacement]
+定義が C++ プログラムによって提供されている予約されていない関数。プログラムの作成 ( 2.2 ) とすべての翻訳単位の定義の解決 ( 3.5 ) の結果、プログラムの実行時においてそのような関数に対してただひとつの定義が有効である。
+
+17.3.19 repositional stream [defns.repositional.stream]
+a stream (described in Clause 27) that can seek to a position that was previously encountered.
+
+17.3.19 再移動可能なストリーム [defns.repositional.stream]
+以前いた位置に移動可能なストリーム ( 27 条で記述されている ) 。
+
+17.3.20 required behavior [defns.required.behavior]
+a description of replacement function and handler function semantics, applicable to both the behavior provided by the implementation and the behavior that shall be provided by any function definition in the program. If a function defined in a C++ program fails to meet the required behavior when it executes, the behavior is undefined.
+
+17.3.20 必須の挙動 [defns.required.behavior]
+実装によって提供される挙動とプログラム内の任意の関数定義によって提供されなければならない挙動両方に当てはまる、置換関数とハンドラー関数の意味記述。 C++ プログラムにおいて定義されている関数が実行された際に必須の挙動に適合しない場合、その挙動は未定義である。
+
+17.3.21 reserved function [defns.reserved.function]
+a function, specified as part of the C++ standard library, that must be defined by the implementation. If a C++ program provides a definition for any reserved function, the results are undefined.
+
+17.3.21 予約済み関数 [defns.reserved.function]
+実装によって定義されなければならない、 C++ 標準ライブラリの一部として示される、関数。 C++ プログラムが任意の予約済み関数の定義を提供する場合、その結果は未定義である。
+
+17.3.22 stable algorithm [defns.stable]
+an algorithm that preserves, as appropriate to the particular algorithm, the order of elements.
+
+    - For the sort algorithms the relative order of equivalent elements is preserved.
+    - For the remove algorithms the relative order of the elements that are not removed is preserved.
+    - For the merge algorithms, for equivalent elements in the original two ranges, the elements from the first range precede the elements from the second range.
+
+17.3.22 安定アルゴリズム [defns.stable]
+要素の順序が、特定のアルゴリズムに応じて、保たれているアルゴリズム。
+
+    - ソートアルゴリズムにおいて等価要素の相対的な順序は保たれている。
+    - 除去アルゴリズムにおいて取り除かれない要素の相対的な順序は保たれている。
+    - 統合アルゴリズムにおいて、もとのふたつの範囲における等価要素に対して、ひとつ目の範囲からの要素はふたつ目の範囲からの要素に先んじる。
+
+17.3.23 traits class [defns.traits]
+a class that encapsulates a set of types and functions necessary for class templates and function templates to manipulate objects of types for which they are instantiated. Traits classes defined in Clauses 21, 22 and 27 are character traits, which provide the character handling support needed by the string and iostream classes.
+
+17.3.23 特性クラス [defns.traits]
+実体化する型のオブジェクトを操作するためにクラステンプレートや関数テンプレートに必要な型や関数の集合をカプセル化したクラス。 21 、 22 、 27 条で定義されている特性クラスは string もしくは iostream クラスで必要とされる文字処理サポートを提供する、文字特性である。
+
