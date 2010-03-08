@@ -1,0 +1,14 @@
+17.5.2.1.1 General [type.descriptions.general]
+
+1 The Requirements subclauses may describe names that are used to specify constraints on template arguments.  160 These names are used in library Clauses to describe the types that may be supplied as arguments by a C++ program when instantiating template components from the library.
+
+160) Examples from 20.2 include: EqualityComparable, LessThanComparable, CopyConstructable, etc. Examples from 24.2 include: InputIterator, ForwardIterator, Function, Predicate, etc.
+
+1 「要件」節はテンプレート引数の制約を示すために使用される名前を記述することがある 160 。これらの名前はライブラリ内のテンプレート構成部品を実体化する際に C++ プログラムによって引数として与えてよい型を記述するライブラリ条項において使用される。
+
+160) 20.2 からの例: EqualityComparable 、 LessThanComparable 、 CopyConstructable 、など。 24.2 からの例: InputIterator 、 ForwardIterator 、 Function 、 Predicate など。
+
+2 Certain types defined in Clause 27 are used to describe implementation-defined types. They are based on other types, but with added constraints.
+
+2 27 条において定義されている特定の型は実装時定義の型を記述するために使用されている。それらは他の型に基づいているが、制約を付加されている。
+
