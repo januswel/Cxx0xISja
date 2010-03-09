@@ -1,8 +1,8 @@
 17.5.2.1.4.5 Wide-character sequences [wide.characters]
 
-1 A wide-character sequence is an array object (8.3.4) A that can be declared as T A[N ], where T is type wchar_t (3.9.1), optionally qualified by any combination of const or volatile. The initial elements of the array have defined contents up to and including an element determined by some predicate. A wide-character sequence can be designated by a pointer value S that designates its first element.
+1 A wide-character sequence is an array object (8.3.4) A that can be declared as T A[N], where T is type wchar_t (3.9.1), optionally qualified by any combination of const or volatile. The initial elements of the array have defined contents up to and including an element determined by some predicate. A wide-character sequence can be designated by a pointer value S that designates its first element.
 
-1 { ワイド文字の連続 } は配列オブジェクト ( 8.3.4 ) である。 T が wchar_t 型 ( 3.9.1 ) である T A[N] として宣言可能な A 、は const もしくは volatile のいずれの組によっても任意に修飾される。配列の最初の要素はいくつかの述語によって決定された要素を含む明確な内容までを持つ。ワイド文字の連続はその最初の要素を指定するポインター値 S によって指定可能である。
+1 { ワイド文字配列 } は T が wchar_t 型 ( 3.9.1 ) であるとき、 const もしくは volatile の任意の組によって任意に修飾される、 T A[N] として宣言可能な配列オブジェクト ( 8.3.4 ) A である。配列要素の初期値は何らかの述語によって決定された要素を含む明確な内容を持つ。ワイド文字配列はその最初の要素を示すポインター値 S によって指定可能である。
 
 2 A null-terminated wide-character string, or NTWCS, is a wide-character sequence whose highest-addressed element with defined content has the value zero.171
 
