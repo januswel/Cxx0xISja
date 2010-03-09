@@ -1,0 +1,26 @@
+17.5.2.1.4.1 Byte strings [byte.strings]
+
+1 A null-terminated byte string, or NTBS, is a character sequence whose highest-addressed element with defined content has the value zero (the terminating null character); no other element in the sequence has the value zero.164
+
+164) Many of the objects manipulated by function signatures declared in <cstring> (21.6) are character sequences or ntbss.  The size of some of these character sequences is limited by a length value, maintained separately from the character sequence.
+
+1 { 終端が空値のバイト文字列 } 、もしくは NTBS 、とは内容を定義する最高位アドレスの要素が零値 ( { 終端空値 } 文字 ) を持つ文字配列である。配列の他の要素は零値を持ってはならない 164 。
+
+164) <cstring> ( 21.6 ) において宣言されている関数シグネチャによって操作されるオブジェクトの多くは文字配列もしくは NTBS である。こういった文字配列のうちいくつかの容量は文字配列とは別に保持される、長さの値によって制限されている。
+
+2 The length of an NTBS is the number of elements that precede the terminating null character. An empty NTBS has a length of zero.
+
+2 NTBS の長さは終端空値文字に先行する要素の数である。空の NTBS は零の長さを持つ。
+
+3 The value of an NTBS is the sequence of values of the elements up to and including the terminating null character.
+
+3 NTBS の値は要素の値の連続に依存し、終端空値文字を含む。
+
+4 A static NTBS is an NTBS with static storage duration.165
+
+165) A string literal, such as "abc", is a static NTBS
+
+4 静的な NTBS は静的記憶域期間を持つ NTBS である 165 。
+
+165) 文字列リテラル、 例えば "abc" 、は静的な NTBS である。
+
