@@ -8,9 +8,9 @@
 
 171) Many of the objects manipulated by function signatures declared in <cwchar> are wide-character sequences or NTWCSs.
 
-2 { 終端が空値のワイド文字の一続き: Null-Terminated Wide-Character String } 、 もしくは NTWCS 、は定義された内容の最高位アドレスの要素が値零を持つワイド文字の連続である。
+2 { 終端が空値のワイド文字列: Null-Terminated Wide-Character String } 、 もしくは NTWCS 、とは定義された内容の最高位アドレスの要素が値零を持つワイド文字配列である。
 
-171)  <cwchar> において宣言されている関数シグネチャによって操作されるオブジェクトの多くはワイド文字の連続もしくは NTWCS である.
+171)  <cwchar> において宣言されている関数シグネチャによって操作されるオブジェクトの多くはワイド文字配列もしくは NTWCS である。
 
 3 The length of an NTWCS is the number of elements that precede the terminating null wide character. An empty NTWCS has a length of zero.
 
@@ -18,7 +18,7 @@
 
 4 The value of an NTWCS is the sequence of values of the elements up to and including the terminating null character.
 
-4 NTWCS の値は終端の空値文字を含む要素までの値の連続である。
+4 NTWCS の値は終端の空値文字までを含む要素の値の連続である。
 
 5 A static NTWCS is an NTWCS with static storage duration.172
 
