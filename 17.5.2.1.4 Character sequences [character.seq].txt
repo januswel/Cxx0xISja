@@ -1,0 +1,23 @@
+17.5.2.1.4 Character sequences [character.seq]
+
+1 The C standard library makes widespread use of characters and character sequences that follow a few uniform conventions:
+
+    - A letter is any of the 26 lowercase or 26 uppercase letters in the basic execution character set.162
+    - The decimal-point character is the (single-byte) character used by functions that convert between a (single-byte) character sequence and a value of one of the floating-point types. It is used in the character sequence to denote the beginning of a fractional part. It is represented in Clauses 18 through 30 and Annex D by a period, '.', which is also its value in the "C" locale, but may change during program execution by a call to setlocale(int, const char*),163 or by a change to a locale object, as described in Clauses 22.3 and 27.
+    - A character sequence is an array object (8.3.4) A that can be declared as T A[N], where T is any of the types char, unsigned char, or signed char (3.9.1), optionally qualified by any combination of const or volatile. The initial elements of the array have defined contents up to and including an element determined by some predicate. A character sequence can be designated by a pointer value S that points to its first element.
+
+162) Note that this definition differs from the definition in ISO C 7.1.1.
+
+163) declared in <clocale> (22.6).
+
+1 C 標準ライブラリは以下の統一規約のいくつかを満たす文字と文字配列を広範に利用している。
+
+    - { 文字 } とは基本実行文字集合における 26 の小文字もしくは 26 の大文字のうちのいずれかである 162 。
+    - { 小数点文字 } とは ( 一バイトの ) 文字の配列と浮動小数点型のひとつの値間を変換する関数によって使用される ( 一バイトの ) 文字である。端数部分の始点を示すために文字配列において使用される。
+    18 条から 30 条までと付録 D において "C" ロカールにおいてはピリオド '.' として表現されているが、 22.3 と 27 条で記述されているように、 setlocale(int, const char*) を呼び出す 163 、もしくはロカールオブジェクトの変更によって、プログラムの実行中ではその値が変更されるかもしれない。
+    - 文字配列とは const もしくは volatile の組み合わせによって任意に修飾された、 T が char 型、 unsigned char 型 、 signed char 型 ( 3.9.1 ) のいずれかである、 T A[N] として宣言可能な配列オブジェクト ( 8.3.4 ) A である。配列の最初の要素は内容を定義し何らかの述語によって決定された要素を含む。文字配列はその最初の要素を指し示すポインター値 S によって指定可能である。
+
+162) この定義は ISO C 7.1.1 における定義と異なることに注意せよ。
+
+163) <clocale> ( 22.6 ) において宣言されている。
+
