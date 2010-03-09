@@ -1,0 +1,30 @@
+17.5.2.1.4.4 char32_t sequences [char32_t.seq]
+
+1 A char32-character sequence is an array object (8.3.4) A that can be declared as T A[N], where T is type char32_t (3.9.1), optionally qualified by any combination of const or volatile. The initial elements of the array have defined contents up to and including an element determined by some predicate. A char32-character sequence can be designated by a pointer value S that designates its first element.
+
+1 { char32 文字配列 } とは T が char32_t 型 ( 3.9.1 ) であるとき、 const もしくは volatile の任意の組み合わせによって任意に修飾された、 T A[N] として宣言可能な配列オブジェクト ( 8.3.4 ) A である。配列要素の初期値は何らかの述語によって決定された要素を含む明確な内容を持つ。 char32 文字配列はその最初の要素を示すポインター値 S によって指定可能である。
+
+2 A null-terminated char32-character string, or NTC32S, is a char32-character sequence whose highest-addressed element with defined content has the value zero.169
+
+169) Many of the objects manipulated by function signatures declared in <cuchar> are char32-character sequences or ntc32ss.
+
+2 { 終端が空値の char32 文字列 } 、もしくは NTC32S 、とは定義された内容の最高位アドレスの要素が零値を持つ char32 文字配列である。
+
+169) <cuchar> において宣言されている関数シグネチャによって操作されるオブジェクトの多くは char32 文字配列もしくは NTC32S である。
+
+3 The length of an NTC32S is the number of elements that precede the terminating null char32_t character.  An empty NTC32S has a length of zero.
+
+3 NTC32S の長さは終端の char32_t 空値文字に先行する要素の数である。空の NTC32S は零の長さを持つ。
+
+4 The value of an NTC32S is the sequence of values of the elements up to and including the terminating null character.
+
+4 NTC32S の値は終端の空値文字までを含む要素の値の連続である。
+
+5 A static NTC32S is an NTC32S with static storage duration.170
+
+170) A char32_t string literal, such as U"abc", is a static NTC32S.
+
+5 静的な NTC32S とは静的記憶域期間を持つ NTC32S である 170 。
+
+170) char32_t 文字列リテラル、例えば U"abc" 、は静的 NTC32S である。
+
