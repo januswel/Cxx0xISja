@@ -1,0 +1,30 @@
+17.5.2.1.4.3 char16_t sequences [char16_t.seq]
+
+1 A char16-character sequence is an array object (8.3.4) A that can be declared as T A[N], where T is type char16_t (3.9.1), optionally qualified by any combination of const or volatile. The initial elements of the array have defined contents up to and including an element determined by some predicate. A char16-character sequence can be designated by a pointer value S that designates its first element.
+
+1 { char16 文字配列 } とは T が char16_t 型 ( 3.9.1 ) であるとき、 const もしくは volatile の任意の組み合わせによって任意に修飾された、 T A[N] として宣言可能な配列オブジェクト ( 8.3.4 ) A である。配列要素の初期値は何らかの述語によって決定された要素を含む明確な内容を持つ。 char16 文字配列はその最初の要素を示すポインター値 S によって指定可能である。
+
+2 A null-terminated char16-character string, or NTC16S, is a char16-character sequence whose highest-addressed element with defined content has the value zero.167
+
+167) Many of the objects manipulated by function signatures declared in <cuchar> are char16-character sequences or NTC16Ss.
+
+2 { 終端が空値の char16 文字列 } 、もしくは NTC16S 、とは定義された内容の最高位アドレスの要素が零値を持つ char16 文字配列である。
+
+167) <cuchar> によって宣言されている関数シグネチャによって操作されるオブジェクトの多くは char16 文字配列もしくは NTC16S である。
+
+3 The length of an NTC16S is the number of elements that precede the terminating null char16_t character.  An empty NTC16S has a length of zero.
+
+3 NTC16S の長さは終端の char16_t 空値文字に先行する要素の数である。空の NTC16S は零の長さを持つ。
+
+4 The value of an NTC16S is the sequence of values of the elements up to and including the terminating null character.
+
+4 NTC16S の値は終端の空値文字までを含む要素の値の連続である。
+
+5 A static NTC16S is an NTC16S with static storage duration.168
+
+168) A char16_t string literal, such as u"abc", is a static NTC16S.
+
+5 静的な NTC16S とは静的記憶域期間を持つ NTC16S である 168 。
+
+168) char16_t 文字列リテラル、例えば u"abc" 、は静的 NTC16S である。
+
