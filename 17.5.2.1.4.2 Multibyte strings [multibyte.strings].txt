@@ -1,0 +1,14 @@
+17.5.2.1.4.2 Multibyte strings [multibyte.strings]
+
+1 A null-terminated multibyte string, or NTMBS, is an NTBS that constitutes a sequence of valid multibyte characters, beginning and ending in the initial shift state.166
+
+166) An NTBS that contains characters only from the basic execution character set is also an NTMBS. Each multibyte character then consists of a single byte.
+
+1 { 終端が空値であるマルチバイト文字列 } 、もしくは NTMBS 、とは初期シフト状態における始点と終点、有効なマルチバイト文字の連続から成る NTBS である 166 。
+
+166) 基本実行文字集合の文字のみを含む NTBS は同時に NTMBS である。その場合それぞれのマルチバイト文字はひとつのバイトから成る。
+
+2 A static NTMBS is an NTMBS with static storage duration.
+
+2 静的な NTMBS とは静的記憶域期間を持つ NTMBS である。
+
