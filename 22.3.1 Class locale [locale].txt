@@ -1,0 +1,123 @@
+22.3.1 Class locale [locale]
+
+    namespace std {
+        class locale {
+        public:
+            // types:
+            class facet;
+            class id;
+            typedef int category;
+            static const category // values assigned here are for exposition only
+                none = 0,
+                collate = 0x010, ctype = 0x020,
+                monetary = 0x040, numeric = 0x080,
+                time = 0x100, messages = 0x200,
+                all = collate | ctype | monetary | numeric | time | messages;
+
+            // construct/copy/destroy:
+            locale() throw();
+            locale(const locale& other) throw();
+            explicit locale(const char* std_name);
+            explicit locale(const string& std_name);
+            locale(const locale& other, const char* std_name, category);
+            locale(const locale& other, const string& std_name, category);
+            template <class Facet> locale(const locale& other, Facet* f);
+            locale(const locale& other, const locale& one, category);
+            ~locale() throw(); // not virtual
+            const locale& operator=(const locale& other) throw();
+            template <class Facet> locale combine(const locale& other) const;
+
+            // locale operations:
+            basic_string<char> name() const;
+
+            bool operator==(const locale& other) const;
+            bool operator!=(const locale& other) const;
+
+            template <class charT, class Traits, class Allocator>
+                bool operator()(const basic_string<charT,Traits,Allocator>& s1,
+                                const basic_string<charT,Traits,Allocator>& s2) const;
+
+            // global locale objects:
+            static       locale global(const locale&);
+            static const locale& classic();
+        };
+    }
+
+1 Class locale implements a type-safe polymorphic set of facets, indexed by facet type. In other words, a facet has a dual role: in one sense, it's just a class interface; at the same time, it's an index into a locale's set of facets.
+
+1 クラス locale はファセットによって索引づけられた、型安全な多態性を持つファセットの集合を提供する。言い換えると、ファセットはふたつの役割を持っている。ひとつはただのクラスインターフェイスであり、同時にそれはロカールのファセット集合への索引である。
+
+2 Access to the facets of a locale is via two function templates, use_facet<> and has_facet<>.
+
+2 ロカールのファセットへのアクセスはふたつの関数テンプレートを通して行う。 use_facet<> と has_facet<> である。
+
+3 [ Example: An iostream operator<< might be implemented as:237
+
+    template <class charT, class traits>
+    basic_ostream<charT,traits>&
+    operator<< (basic_ostream<charT,traits>& s, Date d) {
+        typename basic_ostream<charT,traits>::sentry cerberos(s);
+        if (cerberos) {
+            ios_base::iostate err = ios_base::iostate::goodbit;
+            tm tmbuf; d.extract(tmbuf);
+            use_facet< time_put<charT,ostreambuf_iterator<charT,traits> > >(
+                s.getloc()).put(s, s, s.fill(), err, &tmbuf, 'x');
+            s.setstate(err); // might throw
+        }
+        return s;
+    }
+
+-end example ]
+
+237) Notice that, in the call to put, the stream is implicitly converted to an ostreambuf_iterator<charT,traits>.
+
+3 [ 例: iostream operator<< は以下のように実装されるかもしれない 237 。
+
+    template <class charT, class traits>
+    basic_ostream<charT,traits>&
+    operator<< (basic_ostream<charT,traits>& s, Date d) {
+        typename basic_ostream<charT,traits>::sentry cerberos(s);
+        if (cerberos) {
+            ios_base::iostate err = ios_base::iostate::goodbit;
+            tm tmbuf; d.extract(tmbuf);
+            use_facet< time_put<charT,ostreambuf_iterator<charT,traits> > >(
+                s.getloc()).put(s, s, s.fill(), err, &tmbuf, 'x');
+            s.setstate(err); // might throw
+        }
+        return s;
+    }
+
+ ]
+
+237) put の呼び出しにおいて、ストリームは暗黙的に ostreambuf_iterator<charT,traits> に変換されることに注意せよ。
+
+4 In the call to use_facet<Facet>(loc), the type argument chooses a facet, making available all members of the named type. If Facet is not present in a locale, it throws the standard exception bad_cast. A C++ program can check if a locale implements a particular facet with the function template has_facet<Facet>().  User-defined facets may be installed in a locale, and used identically as may standard facets (22.4.8).
+
+4 use_facet<Facet>(loc) の呼び出しにおいて、型引数は名前のついた型のすべてのメンバーを入手可能な、ファセットを選択する。 Facet がロカールに存在しない場合、標準例外 bad_cast を投げる。 C++ プログラムは関数テンプレート has_facet<Facet>() を用いることでロカールが特定のファセットを提供しているかどうかを確認可能である。ロカールへの利用者定義のファセットの導入、およびその使用は標準ファセットと同様に扱ってもよい ( 22.4.8 ) 。
+
+5 [ Note: All locale semantics are accessed via use_facet<> and has_facet<>, except that:
+
+    - A member operator template operator()(const basic_string<C,T,A>&, const basic_string<C,T,A>&) is provided so that a locale may be used as a predicate argument to the standard collections, to collate strings.
+    - Convenient global interfaces are provided for traditional ctype functions such as isdigit() and isspace(), so that given a locale object loc a C++ program can call isspace(c,loc). (This eases upgrading existing extractors (27.7.1.2).) -end note ]
+
+5 [ 注: 以下の場合を除いて、すべてのロカール動作は use_facet<> もしくは has_facet<> を通して行われる。
+
+    - メンバーテンプレート operator()(const basic_string<C,T,A>&, const basic_string<C,T,A>&) は文字列を比較するために、標準ライブラリに対してロカールを述語文法として使用できるように提供される。
+    - 便利な大域インターフェイスは C++ プログラム毎に与えられたロカールオブジェクト loc が isspace(c,loc) を呼び出すことができるように、 isdigit() や isspace() のような、伝統的な ctype 関数のために提供される。 ( これは存在する抽出子の改良を簡易化する ( 27.7.1.2 ) 。 ) ]
+
+6 Once a facet reference is obtained from a locale object by calling use_facet<>, that reference remains usable, and the results from member functions of it may be cached and re-used, as long as some locale object refers to that facet.
+
+6 use_facet<> を用いてロカールオブジェクトからファセットへの参照が一度取得されると、何らかのロカールオブジェクトがそのファセットを参照している限り、その参照は使用可能のままであり、メンバー関数からの結果をキャッシュし再利用してよい。
+
+7 In successive calls to a locale facet member function on a facet object installed in the same locale, the returned result shall be identical.
+
+7 同一のロカールにおいて導入されているファセットオブジェクトのロカールファセットのメンバー関数の連続的な呼び出しにおいてその結果は全く同一でなければならない。
+
+8 A locale constructed from a name string (such as "POSIX"), or from parts of two named locales, has a name; all others do not. Named locales may be compared for equality; an unnamed locale is equal only to (copies of) itself. For an unnamed locale, locale::name() returns the string "*".
+
+8 名前を示す文字列 ( 例えば "POSIX" ) 、もしくはふたつの名前のあるロカールから構築されたロカールは、名前を持つ。その他のものは名前を持たない。名前のあるロカールは等価性を比較可能である。名前のないロカールはそれ自身と ( とそのコピー ) のみ等価である。名前のないロカールにおいて、 locale::name() は文字列 "*" を返す。
+
+9 Whether there is one global locale object for the entire program or one global locale object per thread is implementation-defined. Implementations are encouraged but not required to provide one global locale object per thread. If there is a single global locale object for the entire program, implementations are not required to avoid data races on it (17.6.4.8).
+
+9 プログラム全体に対しての大域ロカールオブジェクトが存在するかスレッド毎にひとつの大域ロカールが存在するかは実装時定義である。実装はスレッド毎にひとつの大域ロカールオブジェクトを提供することが推奨されるが必須ではない。プログラム全体でひとつの大域ロカールオブジェクトが存在する場合、実装はデータレースの回避を要求されない ( 17.6.4.8 ) 。
+
