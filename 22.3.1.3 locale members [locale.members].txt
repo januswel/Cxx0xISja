@@ -1,0 +1,26 @@
+22.3.1.3 locale members [locale.members]
+
+template <class Facet> locale combine(const locale& other) const;
+
+    1 Effects: Constructs a locale incorporating all facets from *this except for that one facet of other that is identified by Facet.
+
+    1 効果: Facet によって指定される other のひとつのファセットを除き *this からのすべてのファセットを包含するロカールを構築する。
+
+    2 Returns: The newly created locale.
+
+    2 返り値: 新たに生成されたロカール。
+
+    3 Throws: runtime_error if has_facet<Facet>(other) is false.
+
+    3 例外: has_facet<Facet>(other) が偽である場合 runtime_error を投げる。
+
+    4 Remarks: The resulting locale has no name.
+
+    4 注記: 結果のロカールは名前を持たない。
+
+basic_string<char> name() const;
+
+    5 Returns: The name of *this, if it has one; otherwise, the string "*". If *this has a name, then locale(name().c_str()) is equivalent to *this. Details of the contents of the resulting string are otherwise implementation-definedreturn value of locale::name.
+
+    5 返り値: 名前を持つ場合、 *this の名前。名前を持たない場合、文字列 "*" 。 *this が名前を持つ場合、 locale(name().c_str()) は *this と等価である。結果の文字列の内容の詳細は locale::name の他の実装時定義の値である。
+
