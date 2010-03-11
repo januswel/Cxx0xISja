@@ -1,0 +1,178 @@
+22.3.3.2.2 string conversions [conversions.string]
+
+1 Class template wstring_convert performs conversions between a wide string and a byte string. It lets you specify a code conversion facet (like class template codecvt) to perform the conversions, without affecting any streams or locales. [ Example: Say, for example, you have a code conversion facet called codecvt_utf8 that you want to use to output to cout a UTF-8 multibyte sequence corresponding to a wide string, but you don't want to alter the locale for cout. You can write something like:
+
+    wstring_convert<codecvt_utf8<wchar_t>> myconv;
+    std::string mbstring = myconv.to_bytes(L"Hello\n");
+    std::cout << mbstring;
+
+-end example ]
+
+1 クラステンプレート wstring_convert はワイド文字列とバイト文字列間の変換を行う。いずれのストリームもしくはロカールに作用することなく変換を行うための ( クラステンプレート codecvt のような ) 符号変換ファセットの指定を許可する。 [ 例: 例えば、 cout へワイド文字に対応する UTF-8 マルチバイト配列を出力するために使いたい codecvt_utf8 と呼ばれる符号変換ファセットを持っているが、 cout のロカールを変更したくない場合。以下のように書くことが出来る。
+
+    wstring_convert<codecvt_utf8<wchar_t>> myconv;
+    std::string mbstring = myconv.to_bytes(L"Hello\n");
+    std::cout << mbstring;
+
+ ]
+
+2 Class template wstring_convert synopsis
+
+    namespace std {
+    template<class Codecvt, class Elem = wchar_t,
+            class Wide_alloc = std::allocator<Elem>,
+            class Byte_alloc = std::allocator<char> > class wstring_convert {
+        public:
+            typedef std::basic_string<char, char_traits<char>, Byte_alloc> byte_string;
+            typedef std::basic_string<Elem, char_traits<\removed{char} \added{Elem}>, Wide_alloc> wide_string;
+            typedef typename Codecvt::state_type state_type;
+            typedef typename wide_string::traits_type::int_type int_type;
+
+            wstring_convert(Codecvt *pcvt = new Codecvt);
+            wstring_convert(Codecvt *pcvt, state_type state);
+            wstring_convert(const byte_string& byte_err,
+                            const wide_string& wide_err = wide_string());
+            ~wstring_convert();
+
+            wide_string from_bytes(char byte);
+            wide_string from_bytes(const char *ptr);
+            wide_string from_bytes(const byte_string& str);
+            wide_string from_bytes(const char *first, const char *last);
+
+            byte_string to_bytes(Elem wchar);
+            byte_string to_bytes(const Elem *wptr);
+            byte_string to_bytes(const wide_string& wstr);
+            byte_string to_bytes(const Elem *first, const Elem *last);
+
+            size_t converted() const;
+            state_type state() const;
+        private:
+            byte_string byte_err_string; // exposition only
+            wide_string wide_err_string; // exposition only
+            Codecvt *cvtptr; // exposition only
+            state_type cvtstate; // exposition only
+            size_t cvtcount; // exposition only
+        };
+    }
+
+3 The class template describes an object that controls conversions between wide string objects of class std::basic_string<Elem, char_traits<Elem>, Wide_alloc> and byte string objects of class std::basic_- string<char, char_traits<char>, Byte_alloc>. The class template defines the types wide_string and byte_string as synonyms for these two types. Conversion between a sequence of Elem values (stored in a wide_string object) and multibyte sequences (stored in a byte_string object) is performed by an object of class Codecvt<Elem, char, std::mbstate_t>, which meets the requirements of the standard code-conversion facet std::codecvt<Elem, char, std::mbstate_t>.
+
+3 クラステンプレートはクラス std::basic_string<Elem, char_traits<Elem>, Wide_alloc> のワイド文字列オブジェクトとクラス std::basic_string<char, char_traits<char>, Byte_alloc> のバイト文字列オブジェクト間の変換を制御するオブジェクトを表現する。クラステンプレートはこれらふたつの型における異名 wide_string 型と byte_string 型を定義する。
+( wide_string オブジェクトに格納されている ) Elem 値の配列と ( byte_string オブジェクトに格納されている ) マルチバイト配列間の変換は標準符号変換ファセット std::codecvt<Elem, char, std::mbstate_t> の要件を満たす、クラス Codecvt<Elem, char, std::mbstate_t> のオブジェクトによって行われる。
+
+4 An object of this class template stores:
+
+    - byte_err_string - a byte string to display on errors
+    - wide_err_string - a wide string to display on errors
+    - cvtptr - a pointer to the allocated conversion object (which is freed when the wstring_convert object is destroyed)
+    - cvtstate - a conversion state object
+    - cvtcount - a conversion count
+
+4 このクラステンプレートのオブジェクトは以下を持つ。
+
+    - byte_err_string - エラー時に表示するべきバイト文字列
+    - wide_err_string - エラー時に表示するべきワイド文字列
+    - cvtptr - ( wstring_convert オブジェクトが破壊された際に解放される ) メモリ確保された変換オブジェクトへのポインター
+    - cvtstate - 変換状態オブジェクト
+    - cvtcount - 変換総数
+
+typedef std::basic_string<char> byte_string;
+
+    5 The type shall be a synonym for std::basic_string<char>
+
+    5 型は std::basic_string<char> の異名でなくてはならない。
+
+size_t converted() const;
+
+    6 Returns: cvtcount.
+
+    6 返り値: cvtcount.
+
+wide_string from_bytes(char byte);
+wide_string from_bytes(const char *ptr);
+wide_string from_bytes(const byte_string& str);
+wide_string from_bytes(const char *first, const char *last);
+
+    7 Effects: The first member function shall convert the single-element sequence byte to a wide string.  The second member function shall convert the nul-terminated sequence beginning at ptr to a wide string. The third member function shall convert the sequence stored in str to a wide string. The fourth member function shall convert the sequence defined by the range [first,last) to a wide string.
+
+    7 効果: ひとつめのメンバー関数は単独要素の配列 byte をワイド文字列へ変換しなければならない。ふたつめのメンバー関数は ptr から始まる終端が空値の配列をワイド文字列へ変換しなければならない。みっつめのメンバー関数は str に格納されている配列をワイド文字列へ変換しなければならない。よっつめのメンバー関数は範囲 [first,last) によって定義された配列をワイド文字列へ変換しなければならない。
+
+    8 In all cases:
+
+        - If the cvtstate object was not constructed with an explicit value, it shall be set to its default value (the initial conversion state) before the conversion begins. Otherwise it shall be left unchanged.
+        - The number of input elements successfully converted shall be stored in cvtcount.
+
+    8 すべての場合において
+
+        - cvtstate オブジェクトが明確な値で構築されない場合、変換が始まる前にそれはその既定値 ( 初期変換状態 ) へ設定されなければならない。それ以外の場合それを変更してはならない。
+        - 変換に成功した入力要素の数は cvtcount に格納されなければならない。
+
+    9 Returns: If no conversion error occurs, the member function shall return the converted wide string.  Otherwise, if the object was constructed with a wide-error string, the member function shall return the wide-error string. Otherwise, the member function throws an object of class std::range_error.
+
+    9 返り値: 何も変換エラーが起こらなかった場合、メンバー関数は変換されたワイド文字列を返さなければならない。そうでない場合、オブジェクトがワイドエラー文字列によって構築された場合、メンバー関数は返さなければならない。ワイドエラー文字列。そうでもない場合、メンバー関数はクラス std::range_error のオブジェクトを投げる。
+
+typedef typename wide_string::traits_type::int_type int_type;
+
+    The type shall be a synonym for wide_string::traits_type::int_type.
+
+    型は wide_string::traits_type::int_type の異名でなければならない。
+
+state_type state() const;
+
+    10 returns cvtstate.
+
+    10 cvtstate を返す。
+
+typedef typename Codecvt::state_type state_type;
+
+    11 The type shall be a synonym for Codecvt::state_type.
+
+    11 型は Codecvt::state_type の異名でなければならない。
+
+byte_string to_bytes(Elem wchar);
+byte_string to_bytes(const Elem *wptr);
+byte_string to_bytes(const wide_string& wstr);
+byte_string to_bytes(const Elem *first, const Elem *last);
+
+    12 Effects: The first member function shall convert the single-element sequence wchar to a byte string.  The second member function shall convert the nul-terminated sequence beginning at wptr to a byte string. The third member function shall convert the sequence stored in wstr to a byte string. The fourth member function shall convert the sequence defined by the range [first,last) to a byte string.
+
+    12 効果: ひとつめのメンバー関数は単独要素の配列 wchar をバイト文字列へ変換しなければならない。ふたつめのメンバー関数は wptr から始まる終端が空値の配列をバイト文字列へ変換しなければならない。みっつめのメンバー関数は wstr に格納されている配列をバイト文字列へ変換しなければならない。よっつめのメンバー関数は範囲 [first,last) によって定義されている配列をバイト文字列へ変換しなければならない。
+
+    13 In all cases:
+
+        - If the cvtstate object was not constructed with an explicit value, it shall be set to its default value (the initial conversion state) before the conversion begins. Otherwise it shall be left unchanged.
+        - The number of input elements successfully converted shall be stored in cvtcount.
+
+    13 すべての場合において
+
+        - If cvtstate オブジェクトが明確な値で構築されていない場合、変換が始まる前にそれはその既定値 ( 初期変換状態 ) に設定されなければならない。それ以外の場合それを変更してはならない。
+        - 変換に成功した入力要素の数は cvtcount に格納されなければならない。
+
+    14 Returns: If no conversion error occurs, the member function shall return the converted byte string.  Otherwise, if the object was constructed with a byte-error string, the member function shall return the byte-error string. Otherwise, the member function shall throw an object of class std::range_error.
+
+    14 返り値: 何も変換エラーが起こらなかった場合、メンバー関数は変換されたバイト文字列を返さなければならない。それ以外の場合、オブジェクトがバイトエラー文字列で構築された場合、メンバー関数はバイトエラー文字列を返さなければならない。それ以外の場合、メンバー関数はクラス std::range_error オブジェクトを投げる。
+
+typedef std::basic_string<Elem> wide_string;
+
+    15 The type shall be a synonym for std::basic_string<Elem>.
+
+    15 型は std::basic_string<Elem> の異名でなくてはならない。
+
+wstring_convert(Codecvt *pcvt = new Codecvt);
+wstring_convert(Codecvt *pcvt, state_type state);
+wstring_convert(const byte_string& byte_err,
+    const wide_string& wide_err = wide_string());
+
+    16 Effects: The first constructor shall store pcvt in cvtptr and default values in cvtstate, byte_err_string, and wide_err_string. The second constructor shall store pcvt in cvtptr, state in cvtstate, and default values in byte_err_string and wide_err_string; moreover the stored state shall be retained between calls to from_bytes and to_bytes. The third constructor shall store new Codecvt in cvtptr, state_type() in cvtstate, byte_err in byte_err_string, and wide_err in wide_err_string.
+
+    16 効果: ひとつめのコンストラクターは cvtptr に pcvt を cvtstate 、 byte_err_string 、 wide_err_string に既定値を格納しなければならない。
+    ふたつめのコンストラクターは cvtptr に pcvt を、 cvtstate に state を、 byte_err_string と wide_err_string に既定値を格納しなければならない。
+    さらに格納された状態は from_bytes と to_bytes の呼び出し間において保たれなければならない。
+    みっつめのコンストラクターは cvtptr に新しい Codecvt を、 cvtstate に state_type() を、 byte_err_string に byte_err を、 wide_err_string に wide_err を格納しなければならない。
+
+~wstring_convert();
+
+    17 Effects: The destructor shall delete cvtptr.
+
+    17 効果: デストラクターは cvtptr を削除しなければならない。
+
