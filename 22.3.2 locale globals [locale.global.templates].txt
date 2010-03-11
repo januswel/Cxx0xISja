@@ -1,0 +1,26 @@
+22.3.2 locale globals [locale.global.templates]
+
+template <class Facet> const Facet& use_facet(const locale& loc);
+
+    1 Requires: Facet is a facet class whose definition contains the public static member id as defined in 22.3.1.1.2.
+
+    1 必須: Facet は 22.3.1.1.2 で定義されている public な静的メンバー id 定義に持つファセットクラス。
+
+    2 Returns: a reference to the corresponding facet of loc, if present.
+
+    2 返り値: 存在する場合、 loc の対応するファセットへの参照。
+
+    3 Throws: bad_cast if has_facet<Facet>(loc) is false.
+
+    3 例外: has_facet<Facet>(loc) が偽である場合 bad_cast を投げる。
+
+    4 Remarks: The reference returned remains valid at least as long as any copy of loc exists.
+
+    4 注記: 返される参照は少なくとも loc のいずれかのコピーが存在する間有効である。
+
+template <class Facet> bool has_facet(const locale& loc) throw();
+
+    5 Returns: true if the facet requested is present in loc; otherwise false.
+
+    5 返り値: 要求されたファセットが loc において存在する場合、真。そのほかの場合、偽。
+
