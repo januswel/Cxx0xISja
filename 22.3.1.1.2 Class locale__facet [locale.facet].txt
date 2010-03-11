@@ -1,0 +1,32 @@
+22.3.1.1.2 Class locale::facet [locale.facet]
+
+    namespace std {
+        class locale::facet {
+        protected:
+            explicit facet(size_t refs = 0);
+            virtual ~facet();
+            facet(const facet&) = delete;
+            void operator=(const facet&) = delete;
+        };
+    }
+
+1 Template parameters in this Clause which are required to be facets are those named Facet in declarations. A program that passes a type that is not a facet, or a type that refers to a volatile-qualified facet, as an (explicit or deduced) template parameter to a locale function expecting a facet, is ill-formed. A const-qualified facet is a valid template argument to any locale function that expects a Facet template parameter.
+
+1 この条項においてファセットであることが要求されるテンプレートパラメーターは宣言において Facet と名のついているものである。 ( 明示的か推測かを問わず ) ファセットを要求するロカール関数へのテンプレートパラメーターとして、ファセットでない型、もしくは被 volatile 修飾のファセットを参照する型を渡すプログラムは不適格である。被 const 修飾のファセットは Facet テンプレートパラメーターを要求する任意のロカール関数にとって有効なテンプレート引数である。
+
+2 The refs argument to the constructor is used for lifetime management.
+
+    - For refs == 0, the implementation performs delete static_cast<locale::facet*>(f) (where f is a pointer to the facet) when the last locale object containing the facet is destroyed; for refs == 1, the implementation never destroys the facet.
+
+2 コンストラクターへの refs 引数は生存期間の管理に使用される。
+
+    - ファセットを保持する最後のロカールオブジェクトが破壊された際、 refs == 0 であるとき、実装は delete static_cast<locale::facet*>(f) ( ここで f はファセットへのポインター ) を実行し、 refs == 1 であるとき、実装はファセットを破壊することはない。
+
+3 Constructors of all facets defined in this Clause take such an argument and pass it along to their facet base class constructor. All one-argument constructors defined in this Clause are explicit, preventing their participation in automatic conversions.
+
+3 この条項において定義されているすべてのファセットのコンストラクターはそのような引数を取りそれらのファセットの基底クラスのコンストラクターにそれを渡す。この条項において定義されているすべての一引数コンストラクターは明示的であり、自動的な変換を抑止する。
+
+4 For some standard facets a standard "..._byname" class, derived from it, implements the virtual function semantics equivalent to that facet of the locale constructed by locale(const char*) with the same name.  Each such facet provides a constructor that takes a const char* argument, which names the locale, and a refs argument, which is passed to the base class constructor. Each such facet also provides a constructor that takes a string argument str and a refs argument, which has the same effect as calling the first constructor with the two arguments str.c_str() and refs. If there is no "..._byname" version of a facet, the base class implements named locale semantics itself by reference to other facets.
+
+4 何らかの標準ファセットにおいて標準の "..._byname" クラス、そこから派生したもの、は同様の名前と locale(const char*) によって構築されたロカールのそのファセットと同等の仮想関数を提供する。そのようなファセットは各々そのロカールを名付ける const char* 引数と基底クラスのコンストラクターに渡される refs 引数を取るコンストラクターを提供する。そのようなファセットの各々はふたつの引数 str.c_str() と refs でひとつめのコンストラクタを呼んだときと同様の効果をもたらす文字列引数 str と refs 引数を取るコンストラクターも提供する。ファセットの "..._byname" 版が存在しない場合、基底クラスは他のファセットへの参照によって名前のあるロカールを提供する。
+
