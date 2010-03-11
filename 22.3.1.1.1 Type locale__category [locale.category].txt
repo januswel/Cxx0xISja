@@ -62,7 +62,55 @@ messages        messages<char>, messages<wchar_t>
 
 3 構築された、もしくは locale::classic() からの返された任意のロカール loc 、もしくは表 76 で示されている任意のファセット Facet において、 has_facet<Facet>(loc) は真となる。 locale::category 引数を取る各々のロカールメンバー関数は対応するファセットの集合を操作する。
 
+Table 77 — Required specializations
+Category    Includes facets
+collate     collate_byname<char>, collate_byname<wchar_t>
+ctype       ctype_byname<char>, ctype_byname<wchar_t>
+            codecvt_byname<char,char,mbstate_t>
+            codecvt_byname<char16_t,char,mbstate_t>
+            codecvt_byname<char32_t,char,mbstate_t>
+            codecvt_byname<wchar_t,char,mbstate_t>
+monetary    moneypunct_byname<char,International>
+            moneypunct_byname<wchar_t,International>
+            money_get<C,InputIterator>
+            money_put<C,OutputIterator>
+numeric     numpunct_byname<char>, numpunct_byname<wchar_t>
+            num_get<C,InputIterator>, num_put<C,OutputIterator>
+time        time_get<char,InputIterator>
+            time_get_byname<char,InputIterator>
+            time_get<wchar_t,InputIterator>
+            time_get_byname<wchar_t,InputIterator>
+            time_put<char,OutputIterator>
+            time_put_byname<char,OutputIterator>
+            time_put<wchar_t,OutputIterator>
+            time_put_byname<wchar_t,OutputIterator>
+messages    messages_byname<char>, messages_byname<wchar_t>
+
 4 An implementation is required to provide those specializations for facet templates identified as members of a category, and for those shown in Table 77.
+
+表 77 — 必須な特殊化
+Category    Includes facets
+collate     collate_byname<char>, collate_byname<wchar_t>
+ctype       ctype_byname<char>, ctype_byname<wchar_t>
+            codecvt_byname<char,char,mbstate_t>
+            codecvt_byname<char16_t,char,mbstate_t>
+            codecvt_byname<char32_t,char,mbstate_t>
+            codecvt_byname<wchar_t,char,mbstate_t>
+monetary    moneypunct_byname<char,International>
+            moneypunct_byname<wchar_t,International>
+            money_get<C,InputIterator>
+            money_put<C,OutputIterator>
+numeric     numpunct_byname<char>, numpunct_byname<wchar_t>
+            num_get<C,InputIterator>, num_put<C,OutputIterator>
+time        time_get<char,InputIterator>
+            time_get_byname<char,InputIterator>
+            time_get<wchar_t,InputIterator>
+            time_get_byname<wchar_t,InputIterator>
+            time_put<char,OutputIterator>
+            time_put_byname<char,OutputIterator>
+            time_put<wchar_t,OutputIterator>
+            time_put_byname<wchar_t,OutputIterator>
+messages    messages_byname<char>, messages_byname<wchar_t>
 
 4 実装は表 77 において示されるカテゴリーのメンバーとして特定されるファセットテンプレートのための特殊化を提供することが必須である。
 
