@@ -1,0 +1,92 @@
+22.3.1.2 locale constructors and destructor [locale.cons]
+
+locale() throw();
+
+    1 Default constructor: a snapshot of the current global locale.
+
+    1 既定コンストラクター: 現在の大域ロカールのスナップショット。
+
+    2 Effects: Constructs a copy of the argument last passed to locale::global(locale&), if it has been called; else, the resulting facets have virtual function semantics identical to those of locale::classic().  [ Note: This constructor is commonly used as the default value for arguments of functions that take a const locale& argument. -end note ]
+
+    2 効果: locale::global(locale&) を呼び出したことがある場合、最後にそれに渡された引数のコピーを構築する。そうでない場合、結果のファセットは locale::classic() のそれと同じ動作をする仮想関数を持つ。 [ 注: このコンストラクターは通例 const locale& 引数を取る関数の引数における既定の値として使用される。 ]
+
+locale(const locale& other) throw();
+
+    3 Effects: Constructs a locale which is a copy of other.
+
+    3 効果: other のコピーであるロカールを構築する。
+
+const locale& operator=(const locale& other) throw();
+
+    4 Effects: Creates a copy of other, replacing the current value.
+
+    4 効果: other のコピーを作成し、現在の値を置き換える。
+
+    5 Returns: *this
+
+    5 返り値: *this
+
+explicit locale(const char* std_name);
+
+    6 Effects: Constructs a locale using standard C locale names, e.g., "POSIX". The resulting locale implements semantics defined to be associated with that name.
+
+    6 効果: 標準 C ロカール名、例えば "POSIC" で使用するロカールを構築する。結果のロカールはその名前に関連して定義された動作を提供する。
+
+    7 Throws: runtime_error if the argument is not valid, or is null.
+
+    7 例外: 引数が有効でない場合 runtime_error を投げる。そのほかの場合は投げない。
+
+    8 Remarks: The set of valid string argument values is "C", "", and any implementation-defined values.
+
+    8 注記: 有効な文字列引数の集合は "C" 、 "" 、 と任意の実装時定義の値である。
+
+explicit locale(const string& std_name);
+
+    9 Effects: The same as locale(std_name.c_str()).
+
+    9 効果: locale(std_name.c_str()) と同様。
+
+locale(const locale& other, const char* std_name, category);
+
+    10 Effects: Constructs a locale as a copy of other except for the facets identified by the category argument, which instead implement the same semantics as locale(std_name).
+
+    10 効果: locale(std_name) と同等の動作を提供する代わりに、 category 引数によって指定されたファセットを除いた other のコピーとしてロカールを構築する。
+
+    11 Throws: runtime_error if the argument is not valid, or is null.
+
+    11 例外: 引数が有効でない場合 runtime_error を投げる。その他の場合は何も投げない。
+
+    12 Remarks: The locale has a name if and only if other has a name.
+
+    12 注記: other が名前を持つ場合に限りロカールは名前を持つ。
+
+locale(const locale& other, const string& std_name, category cat);
+
+    13 効果: locale(other, std_name.c_str(), cat) と同様。
+
+template <class Facet> locale(const locale& other, Facet* f);
+
+    14 Effects: Constructs a locale incorporating all facets from the first argument except that of type Facet, and installs the second argument as the remaining facet. If f is null, the resulting object is a copy of other.
+
+    14 効果: 型 Facet のファセットを除いてひとつめの引数からのすべてのファセットを包含するロカールを構築し、残りのファセットとしてふたつめの引数を導入する。 f が空値である場合、結果のオブジェクトは other のコピーとなる。
+
+    15 Remarks: The resulting locale has no name.
+
+    15 注記: 結果のロカールは名前を持たない。
+
+locale(const locale& other, const locale& one, category cats);
+
+    16 Effects: Constructs a locale incorporating all facets from the first argument except those that implement cats, which are instead incorporated from the second argument.
+
+    16 効果: ふたつめの引数から包含する代わりに、 cats が提供するファセットを除くひとつめの引数からのすべてのファセットを包含するロカールを構築する。
+
+    17 Remarks: The resulting locale has a name if and only if the first two arguments have names.
+
+    17 注記: 最初ふたつの引数が名前を持つ場合に限り結果のロカールは名前を持つ。
+
+~locale() throw();
+
+    18 A non-virtual destructor that throws no exceptions.
+
+    18 例外を投げない非仮想デストラクター。
+
