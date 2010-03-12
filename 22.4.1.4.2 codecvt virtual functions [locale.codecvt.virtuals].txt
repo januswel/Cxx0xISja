@@ -1,0 +1,158 @@
+22.4.1.4.2 codecvt virtual functions [locale.codecvt.virtuals]
+
+result do_out(stateT& state,
+    const internT* from, const internT* from_end, const internT*& from_next,
+    externT* to, externT* to_end, externT*& to_next) const;
+
+result do_in(stateT& state,
+    const externT* from, const externT* from_end, const externT*& from_next,
+          internT* to, internT* to_end, internT*& to_next) const;
+
+    1 Requires: (from<=from_end && to<=to_end) well-defined and true; state initialized, if at the beginning of a sequence, or else equal to the result of converting the preceding characters in the sequence.
+
+    1 必須: (from<=from_end && to<=to_end) が明確に真。配列の始点から、もしくは配列内の先行する文字の変換の結果と同一の場合、 state は初期化される。
+
+    2 Effects: Translates characters in the source range [from,from_end), placing the results in sequential positions starting at destination to. Converts no more than (from_end-from) source elements, and stores no more than (to_end-to) destination elements.
+
+    Stops if it encounters a character it cannot convert. It always leaves the from_next and to_next pointers pointing one beyond the last element successfully converted. If returns noconv, internT and externT are the same type and the converted sequence is identical to the input sequence [from, from_next). to_next is set equal to to, the value of state is unchanged, and there are no changes to the values in [to, to_end).
+
+    2 効果: 変換元の範囲 [from,from_end) の文字を変換先の始点から連続する位置に結果を配置することで翻訳する。 (from_end-from) 以上に変換元要素を変換せず、 (to_end-to) 以上に変換先要素へ格納しない。
+
+    変換できない文字に遭遇した場合終了する。変換に成功した最後の要素を越えた位置を指し示す from_next ポインターと to_next ポインターを常に無視する。 noconv が返る場合、 internT と externT は同じ型かつ変換された配列は変換元配列 [from, from_next) と同一である。 to_next は to と同じ値に設定され、 state の値は変化せず、 [to, to_end) の値は変化しない。
+
+    3 A codecvt facet that is used by basic_filebuf (27.9) shall have the property that if
+
+        do_out(state, from, from_end, from_next, to, to_end, to_next)
+
+    would return ok, where from != from_end, then
+
+        do_out(state, from, from + 1, from_next, to, to_end, to_next)
+
+    shall also return ok, and that if
+
+        do_in(state, from, from_end, from_next, to, to_end, to_next)
+
+    would return ok, where to != to_end, then
+
+        do_in(state, from, from_end, from_next, to, to + 1, to_next)
+
+    shall also return ok.242 [ Note: As a result of operations on state, it can return ok or partial and set from_next == from and to_next != to. -end note ]
+
+242) Informally, this means that basic_filebuf assumes that the mappings from internal to external characters is 1 to N: a codecvt facet that is used by basic_filebuf must be able to translate characters one internal character at a time.
+
+    3 basic_filebuf ( 27.9 ) によって使用される codecvt ファセットは以下の性質を持っていなければならない。 from != from_end であるとき、
+
+        do_out(state, from, from_end, from_next, to, to_end, to_next)
+
+    が ok を返す場合、
+
+        do_out(state, from, from + 1, from_next, to, to_end, to_next)
+
+    も ok を返さなければならず、 to != to_end であるとき、
+
+        do_in(state, from, from_end, from_next, to, to_end, to_next)
+
+    が ok を返す場合、
+
+        do_in(state, from, from_end, from_next, to, to + 1, to_next)
+
+    も ok を返さなければならない 242 。 [ 注: state の操作の結果として、 ok もしくは partial を返し from_next == from と to_next != to であると確定することは可能である。 ]
+
+242) Informally, これは basic_filebuf が内部から外部への文字写像が 1 対 N であると仮定するということを意味する。つまり basic_filebuf によって使用される codecvt ファセットは一度に文字群をただひとつの内部文字に変換可能でなければならない。
+
+    4 Remarks: Its operations on state are unspecified. [ Note: This argument can be used, for example, to maintain shift state, to specify conversion options (such as count only), or to identify a cache of seek offsets. -end note ]
+
+    4 注記: state の操作は非明示である。 [ 注: この引数は例えば、変換状態を示すシフト状態を保持するため ( 例えば変換済み文字数のみ ) やシークオフセットのキャッシュを特定するために使用可能である。 ]
+
+    5 Returns: An enumeration value, as summarized in Table 78.
+
+Table 78 - do_in/do_out result values
+Value       Meaning
+ok          completed the conversion
+partial     not all source characters converted
+error       encountered a character in [from,from_end) that it could not convert
+noconv      internT and externT are the same type, and input sequence is identical to converted sequence
+
+    A return value of partial, if (from_next==from_end), indicates that either the destination sequence has not absorbed all the available destination elements, or that additional source elements are needed before another destination element can be produced.
+
+    5 返り値: 表 78 にまとめられている列挙値。
+
+表 78 - do_in/do_out の結果
+値          意味
+ok          変換完了
+partial     すべての変換元文字が変換されていない
+error       [from,from_end) において変換できない文字に遭遇した
+noconv      internT と externT は同じ型であり、入力配列は変換された配列と同一である。
+
+    (from_next==from_end) である場合、 partial の返り値は変換先配列が使用可能なすべての変換先要素を使い切れなかったということと他の変換先要素を生成する前に追加の変換元要素が必要とされるということを示す。
+
+result do_unshift(stateT& state,
+    externT* to, externT* to_end, externT*& to_next) const;
+
+    6 Requires: (to <= to_end) well defined and true; state initialized, if at the beginning of a sequence, or else equal to the result of converting the preceding characters in the sequence.
+
+    6 必須: (to <= to_end) が明確に真。配列の始点から、もしくは配列内の先行する文字の変換の結果と同一の場合、 state は初期化される。
+
+    7 Effects: Places characters starting at to that should be appended to terminate a sequence when the current stateT is given by state.243 Stores no more than (to_end-to) destination elements, and leaves the to_next pointer pointing one beyond the last element successfully stored.
+
+243) Typically these will be characters to return the state to stateT()
+
+    7 効果: 現在の stateT が state によって与えられるとき配列を終端するために追加されなければならない to から始まる文字を配置する 243 。変換先要素に (to_end-to) 以上を格納せず、格納に成功した最後の要素を越えた位置を指し示す to_next ポインターを無視する。
+
+243) 一般的にこれらは状態を stateT() に返す文字となるだろう。
+
+    8 Returns: An enumeration value, as summarized in Table 79.
+
+Table 79 - do_unshift result values
+Value       Meaning
+ok          completed the sequence
+partial     space for more than to_end-to destination elements was needed to terminate a sequence given the value of state
+error       an unspecified error has occurred
+noconv      no termination is needed for this state_type
+
+    8 返り値: 表 79 にまとめられている列挙値。
+
+表 79 - do_unshift の結果
+値          意味
+ok          配列が完結した
+partial     state の値で与えられている配列を終端させるために to_end-to 以上の変換先要素にとっての空間が必要
+error       不明なエラーが発生した
+noconv      この state_type は終端を必要としない
+
+int do_encoding() const throw();
+
+    9 Returns:-1 if the encoding of the externT sequence is state-dependent; else the constant number of externT characters needed to produce an internal character; or 0 if this number is not a constant244.
+
+244) If encoding() yields -1, then more than max_length() externT elements may be consumed when producing a single internT character, and additional externT elements may appear at the end of a sequence after those that yield the final internT character.
+
+    9 返り値: externT 配列の文字符号が状態独立である場合 -1 。もしくは externT 文字が内部文字を生成するために必要とする数。この数が定数でない場合 0 244 。
+
+244) encoding() が -1 を与える場合、単独の internT 文字を生成する際 max_length() 以上の externT 要素が消費されてよく、追加の externT 要素は最後の internT 文字を与えるそれらの後ろの配列の最後に現れてよい。
+
+bool do_always_noconv() const throw();
+
+    10 Returns: true if do_in() and do_out() return noconv for all valid argument values. codecvt<char, char, mbstate_t> returns true.
+
+    10 返り値: すべての有効な引数値において do_in() と do_out() が noconv を返す場合、真。 codecvt<char, char, mbstate_t> は真を返す。
+
+int do_length(stateT& state, const externT* from, const externT* from_end,
+              size_t max) const;
+
+    11 Requires: (from<=from_end) well-defined and true; state initialized, if at the beginning of a sequence, or else equal to the result of converting the preceding characters in the sequence.
+
+    11 必須: (from<=from_end) が明確に真。配列の始点から、もしくは配列内の先行する文字の変換結果と同一の場合、 state は初期化される。
+
+    12 Effects: The effect on the state argument is "as if" it called do_in(state, from, from_end, from, to, to+max, to) for to pointing to a buffer of at least max elements.
+
+    12 効果: state 引数における効果は少なくとも max 要素を持つバッファーを to に指定して do_in(state, from, from_end, from, to, to+max, to) を呼んだ「かのように」振る舞う。
+
+    13 Returns: (from_next-from) where from_next is the largest value in the range [from,from_end] such that the sequence of values in the range [from,from_next) represents max or fewer valid complete characters of type internT. The specialization codecvt<char, char, mbstate_t>, returns the lesser of max and (from_end-from).
+
+    13 返り値: from_next が範囲 [from,from_end] における最大値であるとき (from_next-from) は範囲 [from,from_next) における値の配列は max もしくはより少ない internT 型の有効な完全文字を表現する。特殊化 codecvt<char, char, mbstate_t> は max と (from_end-from) の小さい方を返す。
+
+int do_max_length() const throw();
+
+    14 Returns: The maximum value that do_length(state, from, from_end, 1) can return for any valid range [from, from_end) and stateT value state. The specialization codecvt<char, char, mbstate_t>::do_max_length() returns 1.
+
+    14 返り値: 任意の有効な範囲 [from, from_end) と stateT 型の state において do_length(state, from, from_end, 1) が返しうる最大値。特殊化 codecvt<char, char, mbstate_t>::do_max_length() は 1 を返す。
+
