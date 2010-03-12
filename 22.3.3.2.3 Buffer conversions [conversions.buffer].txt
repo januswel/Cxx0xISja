@@ -1,0 +1,90 @@
+22.3.3.2.3 Buffer conversions [conversions.buffer]
+
+1 Class template wbuffer_convert looks like a wide stream buffer, but performs all its I/O through an underlying byte stream buffer that you specify when you construct it. Like class template wstring_convert, it lets you specify a code conversion facet to perform the conversions, without affecting any streams or locales.
+
+1 クラステンプレート wbuffer_convert はワイドストリームバッファーのように見えるが、すべてその I/O を構築する際に指定された下層のバイトストリームバッファーを通して行う。クラステンプレート wstring_convert のように、いずれのストリームもしくはロカールに作用することなく、変換を行う符号変換ファセットを指定することを許可する。
+
+2 Class template wbuffer_convert synopsis
+
+    namespace std {
+    template<class Codecvt,
+            class Elem = wchar_t,
+            class Tr = std::char_traits<Elem> >
+        class wbuffer_convert
+            : public std::basic_streambuf<Elem, Tr> {
+        public:
+            typedef typename Tr::state_type state_type;
+
+            wbuffer_convert(std::streambuf *bytebuf = 0,
+                            Codecvt *pcvt = new Codecvt,
+                            state_type state = state_type());
+
+            std::streambuf *rdbuf() const;
+            std::streambuf *rdbuf(std::streambuf *bytebuf);
+
+            state_type state() const;
+
+        private:
+            std::streambuf *bufptr; // exposition only
+            Codecvt *cvtptr; // exposition only
+            state_type cvtstate; // exposition only
+        };
+    }
+
+3 The class template describes a stream buffer that controls the transmission of elements of type Elem, whose character traits are described by the class Tr, to and from a byte stream buffer of type std::streambuf.  Conversion between a sequence of Elem values and multibyte sequences is performed by an object of class Codecvt<Elem, char, std::mbstate_t>, which shall meet the requirements of the standard code-conversion facet std::codecvt<Elem, char, std::mbstate_t>.
+
+3 クラステンプレートは文字特性がクラス Tr によって記述されている Elem 型の要素を std::streambuf 型のバイトストリームバッファーへ、もしくはそこからの伝達を制御するストリームバッファーを記述している。 Elem 値の連続とマルチバイト配列間の変換は、標準符号変換ファセット std::codecvt<Elem, char, std::mbstate_t> の要件を満たしていなければならないクラス Codecvt<Elem, char, std::mbstate_t> のオブジェクトによって行われる。
+
+4 An object of this class template stores:
+
+    - bufptr - a pointer to its underlying byte stream buffer
+    - cvtptr - a pointer to the allocated conversion object (which is freed when the wbuffer_convert object is destroyed)
+    - cvtstate - a conversion state object
+
+4 このクラステンプレートのオブジェクトは以下を格納する。
+
+    - bufptr - その下層のバイトストリームバッファーへのポインター
+    - cvtptr - ( wbuffer_convert オブジェクトが破壊される際に解放される ) メモリ確保された変換オブジェクトへのポインター
+    - cvtstate - 変換状態オブジェクト
+
+state_type state() const;
+
+    5 Returns: cvtstate.
+
+    5 返り値: cvtstate.
+
+std::streambuf *rdbuf() const;
+
+    6 Returns: bufptr.
+
+    6 返り値: bufptr.
+
+std::streambuf *rdbuf(std::streambuf *bytebuf);
+
+    7 Effects: stores bytebuf in bufptr.
+
+    7 効果: bufptr に bytebuf を格納する。
+
+    8 Returns: the previous value of bufptr.
+
+    8 返り値: bufptr の以前の値。
+
+typedef typename Codecvt::state_type state_type;
+
+    9 The type shall be a synonym for Codecvt::state_type.
+
+    9 型は Codecvt::state_type の異名でなければならない。
+
+wbuffer_convert(std::streambuf *bytebuf = 0,
+    Codecvt *pcvt = new Codecvt, state_type state = state_type());
+
+    10 Effects: The constructor constructs a stream buffer object, initializes bufptr to bytebuf, initializes cvtptr to pcvt, and initializes cvtstate to state.
+
+    10 効果: コンストラクターはストリームバッファーオブジェクトを構築し、 bufptr を bytebuf に初期化し、 cvtptr を pcvt に初期化し、 cvtstate を state に初期化する。
+
+~wbuffer_convert();
+
+    11 Effects: The destructor shall delete cvtptr.
+
+    11 効果: デストラクターは cvtptr を削除しなければならない。
+
