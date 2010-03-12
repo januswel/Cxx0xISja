@@ -1,0 +1,93 @@
+22.5 Standard code conversion facets [locale.stdcvt]
+
+1 The header <codecvt> provides code conversion facets for various character encodings.
+
+1 ヘッダー <codecvt> は様々な文字符号における符号変換ファセットを提供する。
+
+2 Header <codecvt> synopsis
+
+    namespace std {
+        enum codecvt_mode {
+            consume_header = 4,
+            generate_header = 2,
+            little_endian = 1
+        };
+
+        template<class Elem, unsigned long Maxcode = 0x10ffff,
+            codecvt_mode Mode = (codecvt_mode)0>
+        class codecvt_utf8
+            : public codecvt<Elem, char, mbstate_t> {
+            // unspecified
+        };
+
+        template<class Elem, unsigned long Maxcode = 0x10ffff,
+            codecvt_mode Mode = (codecvt_mode)0>
+        class codecvt_utf16
+            : public codecvt<Elem, char, mbstate_t> {
+            // unspecified
+        };
+
+        template<class Elem, unsigned long Maxcode = 0x10ffff,
+            codecvt_mode Mode = (codecvt_mode)0>
+        class codecvt_utf8_utf16
+            : public codecvt<Elem, char, mbstate_t> {
+            // unspecified
+        };
+    }
+
+3 For each of the three code conversion facets codecvt_utf8, codecvt_utf16, and codecvt_utf8_utf16:
+
+    - Elem is the wide-character type, such as wchar_t, char16_t, or char32_t.
+    - Maxcode is the largest wide-character code that the facet will read or write without reporting a conversion error.
+    - If (Mode & consume_header), the facet shall consume an initial header sequence, if present, when reading a multibyte sequence to determine the endianness of the subsequent multibyte sequence to be read.
+    - If (Mode & generate_header), the facet shall generate an initial header sequence when writing a multibyte sequence to advertise the endianness of the subsequent multibyte sequence to be written.
+    - If (Mode & little_endian), the facet shall generate a multibyte sequence in little-endian order, as opposed to the default big-endian order.
+
+3 codecvt_utf8 、 codecvt_utf16 、 codecvt_utf8_utf16 のみっつの符号変換ファセットそれぞれにおいて
+
+    - Elem はワイド文字型、例えば wchar_t 、 char16_t 、 char32_t である。
+    - Maxcode はファセットが変換エラーを起こすことなく読み書きできるワイド文字符号の最大のものである。
+    - (Mode & consume_header) が真である場合、次に読み込まれるマルチバイト配列のエンディアンを決定するためにマルチバイト配列を読む際、ファセットはもし存在するならば最初のヘッダー配列を消費しなければならない
+    - (Mode & generate_header) が真である場合、次に書き込まれるマルチバイト配列のエンディアンを指示するためにマルチバイト配列を書き込む際、ファセットは最初のヘッダー配列を生成しなければならない。
+    - (Mode & little_endian) が真である場合、既定のビッグエンディアンと対照的に、ファセットはリトルエンディアンでマルチバイト配列を生成しなければならない
+
+4 For the facet codecvt_utf8:
+
+    - The facet shall convert between UTF-8 multibyte sequences and UCS2 or UCS4 (depending on the size of Elem) within the program.
+    - Endianness shall not affect how multibyte sequences are read or written.
+    - The multibyte sequences may be written as either a text or a binary file.
+
+4 codecvt_utf8 ファセットにおいて
+
+    - ファセットはプログラム内部で UTF-8 マルチバイト配列と UCS2 もしくは UCS4 ( Elem の容量に依存する ) 間を変換しなければならない。
+    - エンディアンはマルチバイト配列の読み書きに作用してはならない。
+    - マルチバイト配列はテキストもしくはバイナリーファイルのどちらに書き込まれてもよい。
+
+5 For the facet codecvt_utf16:
+
+    - The facet shall convert between UTF-16 multibyte sequences and UCS2 or UCS4 (depending on the size of Elem) within the program.
+    - Multibyte sequences shall be read or written according to the Mode flag, as set out above.
+    - The multibyte sequences may be written only as a binary file. Attempting to write to a text file produces undefined behavior.
+
+5 codecvt_utf16 ファセットにおいて
+
+    - ファセットはプログラム内部で UTF-16 マルチバイト配列と UCS2 もしくは UCS4 ( Elem の容量に依存する ) 間を変換しなければならない。
+    - マルチバイト配列は上記で示したように、 Mode フラグに従って読み書きされなければならない。
+    - マルチバイト配列はバイナリーファイルとしてのみ書き込まれてよい。テキストファイルへの書き込みは未定義の挙動となる。
+
+6 For the facet codecvt_utf8_utf16:
+
+    - The facet shall convert between UTF-8 multibyte sequences and UTF-16 (one or two 16-bit codes) within the program.
+    - Endianness shall not affect how multibyte sequences are read or written.
+    - The multibyte sequences may be written as either a text or a binary file.
+
+See also: ISO/IEC 10646-1:1993.
+
+6 codecvt_utf8_utf16 ファセットにおいて
+
+    - ファセットはプログラム内部で UTF-8 マルチバイト配列と UTF-16 ( ひとつもしくはふたつの 16 ビット符号 ) 間を変換しなければならない。
+    - エンディアンはマルチバイト配列の読み書きに作用してはならない。
+    - マルチバイト配列はテキストもしくはバイナリーファイルのどちらに書き込まれてもよい。
+
+See also: ISO/IEC 10646-1:1993.
+
