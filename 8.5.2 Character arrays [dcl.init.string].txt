@@ -22,5 +22,5 @@ char cv[4] = "asdf"; // error
 
 3 If there are fewer initializers than there are array elements, each element not explicitly initialized shall be zero-initialized (8.5).
 
-3 配列の要素以下の初期化子が存在する場合、明示的に初期化されない各々の要素は零初期化 ( 8.5 ) しなければならない。
+3 配列の要素以下の初期化子が存在する場合、明示的に初期化されない各々の要素は零初期化 ( 8.5 ) されなければならない。
 

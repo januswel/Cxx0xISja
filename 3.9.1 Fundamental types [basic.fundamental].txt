@@ -2,19 +2,21 @@
 
 1 Objects declared as characters (char) shall be large enough to store any member of the implementation's basic character set. If a character from this set is stored in a character object, the integral value of that character object is equal to the value of the single character literal form of that character. It is implementation-defined whether a char object can hold negative values. Characters can be explicitly declared unsigned or signed. Plain char, signed char, and unsigned char are three distinct types. A char, a signed char, and an unsigned char occupy the same amount of storage and have the same alignment requirements (3.11); that is, they have the same object representation. For character types, all bits of the object representation participate in the value representation. For unsigned character types, all possible bit patterns of the value representation represent numbers. These requirements do not hold for other types. In any particular implementation, a plain char object can take on either the same values as a signed char or an unsigned char; which one is implementation-defined.
 
-1 文字 ( char ) として宣言されたオブジェクトは実装の基本的な文字集合を格納できる大きさでなければならない。もしこの集合の文字が文字オブジェクトに格納されると、その文字オブジェクトの整数値はその文字の一文字リテラルの値と等しくなる。文字オブジェクトが負の値を保持できるかどうかは実装により定義される。文字は符号なしか符号ありを明示的に宣言することができる。ただの char 、 signed char 、 unsigned char は 3 つの別の型である。 char 、 signed char 、 unsigned char は同じ分の格納領域を占有し、同じ配置要件 ( basic.types ) 、つまり同じオブジェクト表現を持つ。文字型では、オブジェクト表現のすべてのビットが値表現となる。符号なしの文字型では、値表現が取り得るすべてのビットパターンは数字を表す。これらの要件は他の型には適用されない。どの実装においても、ただの char オブジェクトは signed char もしくは unsigned char と等しい値を取ることが出来、どちらであるかは実装によって定義される。
+1 文字 ( char ) として宣言されたオブジェクトは実装の基本文字集合の任意の文字を十分格納できる大きさでなければならない。この集合の文字が文字オブジェクトに格納された場合、その文字オブジェクトの汎整数値はその文字の単独文字リテラル形式の値と等しくなる。 char オブジェクトが負の値を保持できるかどうかは実装時定義である。文字は符号なしか符号ありを明示的に宣言可能である。ただの char 、 signed char 、 unsigned char は 3 つの独立した型である。 char 、 signed char 、 unsigned char は同じ量の格納領域を占有し同じ配置要件 ( basic.types ) を持つ。つまり同じオブジェクト表現を持つ。文字型において、オブジェクト表現のすべてのビットが値表現となる。符号なしの文字型において、値表現が取り得るすべてのビットパターンは数字を表す。これらの要件は他の型には適用されない。特定の実装において、ただの char オブジェクトは signed char もしくは unsigned char と等しい値を取ることが可能である。どちらであるかは実装時定義である。
 
-2 There are five standard signed integer types : “signed char", “short int", “int", “long int", and “long long int". In this list, each type provides at least as much storage as those preceding it in the list. There may also be implementation-defined extended signed integer types. The standard and extended signed integer types are collectively called signed integer types. Plain ints have the natural size suggested by the architecture of the execution environment43; the other signed integer types are provided to meet special needs.
+2 There are five standard signed integer types : "signed char", "short int", "int", "long int", and "long long int". In this list, each type provides at least as much storage as those preceding it in the list. There may also be implementation-defined extended signed integer types. The standard and extended signed integer types are collectively called signed integer types. Plain ints have the natural size suggested by the architecture of the execution environment43; the other signed integer types are provided to meet special needs.
 
 43) that is, large enough to contain any value in the range of INT_MIN and INT_MAX, as defined in the header <climits>.
 
-2 五つの { 標準符号あり整数型 } が存在する。 "signed char" 、 "short int" 、 "int" 、 "long int" 、 "long long int" である。この一覧において、各々の型は少なくとも先行するものと同等の格納領域を提供する。実装時定義の { 拡張符号あり整数型 } もまた存在しても良い。標準符号あり整数型と拡張符号あり整数型は総じて { 符号あり整数型 } と呼ばれる。ただの int は実行環境のアーキテクチャによって提案される自然な容量を持つ 43 。他の符号あり整数型は特別な要求を満たすために提供される。
+2 五つの { 標準符号あり整数型 } が存在する。 "signed char" 、 "short int" 、 "int" 、 "long int" 、 "long long int" である。この一覧において、各々の型は少なくとも先行するものと同等の格納領域を提供する。実装時定義の { 拡張符号あり整数型 } もまた存在してよい。標準符号あり整数型と拡張符号あり整数型を総じて { 符号あり整数型 } と呼ぶ。ただの int は実行環境のアーキテクチャによって提案される自然な容量を持つ 43 。他の符号あり整数型は特別な要求を満たすために提供される。
 
-43) それはつまり、 <climits> ヘッダーで定義されている INT_MIN と INT_MAX の範囲のいずれの値も保持できる程度に十分大きい。
+43) それはつまり、 <climits> ヘッダーで定義されている INT_MIN と INT_MAX の範囲内の任意の値を保持できる程度に十分大きい。
 
-3 For each of the standard signed integer types, there exists a corresponding (but different) standard unsigned integer type: "unsigned char", “unsigned short int", “unsigned int", “unsigned long int", and “unsigned long long int", each of which occupies the same amount of storage and has the same alignment requirements (3.11) as the corresponding signed integer type44; that is, each signed integer type has the same object representation as its corresponding unsigned integer type. Likewise, for each of the extended signed integer types there exists a corresponding extended unsigned integer type with the same amount of storage and alignment requirements. The standard and extended unsigned integer types are collectively called unsigned integer types. The range of non-negative values of a signed integer type is a subrange of the corresponding unsigned integer type, and the value representation of each corresponding signed/unsigned type shall be the same. The standard signed integer types and standard unsigned integer types are collectively called the standard integer types, and the extended signed integer types and extended unsigned integer types are collectively called the extended integer types.
+3 For each of the standard signed integer types, there exists a corresponding (but different) standard unsigned integer type: "unsigned char", "unsigned short int", "unsigned int", "unsigned long int", and "unsigned long long int", each of which occupies the same amount of storage and has the same alignment requirements (3.11) as the corresponding signed integer type44; that is, each signed integer type has the same object representation as its corresponding unsigned integer type. Likewise, for each of the extended signed integer types there exists a corresponding extended unsigned integer type with the same amount of storage and alignment requirements. The standard and extended unsigned integer types are collectively called unsigned integer types. The range of non-negative values of a signed integer type is a subrange of the corresponding unsigned integer type, and the value representation of each corresponding signed/unsigned type shall be the same. The standard signed integer types and standard unsigned integer types are collectively called the standard integer types, and the extended signed integer types and extended unsigned integer types are collectively called the extended integer types.
 
-3 各々の標準符号あり整数型には、対応する ( が異なる ) "unsigned char" 、 "unsigned short int" 、 "unsigned int" 、 "unsigned long int" 、 "unsigned long long int" という { 標準符号なし整数型 } が存在する。各々の型は対応する符号あり整数型と同等の格納領域を占有し同等の配置要件 ( 3.11 ) を持つ 44 。つまり、各々の符号なし整数型はその対応する符号あり整数型と同じオブジェクト表現を持っている。同様に、各々の拡張符号あり整数型には同等の格納領域と配置要件を持った対応する { 拡張符号なし整数型 } が存在する。標準符号なし整数型と拡張符号なし整数型は総じて { 符号なし整数型 } と呼ばれる。符号あり整数型の非負の値の範囲は対応する符号なし整数型の一部であり、各々の対応する符号あり / 符号なし型の値表現は同一でなければならない。標準符号あり整数型と標準符号なし整数型は総じて { 標準整数型 } と呼ばれ、拡張符号あり整数型と拡張符号なし整数型は総じて { 拡張整数型 } と呼ばれる。
+44) See 7.1.6.2 regarding the correspondence between types and the sequences of type-specifiers that designate them.
+
+3 各々の標準符号あり整数型には、対応する ( が異なる ) "unsigned char" 、 "unsigned short int" 、 "unsigned int" 、 "unsigned long int" 、 "unsigned long long int" という { 標準符号なし整数型 } が存在する。各々の型は対応する符号あり整数型と同等の格納領域を占有し同等の配置要件 ( 3.11 ) を持つ 44 。つまり、各々の符号あり整数型はその対応する符号なし整数型と同じオブジェクト表現を持つ。同様に、各々の拡張符号あり整数型には同等の格納領域と配置要件を持った対応する { 拡張符号なし整数型 } が存在する。標準符号なし整数型と拡張符号なし整数型を総じて { 符号なし整数型 } と呼ぶ。符号あり整数型の非負の値の範囲は対応する符号なし整数型の一部であり、各々の対応する符号あり / 符号なし型の値表現は同一でなければならない。標準符号あり整数型と標準符号なし整数型を総じて { 標準整数型 } と呼び、拡張符号あり整数型と拡張符号なし整数型を総じて { 拡張整数型 } と呼ぶ。
 
 44) 型とそれを明示する { 型指定子: type-specifiers } との対応に関しては 7.1.6.2 を参照せよ。
 
@@ -22,36 +24,37 @@
 
 45) This implies that unsigned arithmetic does not overflow because a result that cannot be represented by the resulting unsigned integer type is reduced modulo the number that is one greater than the largest value that can be represented by the resulting unsigned integer type.
 
--4-  unsigned として宣言された、符号なし整数は、 2 の n 乗 ( n は整数のその容量の値表現におけるビットの数である ) を法とするモジュロ演算の法則に従わなくてはならない。*
+4 unsigned として宣言された符号なし整数は、 n が整数の個々の容量の値表現におけるビットの数であるとき 2 の n 乗を法とするモジュロ演算の法則に従わなくてはならない 45 。
 
-45) これは、符号なし整数型で表すことが出来ない演算結果はその符号なし整数型で表現できる最も大きな値よりひとつ大きい数を法として減じられるので、符号なし演算は桁溢れしないことを暗示している。
+45) これは、結果として符号なし整数型で表すことが出来ない演算結果はその符号なし整数型で表現できる最も大きな値よりひとつ大きい数を法として減じられるので、符号なし演算は桁溢れしないことを暗示している。
 
 5 Type wchar_t is a distinct type whose values can represent distinct codes for all members of the largest extended character set specified among the supported locales (22.3.1). Type wchar_t shall have the same size, signedness, and alignment requirements (3.11) as one of the other integral types, called its underlying type. Types char16_t and char32_t denote distinct types with the same size, signedness, and alignment as uint_least16_t and uint_least32_t, respectively, in <stdint.h>, called the underlying types.
 
-5 wchar_t 型は、その値がサポートするロカール ( 22.3.1 ) のうち、最も広範囲の文字集合に含まれるすべての文字を別個の符号で表現できる、別個の型である。 wchar_t 型は { 基底型: underlying type } と呼ばれる、他の汎整数型のひとつと同じ容量、同じ符号、同じ配置要件 ( 3.11 ) を持たなければならない。 char16_t 型もしくは char32_t 型は容量、符号、配置において各自が <stdint.h> で定義され、基底型と呼ばれている uint_least16_t 型もしくは uint_least32_t 型と同等である別個の型を意味している。
+5 wchar_t 型はサポートするロカール ( 22.3.1 ) のうち最大の拡張文字集合のすべての文字をその値が別個の符号で表現できる独立した型である。 wchar_t 型は { 基底型: underlying type } と呼ばれる、他の汎整数型のひとつと同じ容量、同じ符号、同じ配置要件 ( 3.11 ) を持たなければならない。 char16_t 型と char32_t 型はそれぞれ、 <stdint.h> で定義され、基底型と呼ばれている uint_least16_t 型と uint_least32_t 型と同じ容量、同じ符号、同じ配置を持つ独立した型を意味している。
 
 6 Values of type bool are either true or false.46 [ Note: there are no signed, unsigned, short, or long bool types or values. -end note ] Values of type bool participate in integral promotions (4.5).
 
-46) Using a bool value in ways described by this International Standard as “undefined," such as by examining the value of an uninitialized automatic variable, might cause it to behave as if it is neither true nor false.
+46) Using a bool value in ways described by this International Standard as "undefined," such as by examining the value of an uninitialized automatic variable, might cause it to behave as if it is neither true nor false.
 
-6 ブール型の値は真もしくは偽となる 46 。 [ 注: signed 、 unsigned 、 short 、 long bool 型もしくはそのような値は存在しない。 ] ブール型の値は整数昇格 ( 4.5 ) の対象となる。
+6 ブール型の値は真もしくは偽のどちらかをとる 46 。 [ 注: signed 、 unsigned 、 short 、 long bool 型もしくはそのような値は存在しない。 ] ブール型の値は汎整数昇格 ( 4.5 ) の対象となる。
 
-45) この国際標準で定義している「未定義」なブール値の使用、例えば初期化されていない自動変数の値の評価、は真でも偽でもないように振る舞ってもよい。
+45) この国際標準で定義している「未定義」なブール値の使用、例えば初期化されていない自動変数の値の評価、は真でも偽でもないように振る舞う原因となるかもしれない。
 
 7 Types bool, char, char16_t, char32_t, wchar_t, and the signed and unsigned integer types are collectively called integral types.47 A synonym for integral type is integer type. The representations of integral types shall define values by use of a pure binary numeration system.48 [ Example: this International Standard permits 2’s complement, 1’s complement and signed magnitude representations for integral types. -end example ]
 
 47) Therefore, enumerations (7.2) are not integral; however, enumerations can be promoted to integral types as specified in 4.5.
+
 48) A positional representation for integers that uses the binary digits 0 and 1, in which the values represented by successive bits are additive, begin with 1, and are multiplied by successive integral power of 2, except perhaps for the bit with the highest position. (Adapted from the American National Dictionary for Information Processing Systems.)
 
-7 bool 型、 char 型、 char16_t 型、 char32_t 型、 wchar_t 型と符号ありもしくは符号なし整数型は総じて { 汎整数型: integral types } と呼ばれる 47 。汎整数型の同義語は { 整数型: integer type } である。汎整数型の表現は純 2 進記数法を用いて値を定義しなければならない 48 。 [ 例: この国際標準は汎整数型に対して 2 の補数、 1 の補数、符号と大きさによる表現を許可している。 ]
+7 bool 型、 char 型、 char16_t 型、 char32_t 型、 wchar_t 型と符号ありもしくは符号なし整数型を総じて { 汎整数型: integral types } と呼ぶ 47 。汎整数型の同義語は { 整数型: integer type } である。汎整数型の表現は純 2 進記数法を用いて値を定義しなければならない 48 。 [ 例: この国際標準は汎整数型に対して 2 の補数、 1 の補数、符号と大きさによる表現を許可している。 ]
 
-47) 従って、列挙型 ( 7.2 ) は整数型ではない。しかし、 4.5 で示しているように列挙型は整数型に昇格しうる。
+47) 従って、列挙型 ( 7.2 ) は整数型ではない。しかし、 4.5 で示しているように列挙型は汎整数型に昇格可能である。
 
 48) 連続するビットによる値表現における、二進数 0 と 1 を用いた整数の位取り表現は加算的であり、 1 で始まり、2 の一連の整数乗をかけた { 訳注: n 桁の数において小さい方から 1, 2, ..., n 番目とする ( これが一連の整数 ) と、 2 の 1 乗、 2 の 2 乗、 ... 、 2 の n 乗を各桁にかけるということである } ものであり、ことによると最上位のビットを除く。 ( 情報処理システムに関する米国国定辞書からの引用である。 )
 
 8 There are three floating point types: float, double, and long double. The type double provides at least as much precision as float, and the type long double provides at least as much precision as double. The set of values of the type float is a subset of the set of values of the type double; the set of values of the type double is a subset of the set of values of the type long double. The value representation of floating-point types is implementation-defined. Integral and floating types are collectively called arithmetic types. Specializations of the standard template std::numeric_limits (18.3) shall specify the maximum and minimum values of each arithmetic type for an implementation.
 
-8 float 、 double 、 long double の三つの { 浮動小数点型 } が存在する。 double 型は少なくとも float 型と同等の精度を提供し、 long double 型は少なくとも double 型と同等の精度を提供する。 float 型の値の集合は double 型の値の集合の部分集合であり、 double 型の値の集合は long double 型の値の集合の部分集合である。浮動小数点型の値表現は実装により定義される。 { 整数 } 型と { 浮動小数点 } 型はあわせて { 算術 } 型と呼ばれる。標準テンプレート std::numeric_limits ( 18.3 ) を特殊化したものは実装における算術型の最大値と最小値を示さなければならない。
+8 float 、 double 、 long double の三つの { 浮動小数点型 } が存在する。 double 型は少なくとも float 型と同等の精度を提供し、 long double 型は少なくとも double 型と同等の精度を提供する。 float 型の値の集合は double 型の値の集合の部分集合であり、 double 型の値の集合は long double 型の値の集合の部分集合である。浮動小数点型の値表現は実装時定義である。 { 整数 } 型と { 浮動小数点 } 型を総じて { 算術 } 型と呼ぶ。標準テンプレート std::numeric_limits ( 18.3 ) の特殊化は実装における算術型の最大値と最小値を示さなければならない。
 
 9 The void type has an empty set of values. The void type is an incomplete type that cannot be completed. It is used as the return type for functions that do not return a value. Any expression can be explicitly converted to type cv void (5.4). An expression of type void shall be used only as an expression statement (6.2), as an operand of a comma expression (5.18), as a second or third operand of ?: (5.16), as the operand of typeid, or as the expression in a return statement (6.6.3) for a function with the return type void.
 
@@ -64,3 +67,4 @@
 11 [ Note: even if the implementation defines two or more basic types to have the same value representation, they are nevertheless different types. -end note ]
 
 11 [ 注: たとえ実装が同じ値表現を持つ 2 つ以上の基本型を定義してもそれらは異なる型である。 ]
+
