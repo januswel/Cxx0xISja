@@ -1,6 +1,142 @@
 2.14.5 String literals [lex.string]
 
+    string-literal:
+        encoding-prefixopt " s-char-sequenceopt "
+        encoding-prefixopt R raw-string
+
+    encoding-prefix:
+        u8
+        u
+        U
+        L
+
+    s-char-sequence:
+        s-char
+        s-char-sequence s-char
+
+    s-char:
+        any member of the source character set except
+            the double-quote ", backslash \, or new-line character
+        escape-sequence
+        universal-character-name
+
+    raw-string:
+        " d-char-sequenceopt [ r-char-sequenceopt ] d-char-sequenceopt "
+
+    r-char-sequence:
+        r-char
+        r-char-sequence r-char
+
+    r-char:
+        any member of the source character set, except
+            (1), a backslash \followed by a u or U, or
+            (2), a right square bracket ] followed by the initial d-char-sequence
+            (which may be empty) followed by a double quote ".
+        universal-character-name
+
+    d-char-sequence:
+        d-char
+        d-char-sequence d-char
+
+    d-char:
+        any member of the basic source character set except:
+            space, the left square bracket [, the right square bracket ],
+            and the control characters representing horizontal tab,
+            vertical tab, form feed, and newline.
+
+1 A string literal is a sequence of characters (as defined in 2.14.3) surrounded by double quotes, optionally prefixed by R, u8, u8R, u, uR, U, UR, L, or LR, as in "...", R"[...]", u8"...", u8R"**[...]**", u"...", uR"*~[...]*~", U"...", UR"zzz[...]zzz", L"...", or LR"[...]", respectively.
+
+1 文字列リテラルは二重引用符で括られた文字 ( 2.14.3 において定義されている ) の連続であり、任意に R 、 u8 、 u8R 、 u 、 uR 、 U 、 UR 、 L 、 LR という接頭辞をつけることができ、それぞれ "..." 、 R"[...]" 、 u8"..." 、 u8R"**[...]**" 、 u"..." 、 uR"*~[...]*~" 、 U"..." 、 UR"zzz[...]zzz" 、 L"..." 、 or LR"[...]" となる。
+
+2 A string literal that has an R in the prefix is a raw string literal. The d-char-sequence serves as a delimiter. The terminating d-char-sequence of a raw-string is the same sequence of characters as the initial d-char-sequence.  A d-char-sequence shall consist of at most 16 characters.
+
+2 R を接頭辞に持つ文字列リテラルは { 未加工文字列リテラル } である。 d-char-sequence は区切り文字である。未加工文字列の終端の d-char-sequence は最初の d-char-sequence と同じ一連の文字である。 d-char-sequence は最大でも 16 文字で構成されなければならない。
+
+3 [ Note: The characters '[' and ']' are permitted in a raw-string. Thus, R"delimiter[[a-z]]delimiter" is equivalent to "[a-z]". -end note ]
+
+3 [ 注: 文字 '[' と ']' は未加工文字列内での使用を許可されている。従って、 R"delimiter[[a-z]]delimiter" は "[a-z]" と同等である。 ]
+
+4 [ Note: A source-file new-line in a raw string literal results in a new-line in the resulting execution stringliteral, unless preceded by a backslash. Assuming no whitespace at the beginning of lines in the following example, the assert will succeed:
+
+    const char *p = R"[a\
+    b
+    c]";
+    assert(std::strcmp(p, "ab\nc") == 0);
+
+-end note ]
+
+4 [ 注: バックスラッシュが先行しない場合、未加工文字列リテラルにおけるソースファイル内の改行は結果として実行文字列リテラルにおける改行をもたらす。以下の例において行の始まりに空白がないと仮定すると、 assert は成功する。
+
+    const char *p = R"[a\
+    b
+    c]";
+    assert(std::strcmp(p, "ab\nc") == 0);
+
+ ]
+
+5 After translation phase 6, a string literal that does not begin with an encoding-prefix is an ordinary string literal, and is initialized with the given characters.
+
+5 翻訳フェイズ 6 の終了後、 { 符号化接頭辞 } で始まらない文字列リテラルは通常文字列リテラルであり、与えられた文字群で初期化される。
+
+6 A string literal that begins with u8, such as u8"asdf", is a UTF-8 string literal and is initialized with the given characters as encoded in UTF-8.
+
+6 u8 で始まる文字列リテラル、例えば u8"asdf" 、は UTF-8 文字列リテラルであり与えられた UTF-8 で符号化された文字群で初期化される。
+
+7 Ordinary string literals and UTF-8 string literals are also referred to as narrow string literals. A narrow string literal has type "array of n const char", where n is the size of the string as defined below, and has static storage duration (3.7).
+
+7 通常文字列リテラルと UTF-8 文字列リテラルはナロウ文字列リテラルとも呼ばれる。 n が以下で定義されている文字列の容量であるとき、ナロウ文字列リテラルは「 const char の n 個の配列」型を持ち、静的記憶域期間 ( 3.7 ) を持つ。
+
+8 A string literal that begins with u, such as u"asdf", is a char16_t string literal. A char16_t string literal has type "array of n const char16_t", where n is the size of the string as defined below; it has static storage duration and is initialized with the given characters. A single c-char may produce more than one char16_t character in the form of surrogate pairs.
+
+8 u で始まる文字列リテラル、例えば u"asdf" 、は char16_t 文字列リテラルである。 n が以下で定義されている文字列の容量であるとき、char16_t 文字列リテラルは「 char16_t の n 個の配列」型を持つ。静的記憶域期間を持ち与えられた文字群で初期化される。単独の c-char はサロゲートペアの形式でひとつ以上の char16_t 文字を生成してよい。
+
+9 A string literal that begins with U, such as U"asdf", is a char32_t string literal. A char32_t string literal has type "array of n const char32_t", where n is the size of the string as defined below; it has static storage duration and is initialized with the given characters.
+
+9 U で始まる文字列リテラル、例えば U"asdf" 、は char32_t 文字列リテラルである。 n が以下で定義されている文字列の容量であるとき、 char32_t 文字列リテラルは「 const char32_t の n 個の配列」型を持つ。静的記憶域期間を持ち与えられた文字群で初期化される。
+
 10 A string literal that begins with L, such as L"asdf", is a wide string literal. A wide string literal has type "array of n const wchar_t", where n is the size of the string as defined below; it has static storage duration and is initialized with the given characters.
 
-10 L で始まる文字列リテラル、 例えば L"asdf" 、はワイド文字列リテラルである。ワイド文字列リテラルは「 const wchar_t の n 個の配列」型を持つ。ここで n は以下で定義されている文字列のサイズである。それは静的記憶域期間を持ち与えられた文字群で初期化される。
+10 L で始まる文字列リテラル、 例えば L"asdf" 、はワイド文字列リテラルである。 n が以下で定義されている文字列の容量であるとき、ワイド文字列リテラルは「 const wchar_t の n 個の配列」型を持つ。静的記憶域期間を持ち与えられた文字群で初期化される。
+
+11 Whether all string literals are distinct (that is, are stored in nonoverlapping objects) is implementation-defined. The effect of attempting to modify a string literal is undefined.
+
+11 すべての文字列リテラルが別個であるかどうか ( つまり、重複したオブジェクトに格納するかどうか ) は実装時定義である。文字列リテラルを変更しようとする影響は未定義である。
+
+12 In translation phase 6 (2.2), adjacent string literals are concatenated. If both string literals have the same encoding-prefix, the resulting concatenated string literal has that encoding-prefix. If one string literal has no encoding-prefix, it is treated as a string literal of the same encoding-prefix as the other operand. If a UTF-8 string literal token is adjacent to a wide string literal token, the program is ill-formed. Any other concatenations are conditionally supported with implementation-defined behavior. [ Note: This concatenation is an interpretation, not a conversion. Because the interpretation happens in translation phase 6 (after each character from a literal has been translated into a value from the appropriate character set), a string literal's initial rawness has no effect on the interpretation or well-formedness of the concatenation. -end note ] Table 7 has some examples of valid concatenations.
+
+Table 7 - String literal concatenations
+Source      Means   Source      Means   Source      Means
+u"a" u"b"   u"ab"   U"a" U"b"   U"ab"   L"a" L"b"   L"ab"
+u"a" "b"    u"ab"   U"a" "b"    U"ab"   L"a" "b"    L"ab"
+"a"  u"b"   u"ab"   "a"  U"b"   U"ab"   "a"  L"b"   L"ab"
+
+Characters in concatenated strings are kept distinct.
+[ Example:
+
+    "\xA" "B"
+
+contains the two characters '\xA' and 'B' after concatenation (and not the single hexadecimal character '\xAB'). -end example ]
+
+12 翻訳フェイズ 6 ( 2.2 ) において、隣接した文字列リテラルは結合される。両方の文字列リテラルが同じ符号化接頭辞を持つ場合、結合結果の文字列リテラルはその符号化接頭辞を持つ。一方の文字列リテラルが符号化接頭辞を持たない場合、他方の演算対象と同じ符号化接頭辞の文字列リテラルであるかのように扱われる。 UTF-8 文字列リテラルトークンがワイド文字列リテラルと隣接している場合、そのプログラムは不適格である。その他の結合はすべて実行時定義の挙動をする条件付きサポートである。 [ 注: この結合は解釈であり、変換ではない。なぜなら翻訳フェイズ 6 ( リテラルの各々の文字が適切な文字集合の値に翻訳されたあとである ) において解釈が発生し、文字列リテラルの初期の未加工性は解釈もしくは結合の的確性において何の意味も持たないからである。 ] 表 7 は有効な結合のいくつかの例を示している。
+
+表 7 - 文字列リテラル結合
+ソース      意味    ソース      意味    ソース      意味
+u"a" u"b"   u"ab"   U"a" U"b"   U"ab"   L"a" L"b"   L"ab"
+u"a" "b"    u"ab"   U"a" "b"    U"ab"   L"a" "b"    L"ab"
+"a"  u"b"   u"ab"   "a"  U"b"   U"ab"   "a"  L"b"   L"ab"
+
+結合された文字列中の文字は独立したままである。
+[ 例:
+
+    "\xA" "B"
+
+は結合後においてふたつの文字 '\xA' と 'B' を含む ( 単独の十六進文字 '\xAB' ではない ) 。 ]
+
+13 After any necessary concatenation, in translation phase 7 (2.2), '\0' is appended to every string literal so that programs that scan a string can find its end.
+
+13 必要な結合がすべて終了した、翻訳フェイズ 7 ( 2.2 ) において、プログラムが文字列の終了を検知できるように '\0' がすべての文字列リテラルに追加される。
+
+14 Escape sequences in non-raw string literals and universal-character-names in string literals have the same meaning as in character literals (2.14.3), except that the single quote ' is representable either by itself or by the escape sequence \', and the double quote " shall be preceded by a \. In a narrow string literal, a universal-character-name may map to more than one char element due to multibyte encoding. The size of a char32_t or wide string literal is the total number of escape sequences, universal-character-names, and other characters, plus one for the terminating U'\0' or L'\0'. The size of a char16_t string literal is the total number of escape sequences, universal-character-names, and other characters, plus one for each character requiring a surrogate pair, plus one for the terminating u'\0'. [ Note: The size of a char16_t string literal is the number of code units, not the number of characters. -end note ] Within char32_t and char16_t literals, any universal-character-names shall be within the range 0x0 to 0x10FFFF. The size of a narrow string literal is the total number of escape sequences and other characters, plus at least one for the multibyte encoding of each universal-character-name, plus one for the terminating '\0'.
+
+14 未加工でない文字列リテラルにおけるエスケープシーケンスと文字列リテラルにおける共通文字名は、単引用符 ' がそれ自身もしくはエスケープシーケンス \' によって表現可能であり二重引用符 " が \ に先行されなければならない場合を除いて、文字リテラル ( 2.14.3 ) と同じ意味を持つ。ナロウ文字列リテラルにおいて、マルチバイト符号化のために共通文字名をひとつ以上の char 要素に対応させてよい。 char32_t 文字列リテラルもしくはワイド文字列リテラルの容量はすべてのエスケープシーケンス、共通文字名、他の文字、終端の U'\0' もしくは L'\0' の一文字の合計である。 char16_t 文字列リテラルの容量はエスケープシーケンス、共通文字名、他の文字、サロゲートペアを要求する文字は追加で一文字、終端の u'\0' の一文字の合計である。 [ 注: char16_t 文字列リテラルの容量は符号単位の数であり、文字の数ではない。 ] char32_t リテラルと char16_t リテラル内において、任意の共通文字名は 0x0 から 0x10FFFF までの範囲でなければならない。ナロウ文字列リテラルの容量はエスケープシーケンスと他の文字、各々の共通文字名のマルチバイト符号化においては最小でもひとつ以上の追加、終端の '\0' の一文字の合計である。
 
