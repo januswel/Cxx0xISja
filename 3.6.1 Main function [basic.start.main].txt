@@ -1,0 +1,38 @@
+3.6.1 Main function [basic.start.main]
+
+1 A program shall contain a global function called main, which is the designated start of the program. It is implementation-defined whether a program in a freestanding environment is required to define a main function. [ Note: in a freestanding environment, start-up and termination is implementation-defined; start-up contains the execution of constructors for objects of namespace scope with static storage duration; termination contains the execution of destructors for objects with static storage duration. -end note ]
+
+1 プログラムはプログラムの開始点を示す main と呼ばれる大域関数を含まなければならない。独立環境におけるプログラムが main 関数の定義を要求するかどうかは実装時定義である。 [ 注: 独立環境において、開始と終了は実装時定義である。開始は静的記憶域期間を持つ名前空間スコープのオブジェクトにおけるコンストラクターの実行を含む。終了は静的記憶域期間を持つオブジェクトにおけるデストラクターの実行を含む。 ]
+
+2 An implementation shall not predefine the main function. This function shall not be overloaded. It shall have a return type of type int, but otherwise its type is implementation-defined. All implementations shall allow both of the following definitions of main:
+
+    int main() { /* ... */ }
+
+and
+
+    int main(int argc, char* argv[]) { /* ... */ }
+
+In the latter form argc shall be the number of arguments passed to the program from the environment in which the program is run. If argc is nonzero these arguments shall be supplied in argv[0] through argv[argc-1] as pointers to the initial characters of null-terminated multibyte strings (NTMBSs) (17.5.2.1.4.2) and argv[0] shall be the pointer to the initial character of a NTMBS that represents the name used to invoke the program or "". The value of argc shall be non-negative. The value of argv[argc] shall be 0. [ Note: it is recommended that any further (optional) parameters be added after argv. -end note ]
+
+2 実装は main 関数を前もって定義してはならない。この関数はオーバーロードされてはならない。 int 型の返り値を持たなくてはならず、それ以外の場合その型は実装時定義である。すべての実装は以下の main の定義の両方を許可しなければならない。
+
+    int main() { /* ... */ }
+
+もしくは
+
+    int main(int argc, char* argv[]) { /* ... */ }
+
+後者において形式名 argc はプログラムを実行する環境からプログラムに渡された引数の数でなければならない。 argc が零でない場合これらの引数は終端が空値のマルチバイト文字列 ( NTMBS ) ( 17.5.2.1.4.2 ) の最初の文字へのポインター argv[0] から argv[argc-1] として提供されなければならず、 argv[0] はプログラムを起動するために使われた名前もしくは "" を表現する NTMBS の最初の文字へのポインターでなければならない。 argc の値は非負でなければならない。 argv[argc] の値は 0 でなければならない。 [ 注: argv の後ろに ( 任意の ) パラメーターを追加しないことを推奨する。 ]
+
+3 The function main shall not be used (3.2) within a program. The linkage (3.5) of main is implementation-defined.  A program that defines main as deleted or that declares main to be inline, static, or constexpr is ill-formed. The name main is not otherwise reserved. [ Example: member functions, classes, and enumerations can be called main, as can entities in other namespaces. -end example ]
+
+3 関数 main はプログラム内部で使われてはならない (3.2) 。 main のリンケージ (3.5) は実装時定義である。 deleted として main を定義するもしくは main が inline 、 static 、 constexpr であるように宣言するプログラムは不適格である。名前 main はそれ以外の場合予約されない。 [ 例: メンバー関数、クラス、列挙は他の名前空間に実体がある場合 main と呼ぶことが出来る。 ]
+
+4 Terminating the program without leaving the current block (e.g., by calling the function std::exit(int) (18.5)) does not destroy any objects with automatic storage duration (12.4). If std::exit is called to end a program during the destruction of an object with static or thread storage duration, the program has undefined behavior.
+
+4 現在のブロックを抜けずにプログラムを終了すること ( 例えば、関数 std::exit(int) ( 18.5 ) を呼ぶことによって ) は自動記憶域期間 ( 12.4 ) を持つすべてのオブジェクトを破壊しない。 std::exit が静的もしくはスレッド記憶域期間を持つオブジェクトの破壊時にプログラムを終了するために呼ばれる場合、そのプログラムは未定義の挙動をする。
+
+5 A return statement in main has the effect of leaving the main function (destroying any objects with automatic storage duration) and calling std::exit with the return value as the argument. If control reaches the end of main without encountering a return statement, the effect is that of executing return 0;
+
+5 main における return 文は ( 自動記憶域期間を持つオブジェクトをすべて破壊して ) main 関数を抜け、返り値を引数とした std::exit の呼び出す効果を持つ。 return 文に遭遇することなく制御が main の最後まで達した場合、 return 0; を実行した場合と同様になる。
+
