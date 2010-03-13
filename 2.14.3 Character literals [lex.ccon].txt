@@ -1,5 +1,43 @@
 2.14.3 Character literals [lex.ccon]
 
+    character-literal:
+        ' c-char-sequence '
+        u' c-char-sequence '
+        U' c-char-sequence '
+        L' c-char-sequence '
+    
+    c-char-sequence:
+        c-char
+        c-char-sequence c-char
+
+    c-char:
+        any member of the source character set except
+            the single-quote ', backslash \, or new-line character
+        escape-sequence
+        universal-character-name
+
+    escape-sequence:
+        simple-escape-sequence
+        octal-escape-sequence
+        hexadecimal-escape-sequence
+
+    simple-escape-sequence: one of
+        \' \" \? \\
+        \a \b \f \n \r \t \v
+
+    octal-escape-sequence:
+        \ octal-digit
+        \ octal-digit octal-digit
+        \ octal-digit octal-digit octal-digit
+
+    hexadecimal-escape-sequence:
+        \x hexadecimal-digit
+        hexadecimal-escape-sequence hexadecimal-digit
+
+1 A character literal is one or more characters enclosed in single quotes, as in 'x', optionally preceded by one of the letters u, U, or L, as in u'y', U'z', or L'x', respectively. A character literal that does not begin with u, U, or L is an ordinary character literal, also referred to as a narrow-character literal. An ordinary character literal that contains a single c-char has type char, with value equal to the numerical value of the encoding of the c-char in the execution character set. An ordinary character literal that contains more than one c-char is a multicharacter literal. A multicharacter literal has type int and implementation-defined value.
+
+1 文字リテラルとは単引用符で括られているひとつ以上の文字、例えば 'x' 、であり、 u'y' 、 U'z' 、 L'x' のように任意に u 、 U 、 L のひとつが先行してよい。 u 、 U 、 L で始まらない文字リテラルは通常の文字リテラルであり、ナロウ文字リテラルとも呼ばれる。単独の c-char を含む通常の文字リテラルは実行文字集合における c-char の符号の数値と同等の値である char 型を持つ。ひとつ以上の c-char を含む通常の文字リテラルは複数文字リテラルである。複数文字リテラルは実装時定義値である int 型を持つ。
+
 2 A character literal that begins with the letter u, such as u'y', is a character literal of type char16_t. The value of a char16_t literal containing a single c-char is equal to its ISO 10646 code point value, provided that the code point is representable with a single 16-bit code unit. (That is, provided it is a basic multi-lingual plane code point.) If the value is not representable within 16 bits, the program is ill-formed. A char16_t literal containing multiple c-chars is ill-formed. A character literal that begins with the letter U, such as U'z', is a character literal of type char32_t. The value of a char32_t literal containing a single c-char is equal to its ISO 10646 code point value. A char32_t literal containing multiple c-chars is ill-formed. A character literal that begins with the letter L, such as L'x', is a wide-character literal. A wide-character literal has type wchar_t.22 The value of a wide-character literal containing a single c-char has value equal to the numerical value of the encoding of the c-char in the execution wide-character set, unless the c-char has no representation in the execution wide-character set, in which case the value is implementation-defined.  [ Note: the type wchar_t is able to represent all members of the execution wide-charater set (see 3.9.1).  -end note ]. The value of a wide-character literal containing multiple c-chars is implementation-defined.
 
 22) They are intended for character sets where a character does not fit into a single byte.
@@ -8,7 +46,49 @@
 
 22) これらは文字が単独のバイトでは不適切である文字集合を対象としている。
 
+3 Certain nongraphic characters, the single quote ', the double quote ", the question mark ?,23 and the backslash \, can be represented according to Table 6. The double quote " and the question mark ?, can be represented as themselves or by the escape sequences \" and \? respectively, but the single quote ' and the backslash \ shall be represented by the escape sequences \' and \\ respectively. Escape sequences in which the character following the backslash is not listed in Table 6 are conditionally-supported, with implementation-defined semantics. An escape sequence specifies a single character.
+
+Table 6 - Escape sequences
+new-line            NL(LF)  \n
+horizontal tab      HT      \t
+vertical tab        VT      \v
+backspace           BS      \b
+carriage return     CR      \r
+form feed           FF      \f
+alert               BEL     \a
+backslash           \       \\
+question mark       ?       \?
+single quote        '       \'
+double quote        "       \"
+octal number        ooo     \ooo
+hex number          hhh     \xhhh
+
+23) Using an escape sequence for a question mark can avoid accidentally creating a trigraph.
+
+3 特定の非図形文字、単引用符 ' 、二重引用符 " 、疑問符 ? 23 、バックスラッシュ \ は表 6 表現可能に従って表現可能である。二重引用符 " と疑問符 ? はそれ自身もしくはエスケープシーケンスによってそれぞれ \" と \? として表現可能であるが、単引用符 ' とバックスラッシュ \ はエスケープシーケンスによってそれぞれ \' と \\ として表現しなければならない。表 6 に載っていないバックスラッシュに続く文字のエスケープシーケンスは実行時定義の動作をする条件付きサポートである。エスケープシーケンスは単独の文字を示す。
+
+表 6 - エスケープシーケンス
+改行                NL(LF)  \n
+水平タブ            HT      \t
+垂直タブ            VT      \v
+バックスペース      BS      \b
+復帰                CR      \r
+改ページ            FF      \f
+アラート            BEL     \a
+バックスラッシュ    \       \\
+疑問符              ?       \?
+単引用符            '       \'
+二重引用符          "       \"
+八進数              ooo     \ooo
+十六進数            hhh     \xhhh
+
+23) 疑問符におけるエスケープシーケンスの使用は無意識に三文字表記を作成してしまうことを回避可能である。
+
 4 The escape \ooo consists of the backslash followed by one, two, or three octal digits that are taken to specify the value of the desired character. The escape \xhhh consists of the backslash followed by x followed by one or more hexadecimal digits that are taken to specify the value of the desired character. There is no limit to the number of digits in a hexadecimal sequence. A sequence of octal or hexadecimal digits is terminated by the first character that is not an octal digit or a hexadecimal digit, respectively. The value of a character literal is implementation-defined if it falls outside of the implementation-defined range defined for char (for literals with no prefix), char16_t (for literals prefixed by 'u'), char32_t (for literals prefixed by 'U'), or wchar_t (for literals prefixed by 'L').
 
 4 \ooo というエスケープはバックスラッシュに続く目的の文字の値を指定するひとつ、ふたつ、もしくはみっつの八進数から成る。 \xhhh というエスケープはバックスラッシュ、 x に続く目的の文字の値を指定するひとつ以上の十六進数から成る。一連の十六進数における桁数に制限はない。一連の八進数もしくは十六進数の連続はそれぞれ、八進数もしくは十六進数でない最初の文字によって終了する。文字リテラルが char ( 接頭辞なしのリテラル ) 、 char16_t ( 接頭辞 'u' のリテラル ) 、 char32_t ( 接頭辞 'U' のリテラル ) 、 wchar_t ( 接頭辞 'L' のリテラル ) で定義された実装時定義の範囲外になる場合その値は実装時定義である。
+
+5 A universal-character-name is translated to the encoding, in the appropriate execution character set, of the character named. If there is no such encoding, the universal-character-name is translated to an implementationdefined encoding. [ Note: in translation phase 1, a universal-character-name is introduced whenever an actual extended character is encountered in the source text. Therefore, all extended characters are described in terms of universal-character-names. However, the actual compiler implementation may use its own native character set, so long as the same results are obtained. -end note ]
+
+5 共通文字名は名前のある文字の適切な実行文字集合における符号へ変換される。符号が存在しない場合、共通文字名は実装時定義の符号に変換される。 [ 注: 翻訳フェイズ 1 において、ソーステキストにおいて実在する拡張文字に遭遇した時点で共通文字名は導入される。従って、すべての拡張文字は共通文字名を単位として記述される。しかし、実際のコンパイラー実装は同じ結果をもたらす限りそのシステム固有の文字集合を使ってよい。 ]
 
