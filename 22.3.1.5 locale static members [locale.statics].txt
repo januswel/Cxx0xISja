@@ -16,7 +16,7 @@ static locale global(const locale& loc);
 
         std::setlocale(LC_ALL, loc.name().c_str());
 
-    を実行する。そのほかの場合、 C ロカール上の効果は、もしあるのなら、実装時定義となる。 locale::global() 以外のライブラリ関数は locale() によって返される値に作用してはならない。 [ 注: setlocale が起動されたときのデータレースの考慮については 22.6 を参照せよ。 ]
+    を実行する。そのほかの場合、 C ロカール上の効果は、もしあるのなら、処理系定義となる。 locale::global() 以外のライブラリ関数は locale() によって返される値に作用してはならない。 [ 注: setlocale が起動されたときのデータレースの考慮については 22.6 を参照せよ。 ]
 
     3 Returns: The previous value of locale().
 

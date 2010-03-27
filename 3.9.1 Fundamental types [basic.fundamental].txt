@@ -2,13 +2,13 @@
 
 1 Objects declared as characters (char) shall be large enough to store any member of the implementation's basic character set. If a character from this set is stored in a character object, the integral value of that character object is equal to the value of the single character literal form of that character. It is implementation-defined whether a char object can hold negative values. Characters can be explicitly declared unsigned or signed. Plain char, signed char, and unsigned char are three distinct types. A char, a signed char, and an unsigned char occupy the same amount of storage and have the same alignment requirements (3.11); that is, they have the same object representation. For character types, all bits of the object representation participate in the value representation. For unsigned character types, all possible bit patterns of the value representation represent numbers. These requirements do not hold for other types. In any particular implementation, a plain char object can take on either the same values as a signed char or an unsigned char; which one is implementation-defined.
 
-1 文字 ( char ) として宣言されたオブジェクトは実装の基本文字集合の任意の文字を十分格納できる大きさでなければならない。この集合の文字が文字オブジェクトに格納された場合、その文字オブジェクトの汎整数値はその文字の単独文字リテラル形式の値と等しくなる。 char オブジェクトが負の値を保持できるかどうかは実装時定義である。文字は符号なしか符号ありを明示的に宣言可能である。ただの char 、 signed char 、 unsigned char は 3 つの独立した型である。 char 、 signed char 、 unsigned char は同じ量の格納領域を占有し同じ配置要件 ( basic.types ) を持つ。つまり同じオブジェクト表現を持つ。文字型において、オブジェクト表現のすべてのビットが値表現となる。符号なしの文字型において、値表現が取り得るすべてのビットパターンは数字を表す。これらの要件は他の型には適用されない。特定の実装において、ただの char オブジェクトは signed char もしくは unsigned char と等しい値を取ることが可能である。どちらであるかは実装時定義である。
+1 文字 ( char ) として宣言されたオブジェクトは処理系の基本文字集合の任意の文字を十分格納できる大きさでなければならない。この集合の文字が文字オブジェクトに格納された場合、その文字オブジェクトの汎整数値はその文字の単独文字リテラル形式の値と等しくなる。 char オブジェクトが負の値を保持できるかどうかは処理系定義である。文字は符号なしか符号ありを明示的に宣言可能である。ただの char 、 signed char 、 unsigned char は 3 つの独立した型である。 char 、 signed char 、 unsigned char は同じ量の格納領域を占有し同じ配置要件 ( basic.types ) を持つ。つまり同じオブジェクト表現を持つ。文字型において、オブジェクト表現のすべてのビットが値表現となる。符号なしの文字型において、値表現が取り得るすべてのビットパターンは数字を表す。これらの要件は他の型には適用されない。特定の処理系において、ただの char オブジェクトは signed char もしくは unsigned char と等しい値を取ることが可能である。どちらであるかは処理系定義である。
 
 2 There are five standard signed integer types : "signed char", "short int", "int", "long int", and "long long int". In this list, each type provides at least as much storage as those preceding it in the list. There may also be implementation-defined extended signed integer types. The standard and extended signed integer types are collectively called signed integer types. Plain ints have the natural size suggested by the architecture of the execution environment43; the other signed integer types are provided to meet special needs.
 
 43) that is, large enough to contain any value in the range of INT_MIN and INT_MAX, as defined in the header <climits>.
 
-2 五つの { 標準符号あり整数型 } が存在する。 "signed char" 、 "short int" 、 "int" 、 "long int" 、 "long long int" である。この一覧において、各々の型は少なくとも先行するものと同等の格納領域を提供する。実装時定義の { 拡張符号あり整数型 } もまた存在してよい。標準符号あり整数型と拡張符号あり整数型を総じて { 符号あり整数型 } と呼ぶ。ただの int は実行環境のアーキテクチャによって提案される自然な容量を持つ 43 。他の符号あり整数型は特別な要求を満たすために提供される。
+2 五つの { 標準符号あり整数型 } が存在する。 "signed char" 、 "short int" 、 "int" 、 "long int" 、 "long long int" である。この一覧において、各々の型は少なくとも先行するものと同等の格納領域を提供する。処理系定義の { 拡張符号あり整数型 } もまた存在してよい。標準符号あり整数型と拡張符号あり整数型を総じて { 符号あり整数型 } と呼ぶ。ただの int は実行環境のアーキテクチャによって提案される自然な容量を持つ 43 。他の符号あり整数型は特別な要求を満たすために提供される。
 
 43) それはつまり、 <climits> ヘッダーで定義されている INT_MIN と INT_MAX の範囲内の任意の値を保持できる程度に十分大きい。
 
@@ -54,7 +54,7 @@
 
 8 There are three floating point types: float, double, and long double. The type double provides at least as much precision as float, and the type long double provides at least as much precision as double. The set of values of the type float is a subset of the set of values of the type double; the set of values of the type double is a subset of the set of values of the type long double. The value representation of floating-point types is implementation-defined. Integral and floating types are collectively called arithmetic types. Specializations of the standard template std::numeric_limits (18.3) shall specify the maximum and minimum values of each arithmetic type for an implementation.
 
-8 float 、 double 、 long double の三つの { 浮動小数点型 } が存在する。 double 型は少なくとも float 型と同等の精度を提供し、 long double 型は少なくとも double 型と同等の精度を提供する。 float 型の値の集合は double 型の値の集合の部分集合であり、 double 型の値の集合は long double 型の値の集合の部分集合である。浮動小数点型の値表現は実装時定義である。 { 整数 } 型と { 浮動小数点 } 型を総じて { 算術 } 型と呼ぶ。標準テンプレート std::numeric_limits ( 18.3 ) の特殊化は実装における算術型の最大値と最小値を示さなければならない。
+8 float 、 double 、 long double の三つの { 浮動小数点型 } が存在する。 double 型は少なくとも float 型と同等の精度を提供し、 long double 型は少なくとも double 型と同等の精度を提供する。 float 型の値の集合は double 型の値の集合の部分集合であり、 double 型の値の集合は long double 型の値の集合の部分集合である。浮動小数点型の値表現は処理系定義である。 { 整数 } 型と { 浮動小数点 } 型を総じて { 算術 } 型と呼ぶ。標準テンプレート std::numeric_limits ( 18.3 ) の特殊化は処理系における算術型の最大値と最小値を示さなければならない。
 
 9 The void type has an empty set of values. The void type is an incomplete type that cannot be completed. It is used as the return type for functions that do not return a value. Any expression can be explicitly converted to type cv void (5.4). An expression of type void shall be used only as an expression statement (6.2), as an operand of a comma expression (5.18), as a second or third operand of ?: (5.16), as the operand of typeid, or as the expression in a return statement (6.6.3) for a function with the return type void.
 
@@ -66,5 +66,5 @@
 
 11 [ Note: even if the implementation defines two or more basic types to have the same value representation, they are nevertheless different types. -end note ]
 
-11 [ 注: たとえ実装が同じ値表現を持つ 2 つ以上の基本型を定義してもそれらは異なる型である。 ]
+11 [ 注: たとえ処理系が同じ値表現を持つ 2 つ以上の基本型を定義してもそれらは異なる型である。 ]
 

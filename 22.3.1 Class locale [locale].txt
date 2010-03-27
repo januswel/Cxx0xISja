@@ -119,5 +119,5 @@
 
 9 Whether there is one global locale object for the entire program or one global locale object per thread is implementation-defined. Implementations are encouraged but not required to provide one global locale object per thread. If there is a single global locale object for the entire program, implementations are not required to avoid data races on it (17.6.4.8).
 
-9 プログラム全体に対しての大域ロカールオブジェクトが存在するかスレッド毎にひとつの大域ロカールが存在するかは実装時定義である。実装はスレッド毎にひとつの大域ロカールオブジェクトを提供することが推奨されるが必須ではない。プログラム全体でひとつの大域ロカールオブジェクトが存在する場合、実装はデータレースの回避を要求されない ( 17.6.4.8 ) 。
+9 プログラム全体に対しての大域ロカールオブジェクトが存在するかスレッド毎にひとつの大域ロカールが存在するかは処理系定義である。処理系はスレッド毎にひとつの大域ロカールオブジェクトを提供することが推奨されるが必須ではない。プログラム全体でひとつの大域ロカールオブジェクトが存在する場合、処理系はデータレースの回避を要求されない ( 17.6.4.8 ) 。
 

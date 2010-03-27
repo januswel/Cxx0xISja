@@ -112,11 +112,11 @@ time        time_get<char,InputIterator>
             time_put_byname<wchar_t,OutputIterator>
 messages    messages_byname<char>, messages_byname<wchar_t>
 
-4 実装は表 77 において示されるカテゴリーのメンバーとして特定されるファセットテンプレートのための特殊化を提供することが必須である。
+4 処理系は表 77 において示されるカテゴリーのメンバーとして特定されるファセットテンプレートのための特殊化を提供することが必須である。
 
 5 The provided implementation of members of facets num_get<charT> and num_put<charT> calls use_facet <F> (l) only for facet F of types numpunct<charT> and ctype<charT>, and for locale l the value obtained by calling member getloc() on the ios_base& argument to these functions.
 
-5 ファセット num_get<charT> と num_put<charT> のメンバーの提供された実装は型 numpunct<charT> と ctype<charT> のファセット F において、かつ iso_base& を引数としたメンバー getloc() の呼び出しによって取得された値ロカール l において、 use_facet <F> (l) のみを呼び出す。
+5 ファセット num_get<charT> と num_put<charT> のメンバーの提供された処理系は型 numpunct<charT> と ctype<charT> のファセット F において、かつ iso_base& を引数としたメンバー getloc() の呼び出しによって取得された値ロカール l において、 use_facet <F> (l) のみを呼び出す。
 
 6 In declarations of facets, a template formal parameter with name InputIterator or OutputIterator indicates the set of all possible specializations on parameters that satisfy the requirements of an Input Iterator or an Output Iterator, respectively (24.2). A template formal parameter with name C represents the set of all possible specializations on a parameter that satisfies the requirements for a character on which any of the iostream components can be instantiated. A template formal parameter with name International represents the set of all possible specializations on a bool parameter.
 

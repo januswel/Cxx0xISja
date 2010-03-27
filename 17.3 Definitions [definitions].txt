@@ -50,7 +50,7 @@ two or more threads are unable to continue execution because each is blocked wai
 a description of replacement function and handler function semantics. Any specific behavior provided by the implementation, within the scope of the required behavior.
 
 17.3.8 既定の挙動 [defns.default.behavior]
-置換関数もしくはハンドラー関数の記述。必須の挙動の範囲内で、実装によって提供される任意の特定の挙動。
+置換関数もしくはハンドラー関数の記述。必須の挙動の範囲内で、処理系によって提供される任意の特定の挙動。
 
 17.3.9 handler function [defns.handler]
 a non-reserved function whose definition may be provided by a C++ program. A C++ program may designate a handler function at various points in its execution, by supplying a pointer to the function when calling any of the library functions that install handler functions (Clause 18).
@@ -122,13 +122,13 @@ a stream (described in Clause 27) that can seek to a position that was previousl
 a description of replacement function and handler function semantics, applicable to both the behavior provided by the implementation and the behavior that shall be provided by any function definition in the program. If a function defined in a C++ program fails to meet the required behavior when it executes, the behavior is undefined.
 
 17.3.20 必須の挙動 [defns.required.behavior]
-実装によって提供される挙動とプログラム内の任意の関数定義によって提供されなければならない挙動両方に当てはまる、置換関数とハンドラー関数の意味記述。 C++ プログラムにおいて定義されている関数が実行された際に必須の挙動に適合しない場合、その挙動は未定義である。
+処理系によって提供される挙動とプログラム内の任意の関数定義によって提供されなければならない挙動両方に当てはまる、置換関数とハンドラー関数の意味記述。 C++ プログラムにおいて定義されている関数が実行された際に必須の挙動に適合しない場合、その挙動は未定義である。
 
 17.3.21 reserved function [defns.reserved.function]
 a function, specified as part of the C++ standard library, that must be defined by the implementation. If a C++ program provides a definition for any reserved function, the results are undefined.
 
 17.3.21 予約済み関数 [defns.reserved.function]
-実装によって定義されなければならない、 C++ 標準ライブラリの一部として示される、関数。 C++ プログラムが任意の予約済み関数の定義を提供する場合、その結果は未定義である。
+処理系によって定義されなければならない、 C++ 標準ライブラリの一部として示される、関数。 C++ プログラムが任意の予約済み関数の定義を提供する場合、その結果は未定義である。
 
 17.3.22 stable algorithm [defns.stable]
 an algorithm that preserves, as appropriate to the particular algorithm, the order of elements.

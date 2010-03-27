@@ -10,5 +10,5 @@
 
 2 Certain types defined in Clause 27 are used to describe implementation-defined types. They are based on other types, but with added constraints.
 
-2 27 条において定義されている特定の型は実装時定義の型を記述するために使用されている。それらは他の型に基づいているが、制約を付加されている。
+2 27 条において定義されている特定の型は処理系定義の型を記述するために使用されている。それらは他の型に基づいているが、制約を付加されている。
 

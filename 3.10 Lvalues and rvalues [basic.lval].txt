@@ -10,7 +10,7 @@
 
 2 左辺値はオブジェクトもしくは関数を参照する。いくつかの右辺値式 --- ( 場合によっては被 cv 修飾の ) クラス型もしくは配列型 --- もまたオブジェクトを指し示す。*
 
-51) コンストラクターを起動するような式やオブジェクトを参照するクラス型を返す関数を起動するような式があり、さらに実装がそういったオブジェクトのメンバー関数を起動できる場合、その式は左辺値とならない。
+51) コンストラクターを起動するような式やオブジェクトを参照するクラス型を返す関数を起動するような式があり、さらに処理系がそういったオブジェクトのメンバー関数を起動できる場合、その式は左辺値とならない。
 
 3 [ Note: some built-in operators and function calls yield lvalues. [ Example: if E is an expression of pointer type, then *E is an lvalue expression referring to the object or function to which E points. As another example, the function
 

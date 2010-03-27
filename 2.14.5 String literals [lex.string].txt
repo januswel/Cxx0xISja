@@ -100,7 +100,7 @@
 
 11 Whether all string literals are distinct (that is, are stored in nonoverlapping objects) is implementation-defined. The effect of attempting to modify a string literal is undefined.
 
-11 すべての文字列リテラルが別個であるかどうか ( つまり、重複したオブジェクトに格納するかどうか ) は実装時定義である。文字列リテラルを変更しようとする影響は未定義である。
+11 すべての文字列リテラルが別個であるかどうか ( つまり、重複したオブジェクトに格納するかどうか ) は処理系定義である。文字列リテラルを変更しようとする影響は未定義である。
 
 12 In translation phase 6 (2.2), adjacent string literals are concatenated. If both string literals have the same encoding-prefix, the resulting concatenated string literal has that encoding-prefix. If one string literal has no encoding-prefix, it is treated as a string literal of the same encoding-prefix as the other operand. If a UTF-8 string literal token is adjacent to a wide string literal token, the program is ill-formed. Any other concatenations are conditionally supported with implementation-defined behavior. [ Note: This concatenation is an interpretation, not a conversion. Because the interpretation happens in translation phase 6 (after each character from a literal has been translated into a value from the appropriate character set), a string literal's initial rawness has no effect on the interpretation or well-formedness of the concatenation. -end note ] Table 7 has some examples of valid concatenations.
 
@@ -117,7 +117,7 @@ Characters in concatenated strings are kept distinct.
 
 contains the two characters '\xA' and 'B' after concatenation (and not the single hexadecimal character '\xAB'). -end example ]
 
-12 翻訳フェイズ 6 ( 2.2 ) において、隣接した文字列リテラルは結合される。両方の文字列リテラルが同じ符号化接頭辞を持つ場合、結合結果の文字列リテラルはその符号化接頭辞を持つ。一方の文字列リテラルが符号化接頭辞を持たない場合、他方の演算対象と同じ符号化接頭辞の文字列リテラルであるかのように扱われる。 UTF-8 文字列リテラルトークンがワイド文字列リテラルと隣接している場合、そのプログラムは不適格である。その他の結合はすべて実行時定義の挙動をする条件付きサポートである。 [ 注: この結合は解釈であり、変換ではない。なぜなら翻訳フェイズ 6 ( リテラルの各々の文字が適切な文字集合の値に翻訳されたあとである ) において解釈が発生し、文字列リテラルの初期の未加工性は解釈もしくは結合の的確性において何の意味も持たないからである。 ] 表 7 は有効な結合のいくつかの例を示している。
+12 翻訳フェイズ 6 ( 2.2 ) において、隣接した文字列リテラルは結合される。両方の文字列リテラルが同じ符号化接頭辞を持つ場合、結合結果の文字列リテラルはその符号化接頭辞を持つ。一方の文字列リテラルが符号化接頭辞を持たない場合、他方の演算対象と同じ符号化接頭辞の文字列リテラルであるかのように扱われる。 UTF-8 文字列リテラルトークンがワイド文字列リテラルと隣接している場合、そのプログラムは不適格である。その他の結合はすべて処理系定義の挙動をする条件付きサポートである。 [ 注: この結合は解釈であり、変換ではない。なぜなら翻訳フェイズ 6 ( リテラルの各々の文字が適切な文字集合の値に翻訳されたあとである ) において解釈が発生し、文字列リテラルの初期の未加工性は解釈もしくは結合の的確性において何の意味も持たないからである。 ] 表 7 は有効な結合のいくつかの例を示している。
 
 表 7 - 文字列リテラル結合
 ソース      意味    ソース      意味    ソース      意味

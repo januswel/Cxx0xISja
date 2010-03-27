@@ -20,13 +20,13 @@ an expression in the comma-separated list bounded by the parentheses in a functi
 a program construct that an implementation is not required to support. [ Note: Each implementation documents all conditionally-supported constructs that it does not support.-end note ]
 
 1.3.2 条件付き被サポート [defns.cond.supp]
-実装がサポートすることを要求しないプログラム構成。 [ 注: 各々の実装はサポートしていないすべての条件付き被サポート構成を明示する。 ]
+処理系がサポートすることを要求しないプログラム構成。 [ 注: 各々の実装はサポートしていないすべての条件付き被サポート構成を明示する。 ]
 
 1.3.3 diagnostic message [defns.diagnostic]
 a message belonging to an implementation-defined subset of the implementation's output messages.
 
 1.3.3 診断メッセージ [defns.diagnostic]
-実装が出力するメッセージのうち実装時定義の一部に属するメッセージ。
+処理系が出力するメッセージのうち処理系定義の一部に属するメッセージ。
 
 1.3.4 dynamic type [defns.dynamic.type]
 the type of the most derived object (1.8) to which the lvalue denoted by an lvalue expression refers. [ Example: if a pointer (8.3.1) p whose static type is “pointer to class B” is pointing to an object of class D, derived from B (Clause 10), the dynamic type of the expression *p is “D.” References (8.3.2) are treated similarly. -end example ] The dynamic type of an rvalue expression is its static type.
@@ -38,25 +38,25 @@ the type of the most derived object (1.8) to which the lvalue denoted by an lval
 <del>input to a C++ implementation that is not a well-formed program.</del><ins>a wannabe C++ program that is not well-formed.</ins>
 
 1.3.5 不適格なプログラム [defns.ill.formed]
-<del>適格なプログラムでない C++ 実装への入力。</del><ins>適格でない C++ プログラム状のもの。</ins>
+<del>適格なプログラムでない C++ 処理系への入力。</del><ins>適格でない C++ プログラム状のもの。</ins>
 
 1.3.6 implementation-defined behavior [defns.impl.defined]
 behavior, for a well-formed program construct and correct data, that depends on the implementation and that each implementation documents.
 
-1.3.6 実装時定義の挙動 [defns.impl.defined]
-適格なプログラム構成または正しいデータに対する、実装に依存し各々の実装が明示する、挙動。
+1.3.6 処理系定義の挙動 [defns.impl.defined]
+適格なプログラム構成または正しいデータに対する、処理系に依存し各々の実装が明示する、挙動。
 
 1.3.7 implementation limits [defns.impl.limits]
 restrictions imposed upon programs by the implementation.
 
-1.3.7 実装限界 [defns.impl.limits]
-実装によってプログラムに課せられる制約。
+1.3.7 処理系限界 [defns.impl.limits]
+処理系によってプログラムに課せられる制約。
 
 1.3.8 locale-specific behavior [defns.locale.specific]
 behavior that depends on local conventions of nationality, culture, and language that each implementation documents.
 
 1.3.8 ロカール固有の挙動 [defns.locale.specific]
-各々の実装が明示する国民性、文化、言語の地域の決まりに依存した挙動。
+各々の処理系が明示する国民性、文化、言語の地域の決まりに依存した挙動。
 
 1.3.9 multibyte character [defns.multibyte]
 a sequence of one or more bytes representing a member of the extended character set of either the source or the execution environment. The extended character set is a superset of the basic character set (2.3).
@@ -92,7 +92,7 @@ behavior, such as might arise upon use of an erroneous program construct or erro
 behavior, for a well-formed program construct and correct data, that depends on the implementation. The implementation is not required to document which behavior occurs. [ Note: usually, the range of possible behaviors is delineated by this International Standard. -end note ]
 
 1.3.14 明示されない挙動 [defns.unspecified]
-適格なプログラム構成もしくは正しいデータにおいて、実装に依存する、挙動。実装は挙動の発生について明示する義務はない。 [ 注: 通常、取り得る挙動の範囲はこの国際標準で説明されている。 ]
+適格なプログラム構成もしくは正しいデータにおいて、処理系に依存する、挙動。処理系は挙動の発生について明示する義務はない。 [ 注: 通常、取り得る挙動の範囲はこの国際標準で説明されている。 ]
 
 1.3.15 well-formed program [defns.well.formed]
 a C++ program constructed according to the syntax rules, diagnosable semantic rules, and the One Definition Rule (3.2).

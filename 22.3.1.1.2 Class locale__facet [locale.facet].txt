@@ -20,7 +20,7 @@
 
 2 コンストラクターへの refs 引数は生存期間の管理に使用される。
 
-    - ファセットを保持する最後のロカールオブジェクトが破壊された際、 refs == 0 であるとき、実装は delete static_cast<locale::facet*>(f) ( ここで f はファセットへのポインター ) を実行し、 refs == 1 であるとき、実装はファセットを破壊することはない。
+    - ファセットを保持する最後のロカールオブジェクトが破壊された際、 refs == 0 であるとき、処理系は delete static_cast<locale::facet*>(f) ( ここで f はファセットへのポインター ) を実行し、 refs == 1 であるとき、処理系はファセットを破壊することはない。
 
 3 Constructors of all facets defined in this Clause take such an argument and pass it along to their facet base class constructor. All one-argument constructors defined in this Clause are explicit, preventing their participation in automatic conversions.
 

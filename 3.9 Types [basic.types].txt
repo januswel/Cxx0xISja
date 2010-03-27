@@ -2,7 +2,7 @@
 
 1 [ Note: 3.9 and the subclauses thereof impose requirements on implementations regarding the representation of types. There are two kinds of types: fundamental types and compound types. Types describe objects (1.8), references (8.3.2), or functions (8.3.5).
 
-1 [ 注: 3.9 とその従属節は型の表現についてのその要件を実装に課す。二種類の型が存在する。基本型と複合型である。型はオブジェクト ( 1.8 ) 、参照 ( 8.3.2 ) 、関数 ( 8.3.5 ) を表わす。
+1 [ 注: 3.9 とその従属節は型の表現についてのその要件を処理系に課す。二種類の型が存在する。基本型と複合型である。型はオブジェクト ( 1.8 ) 、参照 ( 8.3.2 ) 、関数 ( 8.3.5 ) を表わす。
 
 2 For any object (other than a base-class subobject) of trivially copyable type T, whether or not the object holds a valid value of type T, the underlying bytes (1.7) making up the object can be copied into an array of char or unsigned char.39 If the content of the array of char or unsigned char is copied back into the object, the object shall subsequently hold its original value. [ Example:
 
@@ -54,7 +54,7 @@
 
 41) The intent is that the memory model of C++ is compatible with that of ISO/IEC 9899 Programming Language C.
 
-4 型 T のオブジェクトの { オブジェクト表現: object representation } は型 T のオブジェクトによって取り込まれる N 個の unsigned char オブジェクトの連続である。ここで N は sizeof(T) と等しい。オブジェクトの { 値表現: value representation } は型 T の値が保持するビット集合である。コピー可能であることが自明な型では、値表現は、実装時定義の値集合の離散要素のひとつである値を決定するオブジェクト表現のビット集合である 41 。
+4 型 T のオブジェクトの { オブジェクト表現: object representation } は型 T のオブジェクトによって取り込まれる N 個の unsigned char オブジェクトの連続である。ここで N は sizeof(T) と等しい。オブジェクトの { 値表現: value representation } は型 T の値が保持するビット集合である。コピー可能であることが自明な型では、値表現は、処理系定義の値集合の離散要素のひとつである値を決定するオブジェクト表現のビット集合である 41 。
 
 41) C++ のメモリーモデルの意図は ISO/IEC 9899 Programming Language C のそれとの互換である。
 

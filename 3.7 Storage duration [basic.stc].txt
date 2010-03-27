@@ -17,7 +17,7 @@
 
 2 Static, thread, and automatic storage durations are associated with objects introduced by declarations (3.1) and implicitly created by the implementation (12.2). The dynamic storage duration is associated with objects created with operator new (5.3.4).
 
-2 静的記憶域期間、スレッド記憶域期間、自動記憶域期間は宣言 ( 3.1 ) によって指示され実装 ( 12.2 ) によって明示的に生成されるオブジェクトに付随する。動的記憶域期間は new 演算子 ( 5.3.4 ) によって生成されるオブジェクトに付随する。
+2 静的記憶域期間、スレッド記憶域期間、自動記憶域期間は宣言 ( 3.1 ) によって指示され処理系 ( 12.2 ) によって明示的に生成されるオブジェクトに付随する。動的記憶域期間は new 演算子 ( 5.3.4 ) によって生成されるオブジェクトに付随する。
 
 3 The storage duration categories apply to references as well. The lifetime of a reference is its storage duration.
 

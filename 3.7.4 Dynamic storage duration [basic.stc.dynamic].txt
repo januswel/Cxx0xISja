@@ -2,7 +2,7 @@
 
 1 Objects can be created dynamically during program execution (1.9), using new-expressions (5.3.4), and destroyed using delete-expressions (5.3.5). A C++ implementation provides access to, and management of, dynamic storage via the global allocation functions operator new and operator new[] and the global deallocation functions operator delete and operator delete[].
 
-1 オブジェクトはプログラム実行時 ( 1.9 ) に動的に { new 式 } を用いることで ( 5.3.4 ) 生成可能であり、 { delete 式 } を用いることで破壊可能である。 C++ 実装は大域的な { メモリ確保関数 } new 演算子もしくは new[] 演算子と大域的な { メモリ解放関数 } delete 演算子もしくは delete[] 演算子を通じて動的記憶領域へのアクセス、管理を提供する。
+1 オブジェクトはプログラム実行時 ( 1.9 ) に動的に { new 式 } を用いることで ( 5.3.4 ) 生成可能であり、 { delete 式 } を用いることで破壊可能である。 C++ 処理系は大域的な { メモリ確保関数 } new 演算子もしくは new[] 演算子と大域的な { メモリ解放関数 } delete 演算子もしくは delete[] 演算子を通じて動的記憶領域へのアクセス、管理を提供する。
 
 2 The library provides default definitions for the global allocation and deallocation functions. Some global allocation and deallocation functions are replaceable (18.6.1). A C++ program shall provide at most one definition of a replaceable allocation or deallocation function. Any such function definition replaces the default version provided in the library (17.6.3.6). The following allocation and deallocation functions (18.6) are implicitly declared in global scope in each translation unit of a program.
 

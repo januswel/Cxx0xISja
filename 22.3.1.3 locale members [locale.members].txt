@@ -22,5 +22,5 @@ basic_string<char> name() const;
 
     5 Returns: The name of *this, if it has one; otherwise, the string "*". If *this has a name, then locale(name().c_str()) is equivalent to *this. Details of the contents of the resulting string are otherwise implementation-definedreturn value of locale::name.
 
-    5 返り値: 名前を持つ場合、 *this の名前。名前を持たない場合、文字列 "*" 。 *this が名前を持つ場合、 locale(name().c_str()) は *this と等価である。結果の文字列の内容の詳細は locale::name の他の実装時定義の値である。
+    5 返り値: 名前を持つ場合、 *this の名前。名前を持たない場合、文字列 "*" 。 *this が名前を持つ場合、 locale(name().c_str()) は *this と等価である。結果の文字列の内容の詳細は locale::name の他の処理系定義の値である。
 

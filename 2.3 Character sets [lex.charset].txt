@@ -16,7 +16,7 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 0 1 2 3 4 5 6 7 8 9
 _ { } [ ] # ( ) < > % : ; . ? * + - / ^ & | ~ ! = , \ " ’
 
-14) 基本ソース文字集合の文字の字形は ASCII 文字集合に対応する ISO/IEC 10646 の部分集合における文字を特定することを目的としている。しかし、ソースファイルの文字から ( 翻訳フェイズ 1 において記述されている ) ソース文字集合への写像は実装時定義において示されるため、実装は基本ソース文字がソースファイルにおいてどのように表現されるかを明示することが必須である。
+14) 基本ソース文字集合の文字の字形は ASCII 文字集合に対応する ISO/IEC 10646 の部分集合における文字を特定することを目的としている。しかし、ソースファイルの文字から ( 翻訳フェイズ 1 において記述されている ) ソース文字集合への写像は処理系定義において示されるため、実装は基本ソース文字がソースファイルにおいてどのように表現されるかを明示することが必須である。
 
 2 The universal-character-name construct provides a way to name other characters.
 
@@ -40,5 +40,5 @@ The character designated by the universal-character-name \UNNNNNNNN is that char
 
 3 The basic execution character set and the basic execution wide-character set shall each contain all the members of the basic source character set, plus control characters representing alert, backspace, and carriage return, plus a null character (respectively, null wide character), whose representation has all zero bits. For each basic execution character set, the values of the members shall be non-negative and distinct from one another. In both the source and execution basic character sets, the value of each character after 0 in the above list of decimal digits shall be one greater than the value of the previous. The execution character set and the execution wide-character set are supersets of the basic execution character set and the basic execution wide-character set, respectively. The values of the members of the execution character sets are implementation-defined, and any additional members are locale-specific.
 
-3 基本実行文字集合と基本実行ワイド文字集合はともに基本ソース文字集合のすべての文字に加えて、ベル、バックスペース、復帰などの制御文字、すべて零のビットを表現として持つ空値文字 ( 空値ワイド文字 ) を含まなければならない。各々の基本実行文字集合において、文字の値は非負でありそれぞれ別個の値を持つものとする。基本ソース文字集合と基本実行文字集合ともに、上記の一覧における十進数の 0 以降の各文字の値はひとつ前のものよりひとつずつ大きくならなければならない。実行文字集合と実行ワイド文字集合はそれぞれ、基本実行文字集合と基本実行ワイド文字集合の上位集合である。実行文字集合の文字の値は実装時定義であり、いずれの追加文字もロカール固有となる。
+3 基本実行文字集合と基本実行ワイド文字集合はともに基本ソース文字集合のすべての文字に加えて、ベル、バックスペース、復帰などの制御文字、すべて零のビットを表現として持つ空値文字 ( 空値ワイド文字 ) を含まなければならない。各々の基本実行文字集合において、文字の値は非負でありそれぞれ別個の値を持つものとする。基本ソース文字集合と基本実行文字集合ともに、上記の一覧における十進数の 0 以降の各文字の値はひとつ前のものよりひとつずつ大きくならなければならない。実行文字集合と実行ワイド文字集合はそれぞれ、基本実行文字集合と基本実行ワイド文字集合の上位集合である。実行文字集合の文字の値は処理系定義であり、いずれの追加文字もロカール固有となる。
 
