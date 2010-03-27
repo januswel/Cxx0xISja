@@ -1,0 +1,211 @@
+7.2 Enumeration declarations [dcl.enum]
+
+1 An enumeration is a distinct type (3.9.1) with named constants. Its name becomes an enum-name, within its scope.
+
+1 列挙とは名前付き定数を伴う独立した型 ( 3.9.1 ) である。その名前はスコープ内部の enum-name となる。
+
+    enum-name:
+        identifier
+    enum-specifier:
+        enum-head { enumerator-listopt }
+        enum-head { enumerator-list , }
+    enum-head:
+        enum-key identifieropt attribute-specifier<sub>opt</sub> enum-baseopt attribute-specifier<sub>opt</sub>
+        enum-key nested-name-specifier identifier
+            attribute-specifier<sub>opt</sub> enum-baseopt attribute-specifier<sub>opt</sub>
+    opaque-enum-declaration:
+        enum-key identifier attribute-specifier<sub>opt</sub> enum-baseopt attribute-specifier<sub>opt</sub> ;
+    enum-key:
+        enum
+        enum class
+        enum struct
+    enum-base:
+        : type-specifier-seq
+    enumerator-list:
+        enumerator-definition
+        enumerator-list , enumerator-definition
+    enumerator-definition:
+        enumerator
+        enumerator = constant-expression
+    enumerator:
+        identifier
+
+The first optional attribute-specifier in the enum-head and the opaque-enum-declaration appertains to the enumeration; the attributes in that attribute-specifier are thereafter considered attributes of the enumeration whenever it is named. The second optional attribute-specifier in the enum-head and the opaque-enum-declaration shall appear only if the enum-base is present; it appertains to the enum-base.
+
+enum-head と opaque-enum-declaration 内の最初の追加的な { 属性指示子 } は列挙に付随する。属性指示子内の属性は名付けられた直後に列挙の属性として認められる。 enum-head と opaque-enum-declaration 内のふたつめの任意の属性指示子は enum-base が存在する場合のみ記述されなければならない。これは enum-base に付随する。
+
+2 The enumeration type declared with an enum-key of only enum is an unscoped enumeration, and its enumerators are unscoped enumerators. The enum-keys enum class and enum struct are semantically equivalent; an enumeration type declared with one of these is a scoped enumeration, and its enumerators are scoped enumerators. The optional identifier shall not be omitted in the declaration of a scoped enumeration. The type-specifier-seq of an enum-base shall name an integral type; any cv-qualification is ignored. An opaque-enum-declaration declaring an unscoped enumeration shall not omit the enum-base. The identifiers in an enumerator-list are declared as constants, and can appear wherever constants are required. An enumerator-definition with = gives the associated enumerator the value indicated by the constant-expression. The constant-expression shall be an integral constant expression (5.19). If the first enumerator has no initializer, the value of the corresponding constant is zero. An enumerator-definition without an initializer gives the enumerator the value obtained by increasing the value of the previous enumerator by one.
+
+[ Example:
+
+    enum { a, b, c=0 };
+    enum { d, e, f=e+2 };
+
+defines a, c, and d to be zero, b and e to be 1, and f to be 3. -end example ]
+
+2 enum のみの enum-key を伴って宣言された列挙型はスコープを持たない列挙であり、その列挙子もスコープを持たない。 enum class と enum struct という enum-key は意味的に等価である。これらのうちひとつを伴って宣言された列挙型はスコープを持つ列挙であり、その列挙子もスコープを持つ。スコープを持つ列挙の宣言において任意の識別子は省略されてはならない。 enum-base の type-specifier-seq は汎整数型を指定しなければならない。いずれの cv 修飾も無視される。スコープを持たない列挙を宣言する opaque-enum-declaration は enum-base を省略してはならない。 enumerator-list 内の識別子は定数として宣言され、定数が要求される任意の場所に記述することができる。 = を伴う enumerator-definition は constant-expression が指す値に結合した列挙を与える。 constant-expression は汎整数の定数式でなければならない ( 5.19 ) 。最初の列挙子が初期化子を持たない場合、定数に対応する値は零となる。
+初期化子を伴わない enumerator-definition は以前の列挙子の値をひとつ増加させた値を持つ列挙子を与える。
+
+[ 例:
+
+    enum { a, b, c=0 };
+    enum { d, e, f=e+2 };
+
+は a 、 c 、 d を零に、 b と e を 1 に、 f を 3 に定義する。 ]
+
+3 An opaque-enum-declaration is either a redeclaration of an enumeration in the current scope or a declaration of a new enumeration. [ Note: an enumeration declared by an opaque-enum-declaration has fixed underlying type and is a complete type. The list of enumerators can be provided in a later redeclaration with an enum-specifier.  -end note ] A scoped enumeration shall not be later redeclared as unscoped or with a different underlying type. An unscoped enumeration shall not be later redeclared as scoped and each redeclaration shall include an enum-base specifying the same underlying type as in the original declaration.
+
+3 opaque-enum-declaration は現在のスコープにおける列挙の再宣言もしくは新しい列挙の宣言である。 [ 注: opaque-enum-declaration によって宣言された列挙は固定された基礎型を持ち完全型となる。列挙子の一覧は後の enum-specifier を伴う再宣言において与えることが可能である。 ] スコープを持つ列挙は後にスコープを持たないものもしくは異なる基礎型を伴うものとして再宣言されてはならない。スコープを持たない列挙は後にスコープを持つものとして再宣言されてはならず各々の再宣言は最初の宣言と同様の基礎型を示す enum-base を含まなくてはならない。
+
+4 If the enum-key is followed by a nested-name-specifier, the enum-specifier shall refer to an enumeration that was previously declared directly in the class or namespace to which the nested-name-specifier refers (i.e., neither inherited nor introduced by a using-declaration), and the enum-specifier shall appear in a namespace enclosing the previous declaration.
+
+4 enum-key に nested-name-specifier が続く場合、 enum-specifier は nested-name-specifier が指し示すクラスもしくは名前空間 ( 例えば、継承されたものや using-declaration によって導入されたものは不可 ) において以前に宣言された列挙を直接参照しなければならず、 enum-specifier は以前の宣言を含む名前空間において記述されなければならない。
+
+5 Each enumeration defines a type that is different from all other types. Each enumeration also has an underlying type. The underlying type can be explicitly specified using enum-base; if not explicitly specified, the underlying type of a scoped enumeration type is int. In these cases, the underlying type is said to be fixed. Following the closing brace of an enum-specifier, each enumerator has the type of its enumeration. If the underlying type is fixed, the type of each enumerator prior to the closing brace is the underlying type; if the initializing value of an enumerator cannot be represented by the underlying type, the program is ill-formed. If the underlying type is not fixed, the type of each enumerator is the type of its initializing value:
+
+    - If an initializer is specified for an enumerator, the initializing value has the same type as the expression.
+    - If no initializer is specified for the first enumerator, the initializing value has an unspecified integral type.
+    - Otherwise the type of the initializing value is the same as the type of the initializing value of the preceding enumerator unless the incremented value is not representable in that type, in which case the type is an unspecified integral type sufficient to contain the incremented value. If no such type exists, the program is ill-formed.
+
+5 各々の列挙は他のすべての型と異なる型を定義する。各々の列挙はまた、基礎型も持つ。基礎型は enum-base を使って明示的に指定可能である。明示的に指定されない場合、スコープを持つ列挙型の基礎型は int となる。これらの場合において、基礎型は固定であると言われる。 enum-specifier の閉じ中括弧に続く、各々の列挙子はその列挙の型を持つ。基礎型が固定である場合、閉じ中括弧の前の各々の列挙子の型は基礎型である。列挙子の値の初期化を基礎型で表現できない場合、そのプログラムは不適格である。基礎型が固定でない場合、各々の列挙子の型はその初期化値の型となる。
+
+    - 初期化子が列挙子に対して指定されている場合、初期化値は式と同じ型を持つ。
+    - 最初の列挙子に対して初期化子が指定されていない場合、初期化値は特定されない汎整数型を持つ。
+    - その他の場合、初期化値の型はその型においてひとつ増加した値が表現できない場合を除いて、型がひとつ増加した値を保持するために十分な特定されない汎整数型である場合、先行する列挙子の初期化値の型と同様となる。そのような型が存在しない場合、プログラムは不適格である。
+
+6 For an enumeration whose underlying type is not fixed, the underlying type is an integral type that can represent all the enumerator values defined in the enumeration. If no integral type can represent all the enumerator values, the enumeration is ill-formed. It is implementation-defined which integral type is used as the underlying type except that the underlying type shall not be larger than int unless the value of an enumerator cannot fit in an int or unsigned int. If the enumerator-list is empty, the underlying type is as if the enumeration had a single enumerator with value 0.
+
+6 基礎型が固定でない列挙において、基礎型はその列挙で定義されているすべての列挙子の値を表現出来る汎整数型となる。すべての列挙子の値を表現できる汎整数型が存在しない場合、その列挙は不適格である。列挙子の値が int もしくは unsigned int に適合できる場合、基礎型が int より大きくなってはならないことを除いて汎整数型が基礎型として使われるかは処理系定義である。 enumerator-list が空の場合、基礎型は列挙が値 0 の単一の列挙子を持つ場合と同じものとなる。
+
+7 For an enumeration whose underlying type is fixed, the values of the enumeration are the values of the underlying type. Otherwise, for an enumeration where emin is the smallest enumerator and emax is the largest, the values of the enumeration are the values in the range bmin to bmax, defined as follows: Let K be 1 for a two's complement representation and 0 for a one's complement or sign-magnitude representation.  bmax is the smallest value greater than or equal to max(|emin| - K, |emax|) and equal to 2M - 1, where M is a non-negative integer. bmin is zero if emin is non-negative and -(bmax + K) otherwise. The size of the smallest bit-field large enough to hold all the values of the enumeration type is max(M, 1) if bmin is zero and M + 1 otherwise. It is possible to define an enumeration that has values not defined by any of its enumerators. If the enumerator-list is empty, the values of the enumeration are as if the enumeration had a single enumerator with value 0.
+
+7 基礎型が固定である列挙において、列挙の値は基礎型の値となる。その他の場合、 emin が最も小さく emax が最も大きい列挙において列挙の値は以下で定義される bmin から bmax の範囲の値である。 K が二の補数表現において 1 かつ一の補数表現もしくは符号と大きさの表現において 0 とする。 bmax は max(|emin| - K, |emax|) 以上の最小値であり M が非負の整数であるとき 2M - 1 に等しい。また emin が非負かつ -(bmax + K) であるとき bmin は零となる。また bmin が零かつ M + 1 である場合列挙型のすべての値を保持するために十分大きな最小のビットフィールドの容量は max(M, 1) である。その列挙子のいずれによっても定義されない値を持つ列挙を定義することは可能である。 enumerator-list が空の場合、列挙の値はその列挙が値 0 の単一の列挙子を持つ列挙と同じものとなる。
+
+8 Two enumeration types are layout-compatible if they have the same underlying type.
+
+8 ふたつの列挙型が同じ基礎型を持つ場合それらは配置互換である。
+
+9 The value of an enumerator or an object of an unscoped enumeration type is converted to an integer by integral promotion (4.5). [ Example:
+
+    enum color { red, yellow, green=20, blue };
+    color col = red;
+    color* cp = &col;
+    if (*cp == blue) // ...
+
+makes color a type describing various colors, and then declares col as an object of that type, and cp as a pointer to an object of that type. The possible values of an object of type color are red, yellow, green, blue; these values can be converted to the integral values 0, 1, 20, and 21. Since enumerations are distinct types, objects of type color can be assigned only values of type color.
+
+    color c = 1;                    // error: type mismatch,
+                                    // no conversion from int to color
+
+    int i = yellow;                 // OK: yellow converted to integral value 1
+                                    // integral promotion
+
+Note that this implicit enum to int conversion is not provided for a scoped enumeration:
+
+    enum class Col { red, yellow, green };
+    int x = Col::red;               // error: no Col to int conversion
+    Col y = Col::red;
+    if (y) { }                      // error: no Col to bool conversion
+
+-end example ]
+
+9 列挙子の値もしくはスコープを持たない列挙型のオブジェクトは汎整数昇格 ( 4.5 ) によって整数に変換される。 [ 例:
+
+    enum color { red, yellow, green=20, blue };
+    color col = red;
+    color* cp = &col;
+    if (*cp == blue) // ...
+
+は color を様々な色を記述する型とし、その型のオブジェクトとして col を、その型のオブジェクトを指し示すポインターとして cp を宣言している。 color 型のオブジェクトの候補値は red 、 yellow 、 green 、 blue である。これらの値は汎整数値 0 、 1 、 20 、 21 に変換可能である。列挙は独立した型なので、 color 型のオブジェクトは color 型の値のみ代入可能である。
+
+    color c = 1;                    // エラー: 型の不一致
+                                    // int から color への変換は存在しない
+
+    int i = yellow;                 // OK: yellow は汎整数値 1 に変換される
+                                    // 汎整数昇格
+
+この暗黙的な enum から int への変換はスコープを持つ列挙には適用されないことに注意せよ。
+
+    enum class Col { red, yellow, green };
+    int x = Col::red;               // エラー: Col から int への変換は存在しない
+    Col y = Col::red;
+    if (y) { }                      // エラー: Col から bool への変換は存在しない
+
+ ]
+
+10 An expression of arithmetic or enumeration type can be converted to an enumeration type explicitly. The value is unchanged if it is in the range of enumeration values of the enumeration type; otherwise the resulting enumeration value is unspecified.
+
+10 算術型もしくは列挙型の式は明示的に列挙型へ変換可能である。列挙型の列挙値の範囲に存在する場合その値は変化しない。その他の場合結果の列挙値は特定されない。
+
+11 Each enum-name and each unscoped enumerator is declared in the scope that immediately contains the enum-specifier. Each scoped enumerator is declared in the scope of the enumeration. These names obey the scope rules defined for all names in (3.3) and (3.4).[ Example:
+
+    enum direction { left='l', right='r' };
+
+    void g() {
+        direction d;                    // OK
+        d = left;                       // OK
+        d = direction::right;           // OK
+    }
+
+    enum class altitude { high='h', low='l' };
+
+    void h() {
+        altitude a;                     // OK
+        a = high;                       // error: high not in scope
+        a = altitude::low;              // OK
+    }
+
+-end example ] An enumerator declared in class scope can be referred to using the class member access operators (::, . (dot) and -> (arrow)), see 5.2.5. [ Example:
+
+    struct X {
+        enum direction { left='l', right='r' };
+        int f(int i) { return i==left ? 0 : i==right ? 1 : 2; }
+    };
+
+    void g(X* p) {
+        direction d;                    // error: direction not in scope
+        int i;
+        i = p->f(left);                 // error: left not in scope
+        i = p->f(X::right);             // OK
+        i = p->f(p->left);              // OK
+        // ...
+    }
+
+-end example ]
+
+11 各々の enum-name と各々のスコープを持たない列挙子は enum-specifier を直接保持するスコープにおいて宣言される。各々のスコープを持つ列挙子は列挙のスコープにおいて宣言される。これらの名前は ( 3.3 ) と ( 3.4 ) においてすべての名前のために定義されているスコープ規則に従う。 [ 例:
+
+    enum direction { left='l', right='r' };
+
+    void g() {
+        direction d;                    // OK
+        d = left;                       // OK
+        d = direction::right;           // OK
+    }
+
+    enum class altitude { high='h', low='l' };
+
+    void h() {
+        altitude a;                     // OK
+        a = high;                       // エラー: high はスコープ内に存在しない
+        a = altitude::low;              // OK
+    }
+
+ ] クラススコープにおいて宣言されている列挙子はクラスメンバー参照演算子 ( :: 、 . ( ドット ) 、 -> ( アロウ ) ) によって参照可能である。 5.2.5 を参照せよ。 [ 例:
+
+    struct X {
+        enum direction { left='l', right='r' };
+        int f(int i) { return i==left ? 0 : i==right ? 1 : 2; }
+    };
+
+    void g(X* p) {
+        direction d;                    // エラー: direction はスコープ内に存在しない
+        int i;
+        i = p->f(left);                 // エラー: left はスコープ内に存在しない
+        i = p->f(X::right);             // OK
+        i = p->f(p->left);              // OK
+        // ...
+    }
+
+ ]
+
