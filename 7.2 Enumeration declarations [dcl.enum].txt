@@ -55,7 +55,7 @@ defines a, c, and d to be zero, b and e to be 1, and f to be 3. -end example ]
 
 3 An opaque-enum-declaration is either a redeclaration of an enumeration in the current scope or a declaration of a new enumeration. [ Note: an enumeration declared by an opaque-enum-declaration has fixed underlying type and is a complete type. The list of enumerators can be provided in a later redeclaration with an enum-specifier.  -end note ] A scoped enumeration shall not be later redeclared as unscoped or with a different underlying type. An unscoped enumeration shall not be later redeclared as scoped and each redeclaration shall include an enum-base specifying the same underlying type as in the original declaration.
 
-3 opaque-enum-declaration は現在のスコープにおける列挙の再宣言もしくは新しい列挙の宣言である。 [ 注: opaque-enum-declaration によって宣言された列挙は固定された基礎型を持ち完全型となる。列挙子の一覧は後の enum-specifier を伴う再宣言において与えることが可能である。 ] スコープを持つ列挙は後にスコープを持たないものもしくは異なる基礎型を伴うものとして再宣言されてはならない。スコープを持たない列挙は後にスコープを持つものとして再宣言されてはならず各々の再宣言は最初の宣言と同様の基礎型を示す enum-base を含まなくてはならない。
+3 opaque-enum-declaration は現在のスコープにおける列挙の再宣言もしくは新しい列挙の宣言である。 [ 注: opaque-enum-declaration によって宣言された列挙は固定された基底型を持ち完全型となる。列挙子の一覧は後の enum-specifier を伴う再宣言において与えることが可能である。 ] スコープを持つ列挙は後にスコープを持たないものもしくは異なる基底型を伴うものとして再宣言されてはならない。スコープを持たない列挙は後にスコープを持つものとして再宣言されてはならず各々の再宣言は最初の宣言と同様の基底型を示す enum-base を含まなくてはならない。
 
 4 If the enum-key is followed by a nested-name-specifier, the enum-specifier shall refer to an enumeration that was previously declared directly in the class or namespace to which the nested-name-specifier refers (i.e., neither inherited nor introduced by a using-declaration), and the enum-specifier shall appear in a namespace enclosing the previous declaration.
 
@@ -67,7 +67,7 @@ defines a, c, and d to be zero, b and e to be 1, and f to be 3. -end example ]
     - If no initializer is specified for the first enumerator, the initializing value has an unspecified integral type.
     - Otherwise the type of the initializing value is the same as the type of the initializing value of the preceding enumerator unless the incremented value is not representable in that type, in which case the type is an unspecified integral type sufficient to contain the incremented value. If no such type exists, the program is ill-formed.
 
-5 各々の列挙は他のすべての型と異なる型を定義する。各々の列挙はまた、基礎型も持つ。基礎型は enum-base を使って明示的に指定可能である。明示的に指定されない場合、スコープを持つ列挙型の基礎型は int となる。これらの場合において、基礎型は固定であると言われる。 enum-specifier の閉じ中括弧に続く、各々の列挙子はその列挙の型を持つ。基礎型が固定である場合、閉じ中括弧の前の各々の列挙子の型は基礎型である。列挙子の値の初期化を基礎型で表現できない場合、そのプログラムは不適格である。基礎型が固定でない場合、各々の列挙子の型はその初期化値の型となる。
+5 各々の列挙は他のすべての型と異なる型を定義する。各々の列挙はまた、基底型も持つ。基底型は enum-base を使って明示的に指定可能である。明示的に指定されない場合、スコープを持つ列挙型の基底型は int となる。これらの場合において、基底型は固定であると言われる。 enum-specifier の閉じ中括弧に続く、各々の列挙子はその列挙の型を持つ。基底型が固定である場合、閉じ中括弧の前の各々の列挙子の型は基底型である。列挙子の値の初期化を基底型で表現できない場合、そのプログラムは不適格である。基底型が固定でない場合、各々の列挙子の型はその初期化値の型となる。
 
     - 初期化子が列挙子に対して指定されている場合、初期化値は式と同じ型を持つ。
     - 最初の列挙子に対して初期化子が指定されていない場合、初期化値は特定されない汎整数型を持つ。
@@ -75,15 +75,15 @@ defines a, c, and d to be zero, b and e to be 1, and f to be 3. -end example ]
 
 6 For an enumeration whose underlying type is not fixed, the underlying type is an integral type that can represent all the enumerator values defined in the enumeration. If no integral type can represent all the enumerator values, the enumeration is ill-formed. It is implementation-defined which integral type is used as the underlying type except that the underlying type shall not be larger than int unless the value of an enumerator cannot fit in an int or unsigned int. If the enumerator-list is empty, the underlying type is as if the enumeration had a single enumerator with value 0.
 
-6 基礎型が固定でない列挙において、基礎型はその列挙で定義されているすべての列挙子の値を表現出来る汎整数型となる。すべての列挙子の値を表現できる汎整数型が存在しない場合、その列挙は不適格である。列挙子の値が int もしくは unsigned int に適合できる場合、基礎型が int より大きくなってはならないことを除いて汎整数型が基礎型として使われるかは処理系定義である。 enumerator-list が空の場合、基礎型は列挙が値 0 の単一の列挙子を持つ場合と同じものとなる。
+6 基底型が固定でない列挙において、基底型はその列挙で定義されているすべての列挙子の値を表現出来る汎整数型となる。すべての列挙子の値を表現できる汎整数型が存在しない場合、その列挙は不適格である。列挙子の値が int もしくは unsigned int に適合できる場合、基底型が int より大きくなってはならないことを除いて汎整数型が基底型として使われるかは処理系定義である。 enumerator-list が空の場合、基底型は列挙が値 0 の単一の列挙子を持つ場合と同じものとなる。
 
 7 For an enumeration whose underlying type is fixed, the values of the enumeration are the values of the underlying type. Otherwise, for an enumeration where emin is the smallest enumerator and emax is the largest, the values of the enumeration are the values in the range bmin to bmax, defined as follows: Let K be 1 for a two's complement representation and 0 for a one's complement or sign-magnitude representation.  bmax is the smallest value greater than or equal to max(|emin| - K, |emax|) and equal to 2M - 1, where M is a non-negative integer. bmin is zero if emin is non-negative and -(bmax + K) otherwise. The size of the smallest bit-field large enough to hold all the values of the enumeration type is max(M, 1) if bmin is zero and M + 1 otherwise. It is possible to define an enumeration that has values not defined by any of its enumerators. If the enumerator-list is empty, the values of the enumeration are as if the enumeration had a single enumerator with value 0.
 
-7 基礎型が固定である列挙において、列挙の値は基礎型の値となる。その他の場合、 emin が最も小さく emax が最も大きい列挙において列挙の値は以下で定義される bmin から bmax の範囲の値である。 K が二の補数表現において 1 かつ一の補数表現もしくは符号と大きさの表現において 0 とする。 bmax は max(|emin| - K, |emax|) 以上の最小値であり M が非負の整数であるとき 2M - 1 に等しい。また emin が非負かつ -(bmax + K) であるとき bmin は零となる。また bmin が零かつ M + 1 である場合列挙型のすべての値を保持するために十分大きな最小のビットフィールドの容量は max(M, 1) である。その列挙子のいずれによっても定義されない値を持つ列挙を定義することは可能である。 enumerator-list が空の場合、列挙の値はその列挙が値 0 の単一の列挙子を持つ列挙と同じものとなる。
+7 基底型が固定である列挙において、列挙の値は基底型の値となる。その他の場合、 emin が最も小さく emax が最も大きい列挙において列挙の値は以下で定義される bmin から bmax の範囲の値である。 K が二の補数表現において 1 かつ一の補数表現もしくは符号と大きさの表現において 0 とする。 bmax は max(|emin| - K, |emax|) 以上の最小値であり M が非負の整数であるとき 2M - 1 に等しい。また emin が非負かつ -(bmax + K) であるとき bmin は零となる。また bmin が零かつ M + 1 である場合列挙型のすべての値を保持するために十分大きな最小のビットフィールドの容量は max(M, 1) である。その列挙子のいずれによっても定義されない値を持つ列挙を定義することは可能である。 enumerator-list が空の場合、列挙の値はその列挙が値 0 の単一の列挙子を持つ列挙と同じものとなる。
 
 8 Two enumeration types are layout-compatible if they have the same underlying type.
 
-8 ふたつの列挙型が同じ基礎型を持つ場合それらは配置互換である。
+8 ふたつの列挙型が同じ基底型を持つ場合それらは配置互換である。
 
 9 The value of an enumerator or an object of an unscoped enumeration type is converted to an integer by integral promotion (4.5). [ Example:
 

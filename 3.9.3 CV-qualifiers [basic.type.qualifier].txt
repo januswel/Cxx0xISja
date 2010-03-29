@@ -37,5 +37,5 @@ volatile      < const volatile
 
 5 In this International Standard, the notation cv (or cv1, cv2, etc.), used in the description of types, represents an arbitrary set of cv-qualifiers, i.e., one of {const}, {volatile}, {const, volatile}, or the empty set. Cv-qualifiers applied to an array type attach to the underlying element type, so the notation “cv T,” where T is an array type, refers to an array whose elements are so-qualified. Such array types can be said to be more (or less) cv-qualified than other types based on the cv-qualification of the underlying element types.
 
-5 この国際標準において、 cv ( もしくは cv1, cv2 など ) という表記は、型の説明として使われ、 cv 修飾子の任意の集合、例えば {const}, {volatile}, {const, volatile}, もしくは空集合を表現する。配列型に適用される cv 修飾子は基礎要素型に結合するため、 T が配列型である "cv T" という表記は要素がかなり限定された配列を参照する。そのような配列型は基礎要素型の cv 修飾に基づく他の型に比べてより被 cv 修飾 ( またはより非被 cv 修飾 ) に言及されうる。
+5 この国際標準において、 cv ( もしくは cv1, cv2 など ) という表記は、型の説明として使われ、 cv 修飾子の任意の集合、例えば {const}, {volatile}, {const, volatile}, もしくは空集合を表現する。配列型に適用される cv 修飾子は基底要素型に結合するため、 T が配列型である "cv T" という表記は要素がかなり限定された配列を参照する。そのような配列型は基底要素型の cv 修飾に基づく他の型に比べてより被 cv 修飾 ( またはより非被 cv 修飾 ) に言及されうる。
 
