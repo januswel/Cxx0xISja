@@ -10,11 +10,11 @@
 
 3 An rvalue of an unscoped enumeration type whose underlying type is not fixed (7.2) can be converted to an rvalue of the first of the following types that can represent all the values of the enumeration (i.e., the values in the range bmin to bmax as described in 7.2): int, unsigned int, long int, unsigned long int, long long int, or unsigned long long int. If none of the types in that list can represent all the values of the enumeration, an rvalue of an unscoped enumeration type can be converted to an rvalue of the extended integer type with lowest integer conversion rank (4.13) greater than the rank of long long in which all the values of the enumeration can be represented. If there are two such extended types, the signed one is chosen.
 
-3 基底型が固定 ( 7.2 ) でないスコープにない列挙型の右辺値は以下の型のうちその列挙のすべての値を表現することができる最初のものの右辺値へ変換可能である ( 例えば、 7.2 において記述されている bmin から bmax までの範囲の値 ) 。 int 、 unsigned int 、 long int 、 unsigned long int 、 long long int 、 unsigned long long int 。その列挙のすべての値を表現することができる型がこの一覧にない場合、スコープにない列挙型の右辺値はその列挙のすべての値を表現することができる long long のランクより高いもののうち最も低い整数変換ランク ( 4.13 ) の拡張整数型右辺値へ変換可能である。そのような二つの拡張型がある場合、符号ありのものが選択される。
+3 基底型が固定 ( 7.2 ) でないスコープを持たない列挙型の右辺値は以下の型のうちその列挙のすべての値を表現することができる最初のものの右辺値へ変換可能である ( 例えば、 7.2 において記述されている bmin から bmax までの範囲の値 ) 。 int 、 unsigned int 、 long int 、 unsigned long int 、 long long int 、 unsigned long long int 。その列挙のすべての値を表現することができる型がこの一覧にない場合、スコープを持たない列挙型の右辺値はその列挙のすべての値を表現することができる long long のランクより高いもののうち最も低い整数変換ランク ( 4.13 ) の拡張整数型右辺値へ変換可能である。そのような二つの拡張型がある場合、符号ありのものが選択される。
 
 4 An rvalue of an unscoped enumeration type whose underlying type is fixed (7.2) can be converted to an rvalue of its underlying type. Moreover, if integral promotion can be applied to its underlying type, an rvalue of an unscoped enumeration type whose underlying type is fixed can also be converted to an rvalue of the promoted underlying type.
 
-4 基底型が固定である ( 7.2 ) スコープにない列挙型の右辺値はその基底型の右辺値へ変換可能である。さらに、整数昇格がその基底型に対して可能である場合、基底型が固定であるスコープにない列挙型の右辺値は昇格した基底型へ変換可能である。
+4 基底型が固定である ( 7.2 ) スコープを持たない列挙型の右辺値はその基底型の右辺値へ変換可能である。さらに、整数昇格がその基底型に対して可能である場合、基底型が固定であるスコープを持たない列挙型の右辺値は昇格した基底型へ変換可能である。
 
 5 An rvalue for an integral bit-field (9.6) can be converted to an rvalue of type int if int can represent all the values of the bit-field; otherwise, it can be converted to unsigned int if unsigned int can represent all the values of the bit-field. If the bit-field is larger yet, no integral promotion applies to it. If the bit-field has an enumerated type, it is treated as any other value of that type for promotion purposes.
 
