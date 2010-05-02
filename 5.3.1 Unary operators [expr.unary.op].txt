@@ -1,0 +1,66 @@
+5.3.1 Unary operators [expr.unary.op]
+
+1 The unary * operator performs indirection: the expression to which it is applied shall be a pointer to an object type, or a pointer to a function type and the result is an lvalue referring to the object or function to which the expression points. If the type of the expression is "pointer to T," the type of the result is "T." [ Note: a pointer to an incomplete type (other than cv void) can be dereferenced. The lvalue thus obtained can be used in limited ways (to initialize a reference, for example); this lvalue must not be converted to <del>an rvalue</del> <ins>a prvalue</ins>, see 4.1. -end note ]
+
+1 単項演算子 * は関節参照として機能する。適用される式はオブジェクト型もしくは関数型へのポインターでなければならず、演算結果はその式が指し示すオブジェクトもしくは関数への左辺値とならなければならない。式の型が「 T へのポインター」である場合、演算結果の型は「 T 」となる。 [ 注: ( cv void 以外の ) 不完全型へのポインターは逆参照可能である。このようにして得られた左辺値は限定的に使うことが可能である ( 例えば、参照を初期化するため ) 。この左辺値は <del>rvalue</del> <ins>prvalue</ins> に変換されてはならない。 4.1 を参照せよ。 ]
+
+2 The result of each of the following unary operators is <del>an rvalue</del> <ins>a prvalue</ins>.
+
+2 以下の単項演算子のそれぞれの演算結果は <del>rvalue</del> <ins>prvalue</ins> となる。
+
+3 The result of the unary & operator is a pointer to its operand. The operand shall be an lvalue or a qualified-id.
+
+<del>In the first case, if the type of the expression is "T," the type of the result is "pointer to T." In particular, the address of an object of type "cv T" is "pointer to cv T," with the same cv-qualifiers. For a qualified-id, if the member is a static member of type "T", the type of the result is plain "pointer to T." If the member is a non-static member of class C of type T, the type of the result is "pointer to member of class C of type T."</del>
+
+<ins>If the operand is a qualified-id naming a non-static member m of some class C with type T, the result has type "pointer to member of class C of type T" and is a prvalue designating C::m; the program is ill formed if C is an ambiguous base (10.2) of the class designated by the nested-name-specifier of the qualified-id. Otherwise, if the type of the expression is T, the result has type "pointer to T" and is a prvalue that is the address of the designated object (1.7) or a pointer to the designated function. [ Note: In particular, the address of an object of type "cv T" is "pointer to cv T", with the same cv-qualification. -end note ]</ins>
+
+[ Example:
+
+    struct A { int i; };
+    struct B : A { };
+    ... &B::i ...      // has type int A::*
+
+-end example ] [ Note: a pointer to member formed from a mutable non-static data member (7.1.1) does not reflect the mutable specifier associated with the non-static data member. -end note ]
+
+3 単項演算子 & の演算結果はその演算対象へのポインターとなる。演算対象は左辺値もしくは qualified-id でなければならない。
+
+<del>まずはじめに、式の型が「 T 」である場合、演算結果の型は「 T へのポインター」となる。特に型「 cv T 」のオブジェクトのアドレスは同様の cv 修飾子を持つ「 cv T へのポインター」となる。 qualified-id に対しては、そのメンバーが型「 T 」である静的メンバーである場合、演算結果の型は単純な「 T へのポインター」となる。そのメンバーが型 T であるクラス C の非静的メンバーである場合、演算結果の型は「型 T であるクラス C のメンバーへのポインター」となる。</del>
+
+<ins>演算対象が何らかのクラス C の型 T である非静的メンバー m を指定する qualified-id である場合、演算結果は「型 T であるクラス C のメンバーへのポインター」型を持ち C::m を指定する prvalue となる。 C が qualified-id の nested-name-specifier によって指定されたクラスのあいまいな基底型 ( 10.2 ) である場合そのプログラムは不適格である。それ以外で式の型が T である場合、演算結果は「 T へのポインター」型を持ち、指定されたオブジェクトのアドレス ( 1.7 ) もしくは指定された関数へのポインターである prvalue となる。 [ 注: 特に型「 cv T 」であるオブジェクトのアドレスは同様の cv 修飾子を持つ「 cv T へのポインター」となる。 ]</ins>
+
+[ 例:
+
+    struct A { int i; };
+    struct B : A { };
+    ... &B::i ...      // int A::* 型を持つ
+
+ ] [ 注: mutable な非静的データメンバー ( 7.1.1 ) から生成されるメンバーへのポインターはその非静的データメンバーに結びついた mutable 指定子を反映しない。 ]
+
+4 A pointer to member is only formed when an explicit & is used and its operand is a qualified-id not enclosed in parentheses. [ Note: that is, the expression &(qualified-id), where the qualified-id is enclosed in parentheses, does not form an expression of type "pointer to member." Neither does qualified-id, because there is no implicit conversion from a qualified-id for a non-static member function to the type "pointer to member function" as there is from an lvalue of function type to the type "pointer to function" (4.3). Nor is &unqualified-id a pointer to member, even within the scope of the unqualified-id's class. -end note ]
+
+4 メンバーへのポインターは明示的な & が使用されその演算対象が丸括弧で括られていない qualified-id であるときのみ生成される。 [ 注: qualified-id が丸括弧で括られている式 &(qualified-id) は「メンバーへのポインター」を生成しない。同様に式 qualified-id でも生成しない。なぜなら関数型の左辺値から「関数へのポインター」型への暗黙的な変換 ( 4.3 ) のような非静的メンバー関数に対する qualified-id から「メンバー関数へのポインター」型への暗黙的な変換が存在しないからである。さらにたとえ unqualified-id のクラスのスコープの中でも、式 &unqualified-id はメンバーへのポインターを生成しない。 ]
+
+5 The address of an object of incomplete type can be taken, but if the complete type of that object is a class type that declares operator&() as a member function, then the behavior is undefined (and no diagnostic is required). The operand of & shall not be a bit-field.
+
+5 不完全型のオブジェクトのアドレスは取得可能であるが、そのオブジェクトの完全型が operator&() をメンバー関数として宣言するクラス型である場合、その挙動は未定義となる ( さらに何の診断メッセージも要求されない ) 。 & の演算対象はビットフィールドであってはならない。
+
+6 The address of an overloaded function (Clause 13) can be taken only in a context that uniquely determines which version of the overloaded function is referred to (see 13.4). [ Note: since the context might determine whether the operand is a static or non-static member function, the context can also affect whether the expression has type "pointer to function" or "pointer to member function." -end note ]
+
+6 オーバーロードされた関数 ( 13 条 ) のアドレスは指定したオーバーロードされた関数の版が一意に決定される文脈においてのみ取得可能である ( 13.4 ) 。 [ 注: 演算対象が静的関数か非静的関数かは文脈が決定するかもしれないため、式が「関数へのポインター」型と「メンバー関数へのポインター」型のどちらを持つかに文脈が影響する。 ]
+
+7 The operand of the unary + operator shall have arithmetic, unscoped enumeration, or pointer type and the result is the value of the argument. Integral promotion is performed on integral or enumeration operands. The type of the result is the type of the promoted operand.
+
+7 単項演算子 + の演算対象は算術型、スコープを持たない列挙型、ポインター型のいずれかでなければならず、演算結果は引数の値となる。汎整数もしくは列挙である演算対象において汎整数昇格が行われる。演算結果の型は演算対象の昇格後の型となる。
+
+8 The operand of the unary - operator shall have arithmetic or unscoped enumeration type and the result is the negation of its operand. Integral promotion is performed on integral or enumeration operands. The negative of an unsigned quantity is computed by subtracting its value from 2 ** n, where n is the number of bits in the promoted operand. The type of the result is the type of the promoted operand.
+
+8 単項演算子 - の演算対象は算術型もしくはスコープを持たない列挙型を持たなければならず、演算結果はその演算対象の否定である。 汎整数もしくは列挙である演算対象において汎整数昇格が行われる。符号のない数の否定は n が昇格後の演算対象のビット数であるときその値を 2 ** n から減算することで計算される。演算結果の型は演算対象の昇格後の型となる。
+
+9 The operand of the logical negation operator ! is contextually converted to bool (Clause 4); its value is true if the converted operand is false and false otherwise. The type of the result is bool.
+
+9 論理否定演算子 ! の演算対象は文脈的に bool に変換される ( 4 条 ) 。その値は演算対象の変換後が偽である場合真となり、真の場合偽となる。演算結果の型は bool となる。
+
+10 The operand of ˜ shall have integral or unscoped enumeration type; the result is the one's complement of its operand. Integral promotions are performed. The type of the result is the type of the promoted operand. There is an ambiguity in the unary-expression ˜X(), where X is a class-name or decltype-specifier . The ambiguity is resolved in favor of treating ˜ as a unary complement rather than treating ˜X as referring to a destructor.
+
+10 ˜ の演算対象は汎整数型もしくはスコープを持たない列挙型を持たなければならない。演算結果は演算対象の一の補数となる。汎整数昇格が行われる。演算結果の型は演算対象の昇格後の型となる。 X が class-name もしくは decltype-specifier であるとき単項式 ~X() は曖昧である。デストラクターを指す ~X として扱うより ~ を単項の補数演算子として扱うことで曖昧さは解決される。
+

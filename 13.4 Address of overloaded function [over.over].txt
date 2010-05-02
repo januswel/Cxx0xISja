@@ -1,0 +1,120 @@
+13.4 Address of overloaded function [over.over]
+
+1 A use of an overloaded function name without arguments is resolved in certain contexts to a function, a pointer to function or a pointer to member function for a specific function from the overload set. A function template name is considered to name a set of overloaded functions in such contexts. The function selected is the one whose type matches the target type required in the context. The target can be
+
+    - an object or reference being initialized (8.5, 8.5.3),
+    - the left side of an assignment (5.17),
+    - a parameter of a function (5.2.2),
+    - a parameter of a user-defined operator (13.5),
+    - the return value of a function, operator function, or conversion (6.6.3),
+    - an explicit type conversion (5.2.3, 5.2.9, 5.4), or
+    - a non-type template-parameter (14.4.2).
+
+The overloaded function name can be preceded by the & operator. An overloaded function name shall not be used without arguments in contexts other than those listed. [ Note: any redundant set of parentheses surrounding the overloaded function name is ignored (5.1). -end note ]
+
+1 引数なしのオーバーロードされた関数名の使用はある文脈においてオーバーロードされた集合のうちの特定の関数への関数、関数へのポインター、メンバー関数へのポインターのいずれかとして解決される。関数テンプレート名はそのような文脈においてオーバーロードされた関数の集合名として考慮される。選択される関数はその文脈において型が対象の型要求に合致するひとつである。対象となることができるのは以下のものである。
+
+    - 初期化されようとしているオブジェクトもしくは参照 (8.5, 8.5.3)
+    - 代入の左辺 ( 5.17 )
+    - 関数のパラメーター ( 5.2.2 )
+    - 利用者定義演算子のパラメーター ( 13.5 )
+    - 関数、演算子関数、変換の戻り値 ( 6.6.3 )
+    - 明示的な型変換 ( 5.2.3 、 5.2.9 、 5.4 )
+    - 型でない template-parameter ( 14.4.2 )
+
+オーバーロードされた関数名の前に & 演算子をおくことが可能である。オーバーロードされた関数名は引数なしで上記に挙げられている文脈以外で使われてはならない。 [ 注: オーバーロードされた関数名を取り囲む丸括弧の冗長な集合は無視される ( 5.1 ) 。 ]
+
+2 If the name is a function template, template argument deduction is done (14.9.2.2), and if the argument deduction succeeds, the resulting template argument list is used to generate a single function template specialization, which is added to the set of overloaded functions considered. [ Note: As described in 14.9.1, if deduction fails and the function template name is followed by an explicit template argument list, the template-id is then examined to see whether it identifies a single function template specialization. If it does, the template-id is considered to be an lvalue for that function template specialization. The target type is not used in that determination. -end note ]
+
+2 名前が関数テンプレートである場合、テンプレート引数推論が行われ ( 14.9.2.2 ) 、引数推論に成功した場合、その結果のテンプレート引数リストは考慮されるオーバーロードされた関数の集合に追加される、ひとつの関数テンプレート特殊化を生成するために使われる。 [ 注: 14.9.1 において記述されているように、推論が失敗し、かつ関数テンプレート名が明示的なテンプレート引数リストを伴う場合、 template-id はただひとつの関数テンプレートへの特殊化へ同定するかどうか確かめられる。そうなった場合、 template-id はその関数テンプレートの特殊化への左辺値となるかどうかを考慮される。目的の型はその決定に使用される。 ]
+
+3 Non-member functions and static member functions match targets of type "pointer-to-function" or "referenceto- function." Nonstatic member functions match targets of type "pointer-to-member-function;" the function type of the pointer to member is used to select the member function from the set of overloaded member functions. If a non-static member function is selected, the reference to the overloaded function name is required to have the form of a pointer to member as described in 5.3.1.
+
+4 If more than one function is selected, any function template specializations in the set are eliminated if the set also contains a non-template function, and any given function template specialization F1 is eliminated if the set contains a second function template specialization whose function template is more specialized than the function template of F1 according to the partial ordering rules of 14.6.6.2. After such eliminations, if any, there shall remain exactly one selected function.
+
+4 ひとつ以上の関数が選択された場合、その集合が非テンプレート関数を含んでいる場合、集合から関数テンプレートの特殊化はすべて除外され、集合が 14.6.6.2 の半順序規則に従って関数テンプレートが F1 の関数テンプレートよりさらに特殊化されるふたつめの関数テンプレートの特殊化を含んでいる場合、与えられた関数テンプレートの特殊化 F1 はすべて除外される。そのような除外の後、もしあるのであれば、残ったひとつの関数が選択される。
+
+5 [ Example:
+
+    int f(double);
+    int f(int);
+    int (*pfd)(double) = &f;            // selects f(double)
+    int (*pfi)(int) = &f;               // selects f(int)
+    int (*pfe)(...) = &f;               // error: type mismatch
+    int (&rfi)(int) = f;                // selects f(int)
+    int (&rfd)(double) = f;             // selects f(double)
+    void g() {
+        (int (*)(int))&f;               // cast expression as selector
+    }
+
+The initialization of pfe is ill-formed because no f() with type int(...) has been declared, and not because of any ambiguity. For another example,
+
+    struct X {
+        int f(int);
+        static int f(long);
+    };
+
+    int (X::*p1)(int) = &X::f;          // OK
+    int (*p2)(int) = &X::f;             // error: mismatch
+    int (*p3)(long) = &X::f;            // OK
+    int (X::*p4)(long) = &X::f;         // error: mismatch
+    int (X::*p5)(int) = &(X::f);        // error: wrong syntax for
+                                        // pointer to member
+    int (*p6)(long) = &(X::f);          // OK
+
+-end example ]
+
+5 [ 例:
+
+    int f(double);
+    int f(int);
+    int (*pfd)(double) = &f;            // f(double) を選択
+    int (*pfi)(int) = &f;               // f(int) を選択
+    int (*pfe)(...) = &f;               // エラー: 型が合わない
+    int (&rfi)(int) = f;                // f(int) を選択
+    int (&rfd)(double) = f;             // f(double) を選択
+    void g() {
+        (int (*)(int))&f;               // 選択するためのキャスト式
+    }
+
+pfe の初期化は不適格となるが int(...) 型を持つ f() が宣言されていないためであり曖昧さのためではない。別の例は、
+
+    struct X {
+        int f(int);
+        static int f(long);
+    };
+
+    int (X::*p1)(int) = &X::f;          // OK
+    int (*p2)(int) = &X::f;             // エラー: 不一致
+    int (*p3)(long) = &X::f;            // OK
+    int (X::*p4)(long) = &X::f;         // エラー: 不一致
+    int (X::*p5)(int) = &(X::f);        // エラー: メンバーへのポインターの
+                                        // 間違った文法
+    int (*p6)(long) = &(X::f);          // OK
+
+ ]
+
+6 [ Note: if f() and g() are both overloaded functions, the cross product of possibilities must be considered to resolve f(&g), or the equivalent expression f(g). -end note ]
+
+6 [ 注: f() と g() がともにオーバーロードされた関数である場合、可能性の外積は f(&g) もしくは等価な式 f(g) に解決されなければならない。 ]
+
+7 [ Note: there are no standard conversions (Clause 4) of one pointer-to-function type into another. In particular, even if B is a public base of D, we have
+
+    D* f();
+    B* (*p1)() = &f;            // error
+
+    void g(D*);
+    void (*p2)(B*) = &g;        // error
+
+-end note ]
+
+7 [ 注: 関数へのポインター型から他への標準の変換 ( 4 条 ) は存在しない。特に、 B が D の public な基底型である場合でも、変換されない。
+
+    D* f();
+    B* (*p1)() = &f;            // エラー
+
+    void g(D*);
+    void (*p2)(B*) = &g;        // エラー
+
+ ]
+
