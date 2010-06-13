@@ -16,11 +16,11 @@ template <class Facet> const Facet& use_facet(const locale& loc);
 
     4 Remarks: The reference returned remains valid at least as long as any copy of loc exists.
 
-    4 注記: 返される参照は少なくとも loc のいずれかのコピーが存在する間有効である。
+    4 備考: 返される参照は少なくとも loc のいずれかのコピーが存在する間有効である。
 
 template <class Facet> bool has_facet(const locale& loc) throw();
 
     5 Returns: true if the facet requested is present in loc; otherwise false.
 
-    5 返り値: 要求されたファセットが loc において存在する場合、真。そのほかの場合、偽。
+    5 返り値: 要求されたファセットが loc において存在する場合、真。そうでない場合、偽。
 

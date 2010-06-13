@@ -62,7 +62,7 @@ result do_in(stateT& state,
 
     4 Remarks: Its operations on state are unspecified. [ Note: This argument can be used, for example, to maintain shift state, to specify conversion options (such as count only), or to identify a cache of seek offsets. -end note ]
 
-    4 注記: state の操作は非明示である。 [ 注: この引数は例えば、変換状態を示すシフト状態を保持するため ( 例えば変換済み文字数のみ ) やシークオフセットのキャッシュを特定するために使用可能である。 ]
+    4 備考: state の操作は非明示である。 [ 注: この引数は例えば、変換状態を示すシフト状態を保持するため ( 例えば変換済み文字数のみ ) やシークオフセットのキャッシュを特定するために使用可能である。 ]
 
     5 Returns: An enumeration value, as summarized in Table 78.
 

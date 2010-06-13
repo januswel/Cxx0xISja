@@ -14,7 +14,7 @@ and
 
 In the latter form argc shall be the number of arguments passed to the program from the environment in which the program is run. If argc is nonzero these arguments shall be supplied in argv[0] through argv[argc-1] as pointers to the initial characters of null-terminated multibyte strings (NTMBSs) (17.5.2.1.4.2) and argv[0] shall be the pointer to the initial character of a NTMBS that represents the name used to invoke the program or "". The value of argc shall be non-negative. The value of argv[argc] shall be 0. [ Note: it is recommended that any further (optional) parameters be added after argv. -end note ]
 
-2 処理系は main 関数を前もって定義してはならない。この関数はオーバーロードされてはならない。 int 型の返り値を持たなくてはならず、それ以外の場合その型は処理系定義である。すべての処理系は以下の main の定義の両方を許可しなければならない。
+2 処理系は main 関数を前もって定義してはならない。この関数はオーバーロードされてはならない。 int 型の返り値を持たなくてはならず、そうでない場合その型は処理系定義である。すべての処理系は以下の main の定義の両方を許可しなければならない。
 
     int main() { /* ... */ }
 
@@ -26,7 +26,7 @@ In the latter form argc shall be the number of arguments passed to the program f
 
 3 The function main shall not be used (3.2) within a program. The linkage (3.5) of main is implementation-defined.  A program that defines main as deleted or that declares main to be inline, static, or constexpr is ill-formed. The name main is not otherwise reserved. [ Example: member functions, classes, and enumerations can be called main, as can entities in other namespaces. -end example ]
 
-3 関数 main はプログラム内部で使われてはならない (3.2) 。 main のリンケージ (3.5) は処理系定義である。 deleted として main を定義するもしくは main が inline 、 static 、 constexpr であるように宣言するプログラムは不適格である。名前 main はそれ以外の場合予約されない。 [ 例: メンバー関数、クラス、列挙は他の名前空間に実体がある場合 main と呼ぶことが出来る。 ]
+3 関数 main はプログラム内部で使われてはならない (3.2) 。 main のリンケージ (3.5) は処理系定義である。 deleted として main を定義するもしくは main が inline 、 static 、 constexpr であるように宣言するプログラムは不適格である。名前 main はそうでない場合予約されない。 [ 例: メンバー関数、クラス、列挙は他の名前空間に実体がある場合 main と呼ぶことが出来る。 ]
 
 4 Terminating the program without leaving the current block (e.g., by calling the function std::exit(int) (18.5)) does not destroy any objects with automatic storage duration (12.4). If std::exit is called to end a program during the destruction of an object with static or thread storage duration, the program has undefined behavior.
 

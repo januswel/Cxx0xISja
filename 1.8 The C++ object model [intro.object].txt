@@ -16,7 +16,7 @@
 3 すべてのオブジェクト x において、以下によって決定される x { から成る完全オブジェクト } と呼ばれるいくつかのオブジェクトが存在する。
 
     - x が完全オブジェクトである場合、 x は x から成る完全オブジェクトである。
-    - そのほかの場合、 x から成る完全オブジェクトとは x を包含する ( 固有の ) オブジェクトから成る完全オブジェクトである。
+    - そうでない場合、 x から成る完全オブジェクトとは x を包含する ( 固有の ) オブジェクトから成る完全オブジェクトである。
 
 4 If a complete object, a data member (9.2), or an array element is of class type, its type is considered the most derived class, to distinguish it from the class type of any base class subobject; an object of a most derived class type or of a non-class type is called a most derived object.
 

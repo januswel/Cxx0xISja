@@ -71,7 +71,7 @@ defines a, c, and d to be zero, b and e to be 1, and f to be 3. -end example ]
 
     - 初期化子が列挙子に対して指定されている場合、初期化値は式と同じ型を持つ。
     - 最初の列挙子に対して初期化子が指定されていない場合、初期化値は特定されない汎整数型を持つ。
-    - その他の場合、初期化値の型はその型においてひとつ増加した値が表現できない場合を除いて、型がひとつ増加した値を保持するために十分な特定されない汎整数型である場合、先行する列挙子の初期化値の型と同様となる。そのような型が存在しない場合、プログラムは不適格である。
+    - そうでない場合、初期化値の型はその型においてひとつ増加した値が表現できない場合を除いて、型がひとつ増加した値を保持するために十分な特定されない汎整数型である場合、先行する列挙子の初期化値の型と同様となる。そのような型が存在しない場合、プログラムは不適格である。
 
 6 For an enumeration whose underlying type is not fixed, the underlying type is an integral type that can represent all the enumerator values defined in the enumeration. If no integral type can represent all the enumerator values, the enumeration is ill-formed. It is implementation-defined which integral type is used as the underlying type except that the underlying type shall not be larger than int unless the value of an enumerator cannot fit in an int or unsigned int. If the enumerator-list is empty, the underlying type is as if the enumeration had a single enumerator with value 0.
 
@@ -79,7 +79,7 @@ defines a, c, and d to be zero, b and e to be 1, and f to be 3. -end example ]
 
 7 For an enumeration whose underlying type is fixed, the values of the enumeration are the values of the underlying type. Otherwise, for an enumeration where emin is the smallest enumerator and emax is the largest, the values of the enumeration are the values in the range bmin to bmax, defined as follows: Let K be 1 for a two's complement representation and 0 for a one's complement or sign-magnitude representation.  bmax is the smallest value greater than or equal to max(|emin| - K, |emax|) and equal to 2M - 1, where M is a non-negative integer. bmin is zero if emin is non-negative and -(bmax + K) otherwise. The size of the smallest bit-field large enough to hold all the values of the enumeration type is max(M, 1) if bmin is zero and M + 1 otherwise. It is possible to define an enumeration that has values not defined by any of its enumerators. If the enumerator-list is empty, the values of the enumeration are as if the enumeration had a single enumerator with value 0.
 
-7 基底型が固定である列挙において、列挙の値は基底型の値となる。その他の場合、 emin が最も小さく emax が最も大きい列挙において列挙の値は以下で定義される bmin から bmax の範囲の値である。 K が二の補数表現において 1 かつ一の補数表現もしくは符号と大きさの表現において 0 とする。 bmax は max(|emin| - K, |emax|) 以上の最小値であり M が非負の整数であるとき 2M - 1 に等しい。また emin が非負かつ -(bmax + K) であるとき bmin は零となる。また bmin が零かつ M + 1 である場合列挙型のすべての値を保持するために十分大きな最小のビットフィールドの容量は max(M, 1) である。その列挙子のいずれによっても定義されない値を持つ列挙を定義することは可能である。 enumerator-list が空の場合、列挙の値はその列挙が値 0 の単一の列挙子を持つ列挙と同じものとなる。
+7 基底型が固定である列挙において、列挙の値は基底型の値となる。そうでない場合、 emin が最も小さく emax が最も大きい列挙において列挙の値は以下で定義される bmin から bmax の範囲の値である。 K が二の補数表現において 1 かつ一の補数表現もしくは符号と大きさの表現において 0 とする。 bmax は max(|emin| - K, |emax|) 以上の最小値であり M が非負の整数であるとき 2M - 1 に等しい。また emin が非負かつ -(bmax + K) であるとき bmin は零となる。また bmin が零かつ M + 1 である場合列挙型のすべての値を保持するために十分大きな最小のビットフィールドの容量は max(M, 1) である。その列挙子のいずれによっても定義されない値を持つ列挙を定義することは可能である。 enumerator-list が空の場合、列挙の値はその列挙が値 0 の単一の列挙子を持つ列挙と同じものとなる。
 
 8 Two enumeration types are layout-compatible if they have the same underlying type.
 
@@ -135,7 +135,7 @@ Note that this implicit enum to int conversion is not provided for a scoped enum
 
 10 An expression of arithmetic or enumeration type can be converted to an enumeration type explicitly. The value is unchanged if it is in the range of enumeration values of the enumeration type; otherwise the resulting enumeration value is unspecified.
 
-10 算術型もしくは列挙型の式は明示的に列挙型へ変換可能である。列挙型の列挙値の範囲に存在する場合その値は変化しない。その他の場合結果の列挙値は特定されない。
+10 算術型もしくは列挙型の式は明示的に列挙型へ変換可能である。列挙型の列挙値の範囲に存在する場合その値は変化しない。そうでない場合結果の列挙値は特定されない。
 
 11 Each enum-name and each unscoped enumerator is declared in the scope that immediately contains the enum-specifier. Each scoped enumerator is declared in the scope of the enumeration. These names obey the scope rules defined for all names in (3.3) and (3.4).[ Example:
 

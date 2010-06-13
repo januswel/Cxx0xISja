@@ -38,7 +38,7 @@ explicit locale(const char* std_name);
 
     8 Remarks: The set of valid string argument values is "C", "", and any implementation-defined values.
 
-    8 注記: 有効な文字列引数の集合は "C" 、 "" 、 と任意の処理系定義の値である。
+    8 備考: 有効な文字列引数の集合は "C" 、 "" 、 と任意の処理系定義の値である。
 
 explicit locale(const string& std_name);
 
@@ -58,7 +58,7 @@ locale(const locale& other, const char* std_name, category);
 
     12 Remarks: The locale has a name if and only if other has a name.
 
-    12 注記: other が名前を持つ場合に限りロカールは名前を持つ。
+    12 備考: other が名前を持つ場合に限りロカールは名前を持つ。
 
 locale(const locale& other, const string& std_name, category cat);
 
@@ -72,7 +72,7 @@ template <class Facet> locale(const locale& other, Facet* f);
 
     15 Remarks: The resulting locale has no name.
 
-    15 注記: 結果のロカールは名前を持たない。
+    15 備考: 結果のロカールは名前を持たない。
 
 locale(const locale& other, const locale& one, category cats);
 
@@ -82,7 +82,7 @@ locale(const locale& other, const locale& one, category cats);
 
     17 Remarks: The resulting locale has a name if and only if the first two arguments have names.
 
-    17 注記: 最初ふたつの引数が名前を持つ場合に限り結果のロカールは名前を持つ。
+    17 備考: 最初ふたつの引数が名前を持つ場合に限り結果のロカールは名前を持つ。
 
 ~locale() throw();
 
