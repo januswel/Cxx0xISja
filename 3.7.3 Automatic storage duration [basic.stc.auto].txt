@@ -2,13 +2,13 @@
 
 1 Local objects explicitly declared register or not explicitly declared static or extern have automatic storage duration. The storage for these objects lasts until the block in which they are created exits.
 
-1 –¾¦“I‚É register ‚ªéŒ¾‚³‚ê‚Ä‚¢‚é‚à‚µ‚­‚Í–¾¦“I‚É static ‚à‚µ‚­‚Í extern ‚ªéŒ¾‚³‚ê‚Ä‚¢‚È‚¢‹ÇŠƒIƒuƒWƒFƒNƒg‚Í { ©“®‹L‰¯ˆæŠúŠÔ } ‚ğ‚ÂB‚±‚ê‚ç‚ÌƒIƒuƒWƒFƒNƒg‚Ì‹L‰¯‚Í‚»‚ê‚ç‚ª¶¬‚³‚ê‚½ƒuƒƒbƒN‚ªI—¹‚·‚é‚Ü‚Å‚ÌŠÔ‘¶‘±‚·‚éB
+1 æ˜ç¤ºçš„ã« register ãŒå®£è¨€ã•ã‚Œã¦ã„ã‚‹ã‚‚ã—ãã¯æ˜ç¤ºçš„ã« static ã‚‚ã—ãã¯ extern ãŒå®£è¨€ã•ã‚Œã¦ã„ãªã„å±€æ‰€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ { è‡ªå‹•è¨˜æ†¶åŸŸæœŸé–“ } ã‚’æŒã¤ã€‚ã“ã‚Œã‚‰ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¨˜æ†¶ã¯ãã‚Œã‚‰ãŒç”Ÿæˆã•ã‚ŒãŸãƒ–ãƒ­ãƒƒã‚¯ãŒçµ‚äº†ã™ã‚‹ã¾ã§ã®é–“å­˜ç¶šã™ã‚‹ã€‚
 
 2 [ Note: these objects are initialized and destroyed as described in 6.7. -end note ]
 
-2 [ ’: ‚±‚ê‚ç‚ÌƒIƒuƒWƒFƒNƒg‚Í 6.7 ‚Å‹Lq‚³‚ê‚½‚æ‚¤‚É‰Šú‰»‚³‚ê”j‰ó‚³‚ê‚éB ]
+2 [ æ³¨: ã“ã‚Œã‚‰ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ 6.7 ã§è¨˜è¿°ã•ã‚ŒãŸã‚ˆã†ã«åˆæœŸåŒ–ã•ã‚Œç ´å£Šã•ã‚Œã‚‹ã€‚ ]
 
 3 If a named automatic object has initialization or a destructor with side effects, it shall not be destroyed before the end of its block, nor shall it be eliminated as an optimization even if it appears to be unused, except that a class object or its copy may be eliminated as specified in 12.8.
 
-3 –¼‘O‚Ì‚Â‚¢‚½©“®ƒIƒuƒWƒFƒNƒg‚ª‰Šú‰»‚³‚ê‚é‚à‚µ‚­‚Í•›ì—p‚ğ‚ÂƒfƒXƒgƒ‰ƒNƒ^[‚ğ‚Âê‡A 12.8 ‚Å¦‚³‚ê‚Ä‚¢‚éƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚à‚µ‚­‚Í‚»‚ÌƒRƒs[‚ğÁ‹‚µ‚Ä‚æ‚¢ê‡‚ğœ‚¢‚ÄA‚»‚ê‚Í‚»‚ÌƒuƒƒbƒN‚ÌI—¹ˆÈ‘O‚É”j‰ó‚³‚ê‚Ä‚Í‚È‚ç‚¸A‚½‚Æ‚¦g‚í‚ê‚é‚±‚Æ‚ª‚È‚­‚Æ‚àÅ“K‰»‚ÌŒ‹‰ÊÁ‹‚³‚ê‚Ä‚Í‚È‚ç‚È‚¢B
+3 åå‰ã®ã¤ã„ãŸè‡ªå‹•ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒåˆæœŸåŒ–ã•ã‚Œã‚‹ã‚‚ã—ãã¯å‰¯ä½œç”¨ã‚’æŒã¤ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ã‚’æŒã¤å ´åˆã€ 12.8 ã§ç¤ºã•ã‚Œã¦ã„ã‚‹ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚‚ã—ãã¯ãã®ã‚³ãƒ”ãƒ¼ã‚’æ¶ˆå»ã—ã¦ã‚ˆã„å ´åˆã‚’é™¤ã„ã¦ã€ãã‚Œã¯ãã®ãƒ–ãƒ­ãƒƒã‚¯ã®çµ‚äº†ä»¥å‰ã«ç ´å£Šã•ã‚Œã¦ã¯ãªã‚‰ãšã€ãŸã¨ãˆä½¿ã‚ã‚Œã‚‹ã“ã¨ãŒãªãã¨ã‚‚æœ€é©åŒ–ã®çµæœæ¶ˆå»ã•ã‚Œã¦ã¯ãªã‚‰ãªã„ã€‚
 

@@ -11,9 +11,9 @@
 
 1 The class locale::id provides identification of a locale facet interface, used as an index for lookup and to encapsulate initialization.
 
-1 �N���X locale::id �͌����p�������͏��������J�v�Z�������邽�߂̍����Ƃ��Ďg�p�����A���J�[���t�@�Z�b�g�C���^�[�t�F�C�X�̓����񋟂���B
+1 クラス locale::id は検索用もしくは初期化をカプセル化するための索引として使用される、ロカールファセットインターフェイスの同定を提供する。
 
 2 [ Note: Because facets are used by iostreams, potentially while static constructors are running, their initialization cannot depend on programmed static initialization. One initialization strategy is for locale to initialize each facet's id member the first time an instance of the facet is installed into a locale. This depends only on static storage being zero before constructors run (3.6.2). -end note ]
 
-2 [ ��: �t�@�Z�b�g�� iostream �ɂ���Ďg���邽�߁A�ÓI�ȃR���X�g���N�^�[�����s���Ă���Ԃ͐��ݓI�ɁA�����̏������̓v���O�������ꂽ�ÓI�ȏ������Ɉˑ��s�\�ł���B���鏉�����헪�̓t�@�Z�b�g�̎��̂����J�[���ɓ��������ŏ��ɂ����Ċe�X�̃t�@�Z�b�g�� id �����o�[������������ locale �̂��߂̂��̂ł���B����̓R���X�g���N�^�[������O�ɗ�ł���ÓI�L�����u�ɂ݈̂ˑ����� ( 3.6.2 ) �B ]
+2 [ 注: ファセットは iostream によって使われるため、静的なコンストラクターを実行している間は潜在的に、それらの初期化はプログラムされた静的な初期化に依存不可能である。ある初期化戦略はファセットの実体がロカールに導入される最初において各々のファセットの id メンバーを初期化する locale のためのものである。これはコンストラクターが走る前に零である静的記憶装置にのみ依存する ( 3.6.2 ) 。 ]
 

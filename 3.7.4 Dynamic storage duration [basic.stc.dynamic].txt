@@ -2,7 +2,7 @@
 
 1 Objects can be created dynamically during program execution (1.9), using new-expressions (5.3.4), and destroyed using delete-expressions (5.3.5). A C++ implementation provides access to, and management of, dynamic storage via the global allocation functions operator new and operator new[] and the global deallocation functions operator delete and operator delete[].
 
-1 ƒIƒuƒWƒFƒNƒg‚ÍƒvƒƒOƒ‰ƒ€Às ( 1.9 ) ‚É“®“I‚É { new ® } ‚ğ—p‚¢‚é‚±‚Æ‚Å ( 5.3.4 ) ¶¬‰Â”\‚Å‚ ‚èA { delete ® } ‚ğ—p‚¢‚é‚±‚Æ‚Å”j‰ó‰Â”\‚Å‚ ‚éB C++ ˆ—Œn‚Í‘åˆæ“I‚È { ƒƒ‚ƒŠŠm•ÛŠÖ” } new ‰‰Zq‚à‚µ‚­‚Í new[] ‰‰Zq‚Æ‘åˆæ“I‚È { ƒƒ‚ƒŠ‰ğ•úŠÖ” } delete ‰‰Zq‚à‚µ‚­‚Í delete[] ‰‰Zq‚ğ’Ê‚¶‚Ä“®“I‹L‰¯—Ìˆæ‚Ö‚ÌƒAƒNƒZƒXAŠÇ—‚ğ’ñ‹Ÿ‚·‚éB
+1 ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ãƒ—ãƒ­ã‚°ãƒ©ãƒ å®Ÿè¡Œæ™‚ ( 1.9 ) ã«å‹•çš„ã« { new å¼ } ã‚’ç”¨ã„ã‚‹ã“ã¨ã§ ( 5.3.4 ) ç”Ÿæˆå¯èƒ½ã§ã‚ã‚Šã€ { delete å¼ } ã‚’ç”¨ã„ã‚‹ã“ã¨ã§ç ´å£Šå¯èƒ½ã§ã‚ã‚‹ã€‚ C++ å‡¦ç†ç³»ã¯å¤§åŸŸçš„ãª { ãƒ¡ãƒ¢ãƒªç¢ºä¿é–¢æ•° } new æ¼”ç®—å­ã‚‚ã—ãã¯ new[] æ¼”ç®—å­ã¨å¤§åŸŸçš„ãª { ãƒ¡ãƒ¢ãƒªè§£æ”¾é–¢æ•° } delete æ¼”ç®—å­ã‚‚ã—ãã¯ delete[] æ¼”ç®—å­ã‚’é€šã˜ã¦å‹•çš„è¨˜æ†¶é ˜åŸŸã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã€ç®¡ç†ã‚’æä¾›ã™ã‚‹ã€‚
 
 2 The library provides default definitions for the global allocation and deallocation functions. Some global allocation and deallocation functions are replaceable (18.6.1). A C++ program shall provide at most one definition of a replaceable allocation or deallocation function. Any such function definition replaces the default version provided in the library (17.6.3.6). The following allocation and deallocation functions (18.6) are implicitly declared in global scope in each translation unit of a program.
 
@@ -13,17 +13,17 @@
 
 These implicit declarations introduce only the function names operator new, operator new[], operator delete, operator delete[]. [ Note: the implicit declarations do not introduce the names std, std::bad_alloc, and std::size_t, or any other names that the library uses to declare these names. Thus, a new-expression, delete-expression or function call that refers to one of these functions without including the header <new> is well-formed. However, referring to std, std::bad_alloc, and std::size_t is ill-formed unless the name has been declared by including the appropriate header. -end note ] Allocation and/or deallocation functions can also be declared and defined for any class (12.5).
 
-2 ƒ‰ƒCƒuƒ‰ƒŠ‚Í‘åˆæ“I‚Èƒƒ‚ƒŠŠm•ÛŠÖ”‚à‚µ‚­‚Íƒƒ‚ƒŠ‰ğ•úŠÖ”‚É‚¨‚¯‚éŠù’è‚Ì’è‹`‚ğ’ñ‹Ÿ‚·‚éB‚¢‚­‚Â‚©‚Ìƒƒ‚ƒŠŠm•ÛŠÖ”‚Æƒƒ‚ƒŠ‰ğ•úŠÖ”‚Í’u‚«Š·‚¦‰Â”\‚Å‚ ‚é ( 18.6.1 ) B C++ ƒvƒƒOƒ‰ƒ€‚ÍÅ‘å‚Å‚Ğ‚Æ‚Â‚Ì’u‚«Š·‚¦‰Â”\‚Èƒƒ‚ƒŠŠm•ÛŠÖ”‚à‚µ‚­‚Íƒƒ‚ƒŠ‰ğ•úŠÖ”‚Ì’è‹`‚ğ‹K’è‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B‚»‚Ì‚æ‚¤‚ÈŠÖ”’è‹`‚Ì‚¢‚¸‚ê‚àƒ‰ƒCƒuƒ‰ƒŠ‚É‚æ‚éŠù’è“®ì‚ğ’u‚«Š·‚¦‚é ( 17.6.3.6 ) BˆÈ‰º‚Ìƒƒ‚ƒŠŠm•Û‚à‚µ‚­‚Íƒƒ‚ƒŠ‰ğ•ú ( 18.6 ) ‚ªƒvƒƒOƒ‰ƒ€‚ÌŠeX‚Ì–|–ó’PˆÊ‚Ì‘åˆæƒXƒR[ƒv‚É‚¨‚¢‚ÄˆÃ–Ù“I‚ÉéŒ¾‚³‚ê‚Ä‚¢‚éB
+2 ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã¯å¤§åŸŸçš„ãªãƒ¡ãƒ¢ãƒªç¢ºä¿é–¢æ•°ã‚‚ã—ãã¯ãƒ¡ãƒ¢ãƒªè§£æ”¾é–¢æ•°ã«ãŠã‘ã‚‹æ—¢å®šã®å®šç¾©ã‚’æä¾›ã™ã‚‹ã€‚ã„ãã¤ã‹ã®ãƒ¡ãƒ¢ãƒªç¢ºä¿é–¢æ•°ã¨ãƒ¡ãƒ¢ãƒªè§£æ”¾é–¢æ•°ã¯ç½®ãæ›ãˆå¯èƒ½ã§ã‚ã‚‹ ( 18.6.1 ) ã€‚ C++ ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯æœ€å¤§ã§ã²ã¨ã¤ã®ç½®ãæ›ãˆå¯èƒ½ãªãƒ¡ãƒ¢ãƒªç¢ºä¿é–¢æ•°ã‚‚ã—ãã¯ãƒ¡ãƒ¢ãƒªè§£æ”¾é–¢æ•°ã®å®šç¾©ã‚’è¦å®šã—ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚ãã®ã‚ˆã†ãªé–¢æ•°å®šç¾©ã®ã„ãšã‚Œã‚‚ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã«ã‚ˆã‚‹æ—¢å®šå‹•ä½œã‚’ç½®ãæ›ãˆã‚‹ ( 17.6.3.6 ) ã€‚ä»¥ä¸‹ã®ãƒ¡ãƒ¢ãƒªç¢ºä¿ã‚‚ã—ãã¯ãƒ¡ãƒ¢ãƒªè§£æ”¾ ( 18.6 ) ãŒãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®å„ã€…ã®ç¿»è¨³å˜ä½ã®å¤§åŸŸã‚¹ã‚³ãƒ¼ãƒ—ã«ãŠã„ã¦æš—é»™çš„ã«å®£è¨€ã•ã‚Œã¦ã„ã‚‹ã€‚
 
     void* operator new(std::size_t) throw(std::bad_alloc);
     void* operator new[](std::size_t) throw(std::bad_alloc);
     void operator delete(void*) throw();
     void operator delete[](void*) throw();
 
-‚±‚ê‚ç‚ÌˆÃ–Ù“I‚ÈéŒ¾‚ÍŠÖ”–¼ operator new A operator new[] A operator delete A operator delete[] ‚Ì‚İ‚ğ“±“ü‚·‚éB
-[ ’: ˆÃ–Ù“I‚ÈéŒ¾‚Í–¼‘O std A std::bad_alloc A std::size_t ‚â‚±‚ê‚ç‚Ì–¼‘O‚ğéŒ¾‚·‚é‚½‚ß‚Éƒ‰ƒCƒuƒ‰ƒŠ‚ªg—p‚µ‚Ä‚¢‚é‘¼‚Ì‚¢‚Á‚³‚¢‚Ì–¼‘O‚ğ“±“ü‚µ‚È‚¢B]‚Á‚ÄA new ® A delete ® Aƒwƒbƒ_[ <new> ‚ğ include ‚¹‚¸‚É‚±‚ê‚ç‚ÌŠÖ”‚Ì‚¤‚¿‚Ğ‚Æ‚Â‚ğg—p‚µ‚Ä‚¢‚éŠÖ”‚ÌŒÄ‚Ño‚µ‚Í“KŠi‚Å‚ ‚éB‚µ‚©‚µA“KØ‚Èƒwƒbƒ_[‚ğ include ‚É‚æ‚Á‚Ä‚»‚Ì–¼‘O‚ªéŒ¾‚³‚ê‚Ä‚¢‚È‚¢ê‡ std A std::bad_alloc A std::size_t ‚Ö‚ÌŒ¾‹y‚Í•s“KŠi‚Æ‚È‚éB ] ƒƒ‚ƒŠŠm•ÛŠÖ”‚à‚µ‚­‚Íƒƒ‚ƒŠ‰ğ•úŠÖ”‚Í‚¢‚¸‚ê‚ÌƒNƒ‰ƒX‚É‚¨‚¢‚Ä‚à’è‹`‰Â”\‚Å‚ ‚é ( 12.5 ) B
+ã“ã‚Œã‚‰ã®æš—é»™çš„ãªå®£è¨€ã¯é–¢æ•°å operator new ã€ operator new[] ã€ operator delete ã€ operator delete[] ã®ã¿ã‚’å°å…¥ã™ã‚‹ã€‚
+[ æ³¨: æš—é»™çš„ãªå®£è¨€ã¯åå‰ std ã€ std::bad_alloc ã€ std::size_t ã‚„ã“ã‚Œã‚‰ã®åå‰ã‚’å®£è¨€ã™ã‚‹ãŸã‚ã«ãƒ©ã‚¤ãƒ–ãƒ©ãƒªãŒä½¿ç”¨ã—ã¦ã„ã‚‹ä»–ã®ã„ã£ã•ã„ã®åå‰ã‚’å°å…¥ã—ãªã„ã€‚å¾“ã£ã¦ã€ new å¼ ã€ delete å¼ ã€ãƒ˜ãƒƒãƒ€ãƒ¼ <new> ã‚’ include ã›ãšã«ã“ã‚Œã‚‰ã®é–¢æ•°ã®ã†ã¡ã²ã¨ã¤ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹é–¢æ•°ã®å‘¼ã³å‡ºã—ã¯é©æ ¼ã§ã‚ã‚‹ã€‚ã—ã‹ã—ã€é©åˆ‡ãªãƒ˜ãƒƒãƒ€ãƒ¼ã‚’ include ã«ã‚ˆã£ã¦ãã®åå‰ãŒå®£è¨€ã•ã‚Œã¦ã„ãªã„å ´åˆ std ã€ std::bad_alloc ã€ std::size_t ã¸ã®è¨€åŠã¯ä¸é©æ ¼ã¨ãªã‚‹ã€‚ ] ãƒ¡ãƒ¢ãƒªç¢ºä¿é–¢æ•°ã‚‚ã—ãã¯ãƒ¡ãƒ¢ãƒªè§£æ”¾é–¢æ•°ã¯ã„ãšã‚Œã®ã‚¯ãƒ©ã‚¹ã«ãŠã„ã¦ã‚‚å®šç¾©å¯èƒ½ã§ã‚ã‚‹ ( 12.5 ) ã€‚
 
 3 Any allocation and/or deallocation functions defined in a C++ program, including the default versions in the library, shall conform to the semantics specified in 3.7.4.1 and 3.7.4.2.
 
-3 C++ ƒvƒƒOƒ‰ƒ€‚É‚¨‚¢‚Ä’è‹`‚³‚ê‚½A‚à‚µ‚­‚Íƒ‰ƒCƒuƒ‰ƒŠ‚É‚¨‚¯‚éŠù’è“®ì‚ğ include ‚µ‚½‚¢‚¸‚ê‚Ìƒƒ‚ƒŠŠm•ÛŠÖ”‚à‚µ‚­‚Íƒƒ‚ƒŠ‰ğ•úŠÖ”‚Í 3.7.4.1 ‚Æ 3.7.4.2 ‚É‚¨‚¢‚Ä‹Lq‚³‚ê‚Ä‚¢‚éˆÓ–¡‚É]‚í‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
+3 C++ ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã«ãŠã„ã¦å®šç¾©ã•ã‚ŒãŸã€ã‚‚ã—ãã¯ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã«ãŠã‘ã‚‹æ—¢å®šå‹•ä½œã‚’ include ã—ãŸã„ãšã‚Œã®ãƒ¡ãƒ¢ãƒªç¢ºä¿é–¢æ•°ã‚‚ã—ãã¯ãƒ¡ãƒ¢ãƒªè§£æ”¾é–¢æ•°ã¯ 3.7.4.1 ã¨ 3.7.4.2 ã«ãŠã„ã¦è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹æ„å‘³ã«å¾“ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚
 

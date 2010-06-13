@@ -4,7 +4,7 @@ static locale global(const locale& loc);
 
     1 Sets the global locale to its argument.
 
-    1 ��惍�J�[�������̈����ɐݒ肷��B
+    1 大域ロカールをその引数に設定する。
 
     2 Effects: Causes future calls to the constructor locale() to return a copy of the argument. If the argument has a name, does
 
@@ -12,27 +12,27 @@ static locale global(const locale& loc);
 
     otherwise, the effect on the C locale, if any, is implementation-defined. No library function other than locale::global() shall affect the value returned by locale(). [ Note: see 22.6 for data race considerations when setlocale is invoked. -end note ]
 
-    2 ����: ���̂��Ƃ̃R���X�g���N�^�[ locale() �̌Ăяo���ɂ����Ĉ����̃R�s�[��Ԃ��悤�ɂ���B���������O�����ꍇ�A
+    2 効果: このあとのコンストラクター locale() の呼び出しにおいて引数のコピーを返すようにする。引数が名前を持つ場合、
 
         std::setlocale(LC_ALL, loc.name().c_str());
 
-    �����s����B�����łȂ��ꍇ�A C ���J�[����̌��ʂ́A��������̂Ȃ�A�����n��`�ƂȂ�B locale::global() �ȊO�̃��C�u�����֐��� locale() �ɂ���ĕԂ����l�ɍ�p���Ă͂Ȃ�Ȃ��B [ ��: setlocale ���N�����ꂽ�Ƃ��̃f�[�^���[�X�̍l���ɂ��Ă� 22.6 ���Q�Ƃ���B ]
+    を実行する。そうでない場合、 C ロカール上の効果は、もしあるのなら、処理系定義となる。 locale::global() 以外のライブラリ関数は locale() によって返される値に作用してはならない。 [ 注: setlocale が起動されたときのデータレースの考慮については 22.6 を参照せよ。 ]
 
     3 Returns: The previous value of locale().
 
-    3 �Ԃ�l: locale() �̈ȑO�̒l�B
+    3 返り値: locale() の以前の値。
 
 static const locale& classic();
 
     4 The "C" locale.
 
-    4 "C" ���J�[���B
+    4 "C" ロカール。
 
     5 Returns: A locale that implements the classic "C" locale semantics, equivalent to the value locale("C").
 
-    5 �Ԃ�l: �ÓT�I�� "C" ���J�[���̓����񋟂��郍�J�[���A locale("C") �Ɠ����l�B
+    5 返り値: 古典的な "C" ロカールの動作を提供するロカール、 locale("C") と同じ値。
 
     6 Remarks: This locale, its facets, and their member functions, do not change with time.
 
-    6 ���l: ���̃��J�[���A���̃t�@�Z�b�g�A�����Ă����̃����o�[�֐��͎����o���Ă��ύX����Ȃ��B
+    6 備考: このロカール、そのファセット、そしてそれらのメンバー関数は時が経っても変更されない。
 

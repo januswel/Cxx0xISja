@@ -4,89 +4,89 @@ locale() throw();
 
     1 Default constructor: a snapshot of the current global locale.
 
-    1 Šù’èƒRƒ“ƒXƒgƒ‰ƒNƒ^[: Œ»İ‚Ì‘åˆæƒƒJ[ƒ‹‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒgB
+    1 æ—¢å®šã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼: ç¾åœ¨ã®å¤§åŸŸãƒ­ã‚«ãƒ¼ãƒ«ã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆã€‚
 
     2 Effects: Constructs a copy of the argument last passed to locale::global(locale&), if it has been called; else, the resulting facets have virtual function semantics identical to those of locale::classic().  [ Note: This constructor is commonly used as the default value for arguments of functions that take a const locale& argument. -end note ]
 
-    2 Œø‰Ê: locale::global(locale&) ‚ğŒÄ‚Ño‚µ‚½‚±‚Æ‚ª‚ ‚éê‡AÅŒã‚É‚»‚ê‚É“n‚³‚ê‚½ˆø”‚ÌƒRƒs[‚ğ\’z‚·‚éB‚»‚¤‚Å‚È‚¢ê‡AŒ‹‰Ê‚Ìƒtƒ@ƒZƒbƒg‚Í locale::classic() ‚Ì‚»‚ê‚Æ“¯‚¶“®ì‚ğ‚·‚é‰¼‘zŠÖ”‚ğ‚ÂB [ ’: ‚±‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^[‚Í’Ê—á const locale& ˆø”‚ğæ‚éŠÖ”‚Ìˆø”‚É‚¨‚¯‚éŠù’è‚Ì’l‚Æ‚µ‚Äg—p‚³‚ê‚éB ]
+    2 åŠ¹æœ: locale::global(locale&) ã‚’å‘¼ã³å‡ºã—ãŸã“ã¨ãŒã‚ã‚‹å ´åˆã€æœ€å¾Œã«ãã‚Œã«æ¸¡ã•ã‚ŒãŸå¼•æ•°ã®ã‚³ãƒ”ãƒ¼ã‚’æ§‹ç¯‰ã™ã‚‹ã€‚ãã†ã§ãªã„å ´åˆã€çµæœã®ãƒ•ã‚¡ã‚»ãƒƒãƒˆã¯ locale::classic() ã®ãã‚Œã¨åŒã˜å‹•ä½œã‚’ã™ã‚‹ä»®æƒ³é–¢æ•°ã‚’æŒã¤ã€‚ [ æ³¨: ã“ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ã¯é€šä¾‹ const locale& å¼•æ•°ã‚’å–ã‚‹é–¢æ•°ã®å¼•æ•°ã«ãŠã‘ã‚‹æ—¢å®šã®å€¤ã¨ã—ã¦ä½¿ç”¨ã•ã‚Œã‚‹ã€‚ ]
 
 locale(const locale& other) throw();
 
     3 Effects: Constructs a locale which is a copy of other.
 
-    3 Œø‰Ê: other ‚ÌƒRƒs[‚Å‚ ‚éƒƒJ[ƒ‹‚ğ\’z‚·‚éB
+    3 åŠ¹æœ: other ã®ã‚³ãƒ”ãƒ¼ã§ã‚ã‚‹ãƒ­ã‚«ãƒ¼ãƒ«ã‚’æ§‹ç¯‰ã™ã‚‹ã€‚
 
 const locale& operator=(const locale& other) throw();
 
     4 Effects: Creates a copy of other, replacing the current value.
 
-    4 Œø‰Ê: other ‚ÌƒRƒs[‚ğì¬‚µAŒ»İ‚Ì’l‚ğ’u‚«Š·‚¦‚éB
+    4 åŠ¹æœ: other ã®ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆã—ã€ç¾åœ¨ã®å€¤ã‚’ç½®ãæ›ãˆã‚‹ã€‚
 
     5 Returns: *this
 
-    5 •Ô‚è’l: *this
+    5 è¿”ã‚Šå€¤: *this
 
 explicit locale(const char* std_name);
 
     6 Effects: Constructs a locale using standard C locale names, e.g., "POSIX". The resulting locale implements semantics defined to be associated with that name.
 
-    6 Œø‰Ê: •W€ C ƒƒJ[ƒ‹–¼A—á‚¦‚Î "POSIC" ‚Åg—p‚·‚éƒƒJ[ƒ‹‚ğ\’z‚·‚éBŒ‹‰Ê‚ÌƒƒJ[ƒ‹‚Í‚»‚Ì–¼‘O‚ÉŠÖ˜A‚µ‚Ä’è‹`‚³‚ê‚½“®ì‚ğ’ñ‹Ÿ‚·‚éB
+    6 åŠ¹æœ: æ¨™æº– C ãƒ­ã‚«ãƒ¼ãƒ«åã€ä¾‹ãˆã° "POSIC" ã§ä½¿ç”¨ã™ã‚‹ãƒ­ã‚«ãƒ¼ãƒ«ã‚’æ§‹ç¯‰ã™ã‚‹ã€‚çµæœã®ãƒ­ã‚«ãƒ¼ãƒ«ã¯ãã®åå‰ã«é–¢é€£ã—ã¦å®šç¾©ã•ã‚ŒãŸå‹•ä½œã‚’æä¾›ã™ã‚‹ã€‚
 
     7 Throws: runtime_error if the argument is not valid, or is null.
 
-    7 —áŠO: ˆø”‚ª—LŒø‚Å‚È‚¢ê‡ runtime_error ‚ğ“Š‚°‚éB‚»‚Ì‚Ù‚©‚Ìê‡‚Í“Š‚°‚È‚¢B
+    7 ä¾‹å¤–: å¼•æ•°ãŒæœ‰åŠ¹ã§ãªã„å ´åˆ runtime_error ã‚’æŠ•ã’ã‚‹ã€‚ãã®ã»ã‹ã®å ´åˆã¯æŠ•ã’ãªã„ã€‚
 
     8 Remarks: The set of valid string argument values is "C", "", and any implementation-defined values.
 
-    8 ”õl: —LŒø‚È•¶š—ñˆø”‚ÌW‡‚Í "C" A "" A ‚Æ”CˆÓ‚Ìˆ—Œn’è‹`‚Ì’l‚Å‚ ‚éB
+    8 å‚™è€ƒ: æœ‰åŠ¹ãªæ–‡å­—åˆ—å¼•æ•°ã®é›†åˆã¯ "C" ã€ "" ã€ ã¨ä»»æ„ã®å‡¦ç†ç³»å®šç¾©ã®å€¤ã§ã‚ã‚‹ã€‚
 
 explicit locale(const string& std_name);
 
     9 Effects: The same as locale(std_name.c_str()).
 
-    9 Œø‰Ê: locale(std_name.c_str()) ‚Æ“¯—lB
+    9 åŠ¹æœ: locale(std_name.c_str()) ã¨åŒæ§˜ã€‚
 
 locale(const locale& other, const char* std_name, category);
 
     10 Effects: Constructs a locale as a copy of other except for the facets identified by the category argument, which instead implement the same semantics as locale(std_name).
 
-    10 Œø‰Ê: locale(std_name) ‚Æ“¯“™‚Ì“®ì‚ğ’ñ‹Ÿ‚·‚é‘ã‚í‚è‚ÉA category ˆø”‚É‚æ‚Á‚Äw’è‚³‚ê‚½ƒtƒ@ƒZƒbƒg‚ğœ‚¢‚½ other ‚ÌƒRƒs[‚Æ‚µ‚ÄƒƒJ[ƒ‹‚ğ\’z‚·‚éB
+    10 åŠ¹æœ: locale(std_name) ã¨åŒç­‰ã®å‹•ä½œã‚’æä¾›ã™ã‚‹ä»£ã‚ã‚Šã«ã€ category å¼•æ•°ã«ã‚ˆã£ã¦æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚»ãƒƒãƒˆã‚’é™¤ã„ãŸ other ã®ã‚³ãƒ”ãƒ¼ã¨ã—ã¦ãƒ­ã‚«ãƒ¼ãƒ«ã‚’æ§‹ç¯‰ã™ã‚‹ã€‚
 
     11 Throws: runtime_error if the argument is not valid, or is null.
 
-    11 —áŠO: ˆø”‚ª—LŒø‚Å‚È‚¢ê‡ runtime_error ‚ğ“Š‚°‚éB‚»‚Ì‘¼‚Ìê‡‚Í‰½‚à“Š‚°‚È‚¢B
+    11 ä¾‹å¤–: å¼•æ•°ãŒæœ‰åŠ¹ã§ãªã„å ´åˆ runtime_error ã‚’æŠ•ã’ã‚‹ã€‚ãã®ä»–ã®å ´åˆã¯ä½•ã‚‚æŠ•ã’ãªã„ã€‚
 
     12 Remarks: The locale has a name if and only if other has a name.
 
-    12 ”õl: other ‚ª–¼‘O‚ğ‚Âê‡‚ÉŒÀ‚èƒƒJ[ƒ‹‚Í–¼‘O‚ğ‚ÂB
+    12 å‚™è€ƒ: other ãŒåå‰ã‚’æŒã¤å ´åˆã«é™ã‚Šãƒ­ã‚«ãƒ¼ãƒ«ã¯åå‰ã‚’æŒã¤ã€‚
 
 locale(const locale& other, const string& std_name, category cat);
 
-    13 Œø‰Ê: locale(other, std_name.c_str(), cat) ‚Æ“¯—lB
+    13 åŠ¹æœ: locale(other, std_name.c_str(), cat) ã¨åŒæ§˜ã€‚
 
 template <class Facet> locale(const locale& other, Facet* f);
 
     14 Effects: Constructs a locale incorporating all facets from the first argument except that of type Facet, and installs the second argument as the remaining facet. If f is null, the resulting object is a copy of other.
 
-    14 Œø‰Ê: Œ^ Facet ‚Ìƒtƒ@ƒZƒbƒg‚ğœ‚¢‚Ä‚Ğ‚Æ‚Â‚ß‚Ìˆø”‚©‚ç‚Ì‚·‚×‚Ä‚Ìƒtƒ@ƒZƒbƒg‚ğ•ïŠÜ‚·‚éƒƒJ[ƒ‹‚ğ\’z‚µAc‚è‚Ìƒtƒ@ƒZƒbƒg‚Æ‚µ‚Ä‚Ó‚½‚Â‚ß‚Ìˆø”‚ğ“±“ü‚·‚éB f ‚ª‹ó’l‚Å‚ ‚éê‡AŒ‹‰Ê‚ÌƒIƒuƒWƒFƒNƒg‚Í other ‚ÌƒRƒs[‚Æ‚È‚éB
+    14 åŠ¹æœ: å‹ Facet ã®ãƒ•ã‚¡ã‚»ãƒƒãƒˆã‚’é™¤ã„ã¦ã²ã¨ã¤ã‚ã®å¼•æ•°ã‹ã‚‰ã®ã™ã¹ã¦ã®ãƒ•ã‚¡ã‚»ãƒƒãƒˆã‚’åŒ…å«ã™ã‚‹ãƒ­ã‚«ãƒ¼ãƒ«ã‚’æ§‹ç¯‰ã—ã€æ®‹ã‚Šã®ãƒ•ã‚¡ã‚»ãƒƒãƒˆã¨ã—ã¦ãµãŸã¤ã‚ã®å¼•æ•°ã‚’å°å…¥ã™ã‚‹ã€‚ f ãŒç©ºå€¤ã§ã‚ã‚‹å ´åˆã€çµæœã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ other ã®ã‚³ãƒ”ãƒ¼ã¨ãªã‚‹ã€‚
 
     15 Remarks: The resulting locale has no name.
 
-    15 ”õl: Œ‹‰Ê‚ÌƒƒJ[ƒ‹‚Í–¼‘O‚ğ‚½‚È‚¢B
+    15 å‚™è€ƒ: çµæœã®ãƒ­ã‚«ãƒ¼ãƒ«ã¯åå‰ã‚’æŒãŸãªã„ã€‚
 
 locale(const locale& other, const locale& one, category cats);
 
     16 Effects: Constructs a locale incorporating all facets from the first argument except those that implement cats, which are instead incorporated from the second argument.
 
-    16 Œø‰Ê: ‚Ó‚½‚Â‚ß‚Ìˆø”‚©‚ç•ïŠÜ‚·‚é‘ã‚í‚è‚ÉA cats ‚ª’ñ‹Ÿ‚·‚éƒtƒ@ƒZƒbƒg‚ğœ‚­‚Ğ‚Æ‚Â‚ß‚Ìˆø”‚©‚ç‚Ì‚·‚×‚Ä‚Ìƒtƒ@ƒZƒbƒg‚ğ•ïŠÜ‚·‚éƒƒJ[ƒ‹‚ğ\’z‚·‚éB
+    16 åŠ¹æœ: ãµãŸã¤ã‚ã®å¼•æ•°ã‹ã‚‰åŒ…å«ã™ã‚‹ä»£ã‚ã‚Šã«ã€ cats ãŒæä¾›ã™ã‚‹ãƒ•ã‚¡ã‚»ãƒƒãƒˆã‚’é™¤ãã²ã¨ã¤ã‚ã®å¼•æ•°ã‹ã‚‰ã®ã™ã¹ã¦ã®ãƒ•ã‚¡ã‚»ãƒƒãƒˆã‚’åŒ…å«ã™ã‚‹ãƒ­ã‚«ãƒ¼ãƒ«ã‚’æ§‹ç¯‰ã™ã‚‹ã€‚
 
     17 Remarks: The resulting locale has a name if and only if the first two arguments have names.
 
-    17 ”õl: Å‰‚Ó‚½‚Â‚Ìˆø”‚ª–¼‘O‚ğ‚Âê‡‚ÉŒÀ‚èŒ‹‰Ê‚ÌƒƒJ[ƒ‹‚Í–¼‘O‚ğ‚ÂB
+    17 å‚™è€ƒ: æœ€åˆãµãŸã¤ã®å¼•æ•°ãŒåå‰ã‚’æŒã¤å ´åˆã«é™ã‚Šçµæœã®ãƒ­ã‚«ãƒ¼ãƒ«ã¯åå‰ã‚’æŒã¤ã€‚
 
 ~locale() throw();
 
     18 A non-virtual destructor that throws no exceptions.
 
-    18 —áŠO‚ğ“Š‚°‚È‚¢”ñ‰¼‘zƒfƒXƒgƒ‰ƒNƒ^[B
+    18 ä¾‹å¤–ã‚’æŠ•ã’ãªã„éä»®æƒ³ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ã€‚
 

@@ -2,17 +2,17 @@
 
 1 All objects which do not have dynamic storage duration, do not have thread storage duration, and are not local have static storage duration. The storage for these objects shall last for the duration of the program (3.6.2, 3.6.3).
 
-1 “®“I‹L‰¯ˆæŠúŠÔ‚ğ‚½‚¸AƒXƒŒƒbƒh‹L‰¯ˆæŠúŠÔ‚ğ‚½‚¸A‹ÇŠ“I‚Å‚È‚¢‚·‚×‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚Í { Ã“I‹L‰¯ˆæŠúŠÔ } ‚ğ‚ÂB‚±‚ê‚ç‚ÌƒIƒuƒWƒFƒNƒg‚Ì‹L‰¯‚ÍƒvƒƒOƒ‰ƒ€‚ÌŒp‘±’† ( 3.6.2 A 3.6.3 ) ‚¸‚Á‚Æ‘¶‘±‚µ‚Ä‚¢‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
+1 å‹•çš„è¨˜æ†¶åŸŸæœŸé–“ã‚’æŒãŸãšã€ã‚¹ãƒ¬ãƒƒãƒ‰è¨˜æ†¶åŸŸæœŸé–“ã‚’æŒãŸãšã€å±€æ‰€çš„ã§ãªã„ã™ã¹ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ { é™çš„è¨˜æ†¶åŸŸæœŸé–“ } ã‚’æŒã¤ã€‚ã“ã‚Œã‚‰ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¨˜æ†¶ã¯ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ç¶™ç¶šä¸­ ( 3.6.2 ã€ 3.6.3 ) ãšã£ã¨å­˜ç¶šã—ã¦ã„ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚
 
 2 If an object of static storage duration has initialization or a destructor with side effects, it shall not be eliminated even if it appears to be unused, except that a class object or its copy may be eliminated as specified in 12.8.
 
-2 Ã“I‹L‰¯ˆæŠúŠÔ‚ÌƒIƒuƒWƒFƒNƒg‚ª‰Šú‰»‚³‚ê‚é‚à‚µ‚­‚Í•›ì—p‚ğ‚ÂƒfƒXƒgƒ‰ƒNƒ^[‚ğ‚Âê‡A‚½‚Æ‚¦g‚í‚ê‚é‚±‚Æ‚ª‚È‚­‚Æ‚àA12.8 ‚Å¦‚³‚ê‚Ä‚¢‚éƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚à‚µ‚­‚Í‚»‚ÌƒRƒs[‚ªÁ‹‚³‚ê‚Ä‚æ‚¢ê‡‚ğœ‚¢‚ÄA‚»‚ê‚ÍÁ‹‚³‚ê‚Ä‚Í‚È‚ç‚È‚¢B
+2 é™çš„è¨˜æ†¶åŸŸæœŸé–“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒåˆæœŸåŒ–ã•ã‚Œã‚‹ã‚‚ã—ãã¯å‰¯ä½œç”¨ã‚’æŒã¤ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ã‚’æŒã¤å ´åˆã€ãŸã¨ãˆä½¿ã‚ã‚Œã‚‹ã“ã¨ãŒãªãã¨ã‚‚ã€12.8 ã§ç¤ºã•ã‚Œã¦ã„ã‚‹ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚‚ã—ãã¯ãã®ã‚³ãƒ”ãƒ¼ãŒæ¶ˆå»ã•ã‚Œã¦ã‚ˆã„å ´åˆã‚’é™¤ã„ã¦ã€ãã‚Œã¯æ¶ˆå»ã•ã‚Œã¦ã¯ãªã‚‰ãªã„ã€‚
 
 3 The keyword static can be used to declare a local variable with static storage duration. [ Note: 6.7 describes the initialization of local static variables; 3.6.3 describes the destruction of local static variables. -end note ]
 
-3 static ‚Æ‚¢‚¤Œê‚ğÃ“I‹L‰¯ˆæŠúŠÔ‚ğ‚Â‹ÇŠ•Ï”‚ğéŒ¾‚·‚é‚½‚ß‚Ég‚Á‚Ä‚æ‚¢B [ ’: 6.7 ‚É‚¨‚¢‚Ä‹ÇŠÃ“I•Ï”‚Ì‰Šú‰»‚É‚Â‚¢‚ÄA 3.6.3 ‚É‚¨‚¢‚Ä‹ÇŠÃ“I•Ï”‚Ì”j‰ó‚É‚Â‚¢‚Ä‹Lq‚µ‚Ä‚¢‚éB ]
+3 static ã¨ã„ã†èªã‚’é™çš„è¨˜æ†¶åŸŸæœŸé–“ã‚’æŒã¤å±€æ‰€å¤‰æ•°ã‚’å®£è¨€ã™ã‚‹ãŸã‚ã«ä½¿ã£ã¦ã‚ˆã„ã€‚ [ æ³¨: 6.7 ã«ãŠã„ã¦å±€æ‰€é™çš„å¤‰æ•°ã®åˆæœŸåŒ–ã«ã¤ã„ã¦ã€ 3.6.3 ã«ãŠã„ã¦å±€æ‰€é™çš„å¤‰æ•°ã®ç ´å£Šã«ã¤ã„ã¦è¨˜è¿°ã—ã¦ã„ã‚‹ã€‚ ]
 
 4 The keyword static applied to a class data member in a class definition gives the data member static storage duration.
 
-4 ƒNƒ‰ƒX’è‹`‚É‚¨‚¢‚ÄƒNƒ‰ƒXƒf[ƒ^ƒƒ“ƒo[‚É‘Î‚µ‚Ä“K—p‚³‚ê‚½ static ‚Æ‚¢‚¤Œê‚Í‚»‚Ìƒf[ƒ^ƒƒ“ƒo[‚ÉÃ“I‹L‰¯ˆæŠúŠÔ‚ğ—^‚¦‚éB
+4 ã‚¯ãƒ©ã‚¹å®šç¾©ã«ãŠã„ã¦ã‚¯ãƒ©ã‚¹ãƒ‡ãƒ¼ã‚¿ãƒ¡ãƒ³ãƒãƒ¼ã«å¯¾ã—ã¦é©ç”¨ã•ã‚ŒãŸ static ã¨ã„ã†èªã¯ãã®ãƒ‡ãƒ¼ã‚¿ãƒ¡ãƒ³ãƒãƒ¼ã«é™çš„è¨˜æ†¶åŸŸæœŸé–“ã‚’ä¸ãˆã‚‹ã€‚
 

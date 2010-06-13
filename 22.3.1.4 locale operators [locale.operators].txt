@@ -4,13 +4,13 @@ bool operator==(const locale& other) const;
 
     1 Returns: true if both arguments are the same locale, or one is a copy of the other, or each has a name and the names are identical; false otherwise.
 
-    1 •Ô‚è’l: —¼•û‚Ìˆø”‚ª“¯‚¶ƒƒJ[ƒ‹‚Å‚ ‚éAˆê•û‚ª‘¼•û‚ÌƒRƒs[‚Å‚ ‚éAŠeX‚ª–¼‘O‚ğ‚¿‚»‚ê‚ç‚ªˆê’v‚·‚éê‡A^B‚»‚¤‚Å‚È‚¢ê‡A‹UB
+    1 è¿”ã‚Šå€¤: ä¸¡æ–¹ã®å¼•æ•°ãŒåŒã˜ãƒ­ã‚«ãƒ¼ãƒ«ã§ã‚ã‚‹ã€ä¸€æ–¹ãŒä»–æ–¹ã®ã‚³ãƒ”ãƒ¼ã§ã‚ã‚‹ã€å„ã€…ãŒåå‰ã‚’æŒã¡ãã‚Œã‚‰ãŒä¸€è‡´ã™ã‚‹å ´åˆã€çœŸã€‚ãã†ã§ãªã„å ´åˆã€å½ã€‚
 
 bool operator!=(const locale& other) const;
 
     2 Returns: The result of the expression: !(*this == other).
 
-    2 •Ô‚è’l: ® !(*this == other) ‚ÌŒ‹‰ÊB
+    2 è¿”ã‚Šå€¤: å¼ !(*this == other) ã®çµæœã€‚
 
 template <class charT, class Traits, class Allocator>
     bool operator()(const basic_string<charT,Traits,Allocator>& s1,
@@ -18,15 +18,15 @@ template <class charT, class Traits, class Allocator>
 
     3 Effects: Compares two strings according to the collate<charT> facet.
 
-    3 Œø‰Ê: collate<charT> ƒtƒ@ƒZƒbƒg‚É]‚Á‚Ä‚Ó‚½‚Â‚Ì•¶š—ñ‚ğ”äŠr‚·‚éB
+    3 åŠ¹æœ: collate<charT> ãƒ•ã‚¡ã‚»ãƒƒãƒˆã«å¾“ã£ã¦ãµãŸã¤ã®æ–‡å­—åˆ—ã‚’æ¯”è¼ƒã™ã‚‹ã€‚
 
     4 Remarks: This member operator template (and therefore locale itself) satisfies requirements for a comparator predicate template argument (Clause 25) applied to strings.
 
-    4 ”õl: ‚±‚Ìƒƒ“ƒo[‰‰Zqƒeƒ“ƒvƒŒ[ƒg ( ]‚Á‚Ä locale ‚»‚Ì‚à‚Ì ) ‚Í•¶š—ñ‚É“K—p‚³‚ê‚é”äŠrqŒêƒeƒ“ƒvƒŒ[ƒgˆø” ( 25 ğ ) ‚Ì•K—vğŒ‚ğ–‚½‚·B
+    4 å‚™è€ƒ: ã“ã®ãƒ¡ãƒ³ãƒãƒ¼æ¼”ç®—å­ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ ( å¾“ã£ã¦ locale ãã®ã‚‚ã® ) ã¯æ–‡å­—åˆ—ã«é©ç”¨ã•ã‚Œã‚‹æ¯”è¼ƒè¿°èªãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå¼•æ•° ( 25 æ¡ ) ã®å¿…è¦æ¡ä»¶ã‚’æº€ãŸã™ã€‚
 
     5 Returns: The result of the following expression:
 
-    5 •Ô‚è’l: ˆÈ‰º‚Ì®‚ÌŒ‹‰ÊB
+    5 è¿”ã‚Šå€¤: ä»¥ä¸‹ã®å¼ã®çµæœã€‚
 
         use_facet< collate<charT> >(*this).compare
             (s1.data(), s1.data()+s1.size(), s2.data(), s2.data()+s2.size()) < 0;
@@ -37,7 +37,7 @@ template <class charT, class Traits, class Allocator>
 
     -end example ]
 
-    6 [ —á: ( 25.4.1, 23.3.6 ) ‚É‚æ‚è•¶š—ñ vector v ‚ÍƒƒJ[ƒ‹ loc ‚É‚¨‚¯‚é”äŠr‹K‘¥‚É]‚Á‚ÄŠÈ’P‚É”äŠr‰Â”\‚Å‚ ‚éB:
+    6 [ ä¾‹: ( 25.4.1, 23.3.6 ) ã«ã‚ˆã‚Šæ–‡å­—åˆ— vector v ã¯ãƒ­ã‚«ãƒ¼ãƒ« loc ã«ãŠã‘ã‚‹æ¯”è¼ƒè¦å‰‡ã«å¾“ã£ã¦ç°¡å˜ã«æ¯”è¼ƒå¯èƒ½ã§ã‚ã‚‹ã€‚:
 
         std::sort(v.begin(), v.end(), loc);
 
