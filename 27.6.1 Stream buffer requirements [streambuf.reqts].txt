@@ -1,0 +1,44 @@
+27.6.1 Stream buffer requirements [streambuf.reqts]
+
+1 Stream buffers can impose various constraints on the sequences they control. Some constraints are:
+
+- The controlled input sequence can be not readable.
+- The controlled output sequence can be not writable.
+- The controlled sequences can be associated with the contents of other representations for character sequences, such as external files.
+- The controlled sequences can support operations directly to or from associated sequences.
+- The controlled sequences can impose limitations on how the program can read characters from a sequence, write characters to a sequence, put characters back into an input sequence, or alter the stream position.
+
+1 ストリームバッファーは制御するシーケンスに対して様々な制約を課すことがある。制約を以下に示す。
+
+- 制御対象の入力シーケンスは読み込めないことがある。
+- 制御対象の出力シーケンスは書き込めないことがある。
+- 制御対象のシーケンスは文字シーケンスに関するその他の表現の内容、例えば外部ファイルなどに関連づけられることがある。
+- 制御対象のシーケンスは関連づけられたシーケンスに対して直接的な操作を行うことがある。
+- 制御対象のシーケンスはプログラムがシーケンスから文字を読み込む方法、シーケンスへ文字を書き出す方法、入力シーケンスに文字を戻す方法、そしてストリームの位置を変更する方法に制限を課すことがある。
+
+2 Each sequence is characterized by three pointers which, if non-null, all point into the same charT array object. The array object represents, at any moment, a (sub)sequence of characters from the sequence.  Operations performed on a sequence alter the values stored in these pointers, perform reads and writes directly to or from associated sequences, and alter "the stream position" and conversion state as needed to maintain this subsequence relationship. The three pointers are:
+
+- the beginning pointer, or lowest element address in the array (called xbeg here);
+- the next pointer, or next element address that is a current candidate for reading or writing (called xnext here);
+- the end pointer, or first element address beyond the end of the array (called xend here).
+
+2 各々のシーケンスは ( 非空値であるならば ) すべて同じ charT 配列オブジェクトを指す三つのポインターによって特徴付けられる。その配列オブジェクトはいかなるときでもシーケンスからの文字の ( 部分 ) シーケンスを表わす。シーケンスに対して行われる操作とはこれらのポインターが指す値を変更し、関連づけられたシーケンスに直接読み込みと書き込みを行い、この部分シーケンスとの関係を保つために必要ならば「ストリーム位置」と変換状態を変更することである。 3 つのポインターを以下に示す。
+
+- 始点ポインター、つまり配列の最下位要素アドレス ( ここでは xbeg と呼ぶ )
+- 次点ポインター、つまり読み書きにおける現在の対象の次の要素のアドレス ( ここでは xnext と呼ぶ )
+- 終点ポインター、つまり配列の最後を越えた最初の要素のアドレス ( ここでは xend と呼ぶ )
+
+3 The following semantic constraints shall always apply for any set of three pointers for a sequence, using the pointer names given immediately above:
+
+- If xnext is not a null pointer, then xbeg and xend shall also be non-null pointers into the same charT array, as described above; otherwise, xbeg and xend shall also be null.
+- If xnext is not a null pointer and xnext < xend for an output sequence, then a write position is available. In this case, *xnext shall be assignable as the next element to write (to put, or to store a character value, into the sequence).
+- If xnext is not a null pointer and xbeg < xnext for an input sequence, then a putback position is available. In this case, xnext[-1] shall have a defined value and is the next (preceding) element to store a character that is put back into the input sequence.
+- If xnext is not a null pointer and xnext < xend for an input sequence, then a read position is available.  In this case, *xnext shall have a defined value and is the next element to read (to get, or to obtain a character value, from the sequence).
+
+3 以下の意味的な制約はシーケンスに関する 3 つのポインターのどの集合に対しても常に満たされていなければならない。ポインターの名前は直上で定義したものを使っている。
+
+- xnext が空値ポインターでない場合、 xbeg と xend も上記で示した同一の charT 配列上の非空値ポインターでなければならない。そうでない場合、 xbeg と xend も空値でなければならない。
+- 出力シーケンスにおいて xnext が空値ポインターではなく xnext < xend が真である場合、 { 書き込み位置 } は利用可能である。この場合、次の要素を書き込む ( 文字値をシーケンスに加える、もしくは格納する ) ために *xnext は代入可能でなければならない。
+- 入力シーケンスにおいて xnext が空値ポインターではなく xbeg < xnext が真である場合、 { 戻し位置 } は利用可能である。この場合、 xnext[-1] は定義済みの値を持っていなければならず入力シーケンスに戻される文字を格納する次の ( 先行する ) 要素である。
+- 入力シーケンスにおいて xnext が空値ポインターではなく xnext < xend が真である場合、 { 読み込み位置 } は利用可能である。この場合、 *xnext は定義された値を持っていなければならず読み込む ( 文字値をシーケンスから受け取る、もしくは取得する ) 次の要素である。
+

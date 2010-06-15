@@ -1,0 +1,122 @@
+27.7.1.2.3 basic_istream::operator>> [istream::extractors]
+
+basic_istream<charT,traits>& operator>>
+  (basic_istream<charT,traits>& (*pf)(basic_istream<charT,traits>&))
+
+    1 Effects: None. This extractor does not behave as a formatted input function (as described in 27.7.1.2.1.)
+
+    1 効果: 何もしない。この抽出子は整形あり入力関数 ( 27.7.1.2.1 で記述されている。 ) として振る舞わない。
+
+    2 Returns: pf(*this).321
+
+    321) See, for example, the function signature ws(basic_istream&) (27.7.1.4).
+
+    2 戻り値: pf(*this) を返す 321 。
+
+    321) 例えば ws(basic_istream&) ( 27.7.1.4 ) の関数シグネチャを参照せよ。
+
+basic_istream<charT,traits>& operator>>
+  (basic_ios<charT,traits>& (*pf)(basic_ios<charT,traits>&));
+
+    3 Effects: Calls pf(*this). This extractor does not behave as a formatted input function (as described in 27.7.1.2.1).
+
+    3 効果: pf(*this) を呼び出す。 この抽出子は整形あり入力関数と ( 27.7.1.2.1 で記述されている ) して振る舞わない。
+
+    4 Returns: *this.
+
+    4 戻り値: *this を返す。
+
+basic_istream<charT,traits>& operator>>
+  (ios_base& (*pf)(ios_base&));
+
+    5 Effects: Calls pf(*this).322 This extractor does not behave as a formatted input function (as described in 27.7.1.2.1).
+
+    322) See, for example, the function signature dec(ios_base&) (27.5.5.3).
+
+    5 効果: pf(*this) を呼び出す 322 。この抽出子は整形あり入力関数と ( 27.7.1.2.1 で記述されている ) して振る舞わない。
+
+    322) 例えば dec(ios_base&) ( 27.5.5.3 ) の関数シグネチャを参照せよ。
+
+    6 Returns: *this.
+
+    6 戻り値: *this を返す。
+
+template<class charT, class traits>
+  basic_istream<charT,traits>& operator>>(basic_istream<charT,traits>& in,
+                                          charT* s);
+template<class traits>
+  basic_istream<char,traits>& operator>>(basic_istream<char,traits>& in,
+                                         unsigned char* s);
+template<class traits>
+  basic_istream<char,traits>& operator>>(basic_istream<char,traits>& in,
+                                         signed char* s);
+
+    7 Effects: Behaves like a formatted input member (as described in 27.7.1.2.1) of in. After a sentry object is constructed, operator>> extracts characters and stores them into successive locations of an array whose first element is designated by s. If width() is greater than zero, n is width(). Otherwise n is the the number of elements of the largest array of char_type that can store a terminating charT().  n is the maximum number of characters stored.
+
+    7 効果: in の整形あり入力メンバー ( 27.7.1.2.1 で記述されている ) であるように振る舞う。 sentry オブジェクトが構築されたあと、 operator>> が文字を抽出し最初の要素が s によって指定される配列の連続する位置に格納する。 width() が 0 より大きい場合、 n は width() となる。そうでない場合、 n は終端の charT() を格納できる char_type の最も大きい配列の要素の数となる。 n は格納される最大文字数である。
+
+    8 Characters are extracted and stored until any of the following occurs:
+
+        - n-1 characters are stored;
+        - end of file occurs on the input sequence;
+        - ct.is(ct.space,c) is true for the next available input character c, where ct is use_facet<ctype< charT> >(in.getloc()).
+
+    8 以下のいずれかが起こるまで文字を抽出し格納する。
+
+        - n-1 個の文字を格納した。
+        - 入力シーケンスにおいて end of file が発生した。
+        - ct が use_facet<ctype< charT> >(in.getloc()) であるとき、次に利用可能な入力文字 c に対して ct.is(ct.space,c) が真となった。
+
+    9 operator>> then stores a null byte (charT()) in the next position, which may be the first position if no characters were extracted. operator>> then calls width(0).
+
+    9 それから operator>> ははじめて文字が抽出されなかった位置でもあるかもしれない次の位置に空値バイト ( charT() ) を格納する。その後 operator>> は width(0) を呼び出す。
+
+    10 If the function extracted no characters, it calls setstate(failbit), which may throw ios_base::failure (27.5.4.3).
+
+    10 関数が文字を抽出しなかった場合、 ios_base::failure ( 27.5.4.3 ) を投げる可能性のある setstate(failbit) を呼び出す。
+
+    11 Returns: in.
+
+    11 戻り値: in を返す。
+
+template<class charT, class traits>
+  basic_istream<charT,traits>& operator>>(basic_istream<charT,traits>& in,
+                                          charT& c);
+template<class traits>
+  basic_istream<char,traits>& operator>>(basic_istream<char,traits>& in,
+                                         unsigned char& c);
+template<class traits>
+  basic_istream<char,traits>& operator>>(basic_istream<char,traits>& in,
+                                         signed char& c);
+
+    12 Effects: Behaves like a formatted input member (as described in 27.7.1.2.1) of in. After a sentry object is constructed a character is extracted from in, if one is available, and stored in c. Otherwise, the function calls in.setstate(failbit).
+
+    12 効果: in の整形あり入力メンバー ( 27.7.1.2.1 で記述されている ) であるように振る舞う。 sentry オブジェクトが構築されたあと in から一文字抽出され、それが利用可能である場合、 c に格納される。そうでない場合、関数は in.setstate(failbit) を呼び出す。
+
+    13 Returns: in.
+
+    13 戻り値: in を返す。
+
+basic_istream<charT,traits>& operator>>
+  (basic_streambuf<charT,traits>* sb);
+
+    14 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). If sb is null, calls setstate(failbit), which may throw ios_base::failure (27.5.4.3). After a sentry object is constructed, extracts characters from *this and inserts them in the output sequence controlled by sb.  Characters are extracted and inserted until any of the following occurs:
+
+        - end-of-file occurs on the input sequence;
+        - inserting in the output sequence fails (in which case the character to be inserted is not extracted);
+        - an exception occurs (in which case the exception is caught).
+
+    14 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sb が空値である場合、 ios_base::failure ( 27.5.4.3 ) を呼び出す可能性のある setstate(failbit) を呼び出す。 sentry オブジェクトが構築されたあとで、 *this から文字を抽出し sb によって制御されている出力シーケンスに挿入する。以下のいずれかが起こるまで文字を抽出し挿入する。
+
+        - 入力シーケンスにおいて end-of-file が発生した。
+        - 出力シーケンスへの挿入が失敗した ( 挿入される文字が抽出されなかった場合 ) 。
+        - 例外が発生した ( 例外を捉えた場合 ) 。
+
+    15 If the function inserts no characters, it calls setstate(failbit), which may throw ios_base::failure (27.5.4.3).  If it inserted no characters because it caught an exception thrown while extracting characters from *this and failbit is on in exceptions() (27.5.4.3), then the caught exception is rethrown.
+
+    15 関数が何も文字を挿入しなかった場合、 ios_base::failure ( 27.5.4.3 ) を投げる可能性のある setstate(failbit) を呼び出す。 *this からの文字の抽出中に投げられた例外を捉え、 failbit が exceptions() ( 27.5.4.3 ) で設定されたため何も文字を挿入しなかった場合、捉えた例外を再度投げる。
+
+    16 Returns: *this.
+
+    16 戻り値: *this を返す。
+

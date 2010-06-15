@@ -1,0 +1,22 @@
+27.6.2.2.1 Locales [streambuf.locales]
+
+locale pubimbue(const locale& loc);
+
+    1 Postcondition: loc == getloc().
+
+    1 呼び出し後の状態: loc == getloc().
+
+    2 Effects: Calls imbue(loc).
+
+    2 効果: imbue(loc) を呼び出す。
+
+    3 Returns: Previous value of getloc().
+
+    3 戻り値: getloc() の以前の値を返す。
+
+locale getloc() const;
+
+    4 Returns: If pubimbue() has ever been called, then the last value of loc supplied, otherwise the current global locale, locale(), in effect at the time of construction. If called after pubimbue() has been called but before pubimbue has returned (i.e., from within the call of imbue()) then it returns the previous value.
+
+    4 戻り値: pubimbue() が一度でも呼ばれた場合、最後に与えられた loc の値を返す。そうでない場合、現在の大域ロカール locale() であり実質構築時の値。 pubimbue() が呼ばれ、かつ pubimbue から返る前に呼ばれた場合 ( 例えば imbue() の中で呼ぶ ) 、以前の値を返す。
+

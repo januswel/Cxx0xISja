@@ -1,0 +1,58 @@
+27.6.2.4.5 Put area [streambuf.virt.put]
+
+streamsize xsputn(const char_type* s, streamsize n);
+
+    1 Effects: Writes up to n characters to the output sequence as if by repeated calls to sputc(c). The characters written are obtained from successive elements of the array whose first element is designated by s. Writing stops when either n characters have been written or a call to sputc(c) would return traits::eof(). Is is unspecified whether the function calls overflow() when pptr() == epptr() becomes true or whether it achieves the same effects by other means.
+
+    1 効果: sputc(c) を繰り返し呼び出したかのように n 個以下の文字を出力シーケンスに書き込む。書き込まれた文字は最初の要素が s によって指定される配列の連続した要素から取得される。書き込みは n 文字が書き込まれるか sputc(c) の呼び出しが traits::eof() を返した場合に停止する。 pptr() == epptr() が真であるときに関数が overflow() を呼ぶか他の方法によって同じ効果を得るかは明示されない。
+
+    2 Returns: The number of characters written.
+
+    2 戻り値: 書き込まれた文字数を返す。
+
+int_type overflow(int_type c = traits::eof());
+
+    3 Effects: Consumes some initial subsequence of the characters of the pending sequence. The pending sequence is defined as the concatenation of
+
+        a) if pbase() is NULL then the empty sequence otherwise, pptr() - pbase() characters beginning at pbase().
+        b) if traits::eq_int_type(c,traits::eof()) returns true, then the empty sequence otherwise, the sequence consisting of c.
+
+    3 効果: 保留シーケンスの文字の最初の部分シーケンスを消費する。保留シーケンスは以下の連結として定義される。
+
+        a) pbase() が NULL である場合、空のシーケンス。そうでない場合、 pbase() から始まる pptr() - pbase() 個の文字。
+        b) traits::eq_int_type(c,traits::eof()) が真を返す場合、空のシーケンス。そうでない場合、 c から成るシーケンス。
+
+    4 Remarks: The member functions sputc() and sputn() call this function in case that no room can be found in the put buffer enough to accomodate the argument character sequence.
+
+    4 備考: 引数の文字シーケンスを受け入れる十分なバッファ空間が見つからない場合、メンバー関数 sputc() と sputn() がこの関数を呼ぶ。
+
+    5 Requires: Every overriding definition of this virtual function shall obey the following constraints:
+
+        1) The effect of consuming a character on the associated output sequence is specified316
+        2) Let r be the number of characters in the pending sequence not consumed. If r is non-zero then pbase() and pptr() shall be set so that: pptr() - pbase() == r and the r characters starting at pbase() are the associated output stream. In case r is zero (all characters of the pending sequence have been consumed) then either pbase() is set to NULL, or pbase() and pptr() are both set to the same NULL non-value.
+        3) The function may fail if either appending some character to the associated output stream fails or if it is unable to establish pbase() and pptr() according to the above rules.
+
+        316) That is, for each class derived from an instance of basic_streambuf in this Clause (27.8.1, 27.9.1.1), a specification of how consuming a character effects the associated output sequence is given. There is no requirement on a program-defined class.
+
+    5 要求: この仮想関数をオーバーライドするすべての定義は以下の制約に従わなければならない。
+
+        1) 関連する出力シーケンスにおける文字の消費による効果が明示されている 316 。
+        2) r を保留シーケンスの消費されていない文字数にする。
+        r が非零の場合、 pbase() と pptr() はそのように設定されなければならない。つまり pptr() - pbase() == r であり pbase() から始まる r 個の文字が出力シーケンスに関連づけられる。 r が零の場合 ( 保留シーケンスのすべての文字が消費されている ) 、 pbase() が NULL 値に設定されるかもしくは pbase() と pptr() がともに同一の NULL 値に設定される。
+        3) 関連する出力シーケンスへの文字の追加が失敗するか上記の規則に従って pbase() と pptr() を設定することが不可能である場合関数は失敗してよい。
+
+        316) つまり、この節 ( 27.8.1, 27.9.1.1 ) の basic_streambuf の実体の各々の派生クラスにおいて、関連する出力シーケンスに効果を及ぼす文字を消費する方法の特殊化が与えられている。プログラムで定義するクラスに要求はない。
+
+    6 Returns: traits::eof() or throws an exception if the function fails.  Otherwise, returns some value other than traits::eof() to indicate success.317
+
+    317) Typically, overflow returns c to indicate success, except when traits::eq_int_type(c,traits::eof()) returns true, in which case it returns traits::not_eof(c).
+
+    6 戻り値: この関数が失敗したとき traits::eof() を返すかもしくは例外を投げる。
+    そうでない場合、成功を示すために traits::eof() 以外の値を返す 317 。
+
+    317) traits::eq_int_type(c,traits::eof()) が真を返すとき traits::not_eof(c) を返す場合を除いて一般的に、成功を示すために overflow は c を返す。
+
+    7 Default behavior: Returns traits::eof().
+
+    7 デフォルトの挙動: traits::eof() を返す。
+

@@ -1,0 +1,28 @@
+27.7.1.1.1 basic_istream constructors [istream.cons]
+
+explicit basic_istream(basic_streambuf<charT,traits>* sb);
+
+    1 Effects: Constructs an object of class basic_istream, assigning initial values to the base class by calling basic_ios::init(sb) (27.5.4.1).
+
+    1 効果: basic_istream クラスのオブジェクトを構築し、 basic_ios::init(sb) ( 27.5.4.1 ) を呼ぶことで基底クラスに初期値を代入する。
+
+    2 Postcondition: gcount() == 0
+
+    2 呼び出し後の状態: gcount() == 0
+
+basic_istream(basic_istream&& rhs);
+
+    3 Effects: Move constructs from the rvalue rhs. This is accomplished by default constructing the base class, copying the gcount() from rhs, calling basic_ios<charT, traits>::move(rhs) to initialize the base class, and setting the gcount() for rhs to 0.
+
+    3 効果: 右辺値 rhs を元に移動構築する。これは基底クラスのデフォルトコンストラクターを呼び出し、 rhs の gcount() をコピーし、基底クラスを初期化するために basic_ios<charT, traits>::move(rhs) を呼び出し、 rhs の gcount() を 0 に設定することで行われる。
+
+virtual ~basic_istream();
+
+    4 Effects: Destroys an object of class basic_istream.
+
+    4 効果: basic_istream クラスのオブジェクトを破壊する。
+
+    5 Remarks: Does not perform any operations of rdbuf().
+
+    5 備考: rdbuf() への操作は何も行われない。
+

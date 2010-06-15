@@ -1,0 +1,14 @@
+27.6.2.2.4 Putback [streambuf.pub.pback]
+
+int_type sputbackc(char_type c);
+
+    1 Returns: If the input sequence putback position is not available, or if traits::eq(c,gptr()[-1]) is false, returns pbackfail(traits::to_int_type(c)). Otherwise, decrements the next pointer for the input sequence and returns traits::to_int_type(*gptr()).
+
+    1 戻り値: 入力シーケンスの戻し位置が利用可能でない場合、もしくは traits::eq(c,gptr()[-1]) が偽の場合、 pbackfail(traits::to_int_type(c)) を呼び出しその結果を返す。そうでない場合、入力シーケンスに対する次点ポインターをひとつ戻し traits::to_int_type(*gptr()) を呼び出しその結果を返す。
+
+int_type sungetc();
+
+    2 Returns: If the input sequence putback position is not available, returns pbackfail(). Otherwise, decrements the next pointer for the input sequence and returns traits::to_int_type(*gptr()).
+
+    2 戻り値: 入力シーケンスの戻り位置が利用可能でない場合、 pbackfail() を呼び出しその結果を返す。そうでない場合、入力シーケンスに対する次点ポインターをひとつ戻し traits::to_int_type(*gptr()) を呼び出しその結果を返す。
+

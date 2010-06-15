@@ -1,0 +1,129 @@
+27.7.1.1 Class template basic_istream [istream]
+
+namespace std {
+  template <class charT, class traits = char_traits<charT> >
+  class basic_istream : virtual public basic_ios<charT,traits> {
+  public:
+    // types (inherited from basic_ios (27.5.4)):
+    typedef charT char_type;
+    typedef typename traits::int_type int_type;
+    typedef typename traits::pos_type pos_type;
+    typedef typename traits::off_type off_type;
+    typedef traits traits_type;
+
+    // 27.7.1.1.1 Constructor/destructor:
+    explicit basic_istream(basic_streambuf<charT,traits>* sb);
+    <del>basic_istream(basic_istream&& rhs);</del>
+    virtual ~basic_istream();
+
+    // <del>27.7.1.1.2 Assign/swap:</del>
+    <del>basic_istream& operator=(basic_istream&& rhs);</del>
+    <del>void swap(basic_istream& rhs);</del>
+
+    // 27.7.1.1.3 Prefix/suffix:
+    class sentry;
+
+    // 27.7.1.2 Formatted input:
+    basic_istream<charT,traits>& operator>>(
+      basic_istream<charT,traits>& (*pf)(basic_istream<charT,traits>&));
+    basic_istream<charT,traits>& operator>>(
+                        basic_ios<charT,traits>& (*pf)(basic_ios<charT,traits>&));
+    basic_istream<charT,traits>& operator>>(
+      ios_base& (*pf)(ios_base&));
+
+    basic_istream<charT,traits>& operator>>(bool& n);
+    basic_istream<charT,traits>& operator>>(short& n);
+    basic_istream<charT,traits>& operator>>(unsigned short& n);
+    basic_istream<charT,traits>& operator>>(int& n);
+    basic_istream<charT,traits>& operator>>(unsigned int& n);
+    basic_istream<charT,traits>& operator>>(long& n);
+    basic_istream<charT,traits>& operator>>(unsigned long& n);
+    basic_istream<charT,traits>& operator>>(long long& n);
+    basic_istream<charT,traits>& operator>>(unsigned long long& n);
+    basic_istream<charT,traits>& operator>>(float& f);
+    basic_istream<charT,traits>& operator>>(double& f);
+    basic_istream<charT,traits>& operator>>(long double& f);
+
+    basic_istream<charT,traits>& operator>>(void*& p);
+    basic_istream<charT,traits>& operator>>(
+      basic_streambuf<char_type,traits>* sb);
+
+    // 27.7.1.3 Unformatted input:
+    streamsize gcount() const;
+    int_type get();
+    basic_istream<charT,traits>& get(char_type& c);
+    basic_istream<charT,traits>& get(char_type* s, streamsize n);
+    basic_istream<charT,traits>& get(char_type* s, streamsize n,
+                                     char_type delim);
+    basic_istream<charT,traits>& get(basic_streambuf<char_type,traits>& sb);
+    basic_istream<charT,traits>& get(basic_streambuf<char_type,traits>& sb,
+                                     char_type delim);
+
+    basic_istream<charT,traits>& getline(char_type* s, streamsize n);
+    basic_istream<charT,traits>& getline(char_type* s, streamsize n,
+                                         char_type delim);
+
+    basic_istream<charT,traits>& ignore(
+      streamsize n = 1, int_type delim = traits::eof());
+    int_type                     peek();
+    basic_istream<charT,traits>& read    (char_type* s, streamsize n);
+    streamsize                   readsome(char_type* s, streamsize n);
+
+    basic_istream<charT,traits>& putback(char_type c);
+    basic_istream<charT,traits>& unget();
+    int sync();
+
+    pos_type tellg();
+    basic_istream<charT,traits>& seekg(pos_type);
+    basic_istream<charT,traits>& seekg(off_type, ios_base::seekdir);
+
+  protected:
+    basic_istream(basic_istream&& rhs);
+
+    // 27.7.1.1.2 Assign/swap:
+    basic_istream& operator=(basic_istream&& rhs);
+    void swap(basic_istream& rhs);
+  };
+
+  // 27.7.1.2.3 character extraction templates:
+  template<class charT, class traits>
+    basic_istream<charT,traits>& operator>>(basic_istream<charT,traits>&,
+                                            charT&);
+  template<class traits>
+    basic_istream<char,traits>& operator>>(basic_istream<char,traits>&,
+                                           unsigned char&);
+  template<class traits>
+    basic_istream<char,traits>& operator>>(basic_istream<char,traits>&,
+                                           signed char&);
+
+  template<class charT, class traits>
+    basic_istream<charT,traits>& operator>>(basic_istream<charT,traits>&,
+                                            charT*);
+  template<class traits>
+    basic_istream<char,traits>& operator>>(basic_istream<char,traits>&,
+                                           unsigned char*);
+  template<class traits>
+    basic_istream<char,traits>& operator>>(basic_istream<char,traits>&,
+                                           signed char*);
+
+  // <del>swap:</del>
+  <del>template <class charT, class traits></del>
+    <del>void swap(basic_istream<charT, traits>& x, basic_istream<charT, traits>& y);</del>
+}
+
+1 The class basic_istream defines a number of member function signatures that assist in reading and interpreting input from sequences controlled by a stream buffer.
+
+1 basic_istream クラスはストリームバッファーによって制御されるシーケンスからの読み込みや変換を助ける多くのメンバー関数のシグネチャを定義する。
+
+2 Two groups of member function signatures share common properties: the formatted input functions (or extractors) and the unformatted input functions. Both groups of input functions are described as if they obtain (or extract) input characters by calling rdbuf()->sbumpc() or rdbuf()->sgetc(). They may use other public members of istream.
+
+2 メンバー関数シグネチャのふたつのグループは同じ性質を共有している。整形あり入力関数 ( もしくは抽出子 ) と整形なし入力関数である。入力関数のどちらのグループも rdbuf()->sbumpc() もしくは rdbuf()->sgetc() を呼び出すことで入力文字を得る ( もしくは抽出する ) かのように記述されている。それらは istream の他の public なメンバーを使う可能性がある。
+
+3 If rdbuf()->sbumpc() or rdbuf()->sgetc() returns traits::eof(), then the input function, except as explicitly noted otherwise, completes its actions and does setstate(eofbit), which may throw ios_- base::failure (27.5.4.3), before returning.
+
+3 rdbuf()->sbumpc() もしくは rdbuf()->sgetc() が traits::eof() を返す場合、別途明示されていない限り、入力関数はその動作を終了し return する前に ios_base::failure ( 27.5.4.3 ) を投げる可能性のある setstate(eofbit) を実行する。
+
+4 If one of these called functions throws an exception, then unless explicitly noted otherwise, the input function sets badbit in error state. If badbit is on in exceptions(), the input function rethrows the exception without completing its actions, otherwise it does not throw anything and proceeds as if the called function had returned a failure indication.
+
+4 これらの関数の呼び出しが例外を投げた場合、別途明示されていない限り、入力関数はエラー状態の badbit を設定する。 badbit が exceptions() 中で設定された場合、入力関数は動作を行うことなく再度例外を投げる。そうでない場合、何も投げられず関数呼び出しが失敗を示したかのように継続する。
+

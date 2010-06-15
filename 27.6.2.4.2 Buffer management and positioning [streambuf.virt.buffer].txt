@@ -1,0 +1,50 @@
+27.6.2.4.2 Buffer management and positioning [streambuf.virt.buffer]
+
+basic_streambuf* setbuf(char_type* s, streamsize n);
+
+    1 Effects: Influences stream buffering in a way that is defined separately for each class derived from basic_streambuf in this Clause (27.8.1.4, 27.9.1.5).
+
+    1 効果: この項 ( 27.8.1.4 、 27.9.1.5 ) の basic_streambuf から派生したクラスの各々において独立して定義された方法でストリームのバッファリングを操る。
+
+    2 Default behavior: Does nothing. Returns this.
+
+    2 デフォルトの挙動: 何もしない。 this を返す。
+
+pos_type seekoff(off_type off, ios_base::seekdir way,
+                 ios_base::openmode which
+                  = ios_base::in | ios_base::out);
+
+    3 Effects: Alters the stream positions within one or more of the controlled sequences in a way that is defined separately for each class derived from basic_streambuf in this Clause (27.8.1.4, 27.9.1.5).
+
+    3 効果: この項 ( 27.8.1.4 、 27.9.1.5 ) の basic_streambuf から派生したクラスの各々において独立して定義された方法で制御対象のシーケンスのひとつ以上のストリームの位置を変更する。
+
+    4 Default behavior: Returns pos_type(off_type(-1)).
+
+    4 デフォルトの挙動: pos_type(off_type(-1)) を呼び出しその結果を返す。
+
+pos_type seekpos(pos_type sp,
+                 ios_base::openmode which
+                  = ios_base::in | ios_base::out);
+
+    5 Effects: Alters the stream positions within one or more of the controlled sequences in a way that is defined separately for each class derived from basic_streambuf in this Clause (27.8.1, 27.9.1.1).
+
+    5 効果: この項 ( 27.8.1 、 27.9.1.1 ) の basic_streambuf から派生したクラスの各々において独立して定義された方法で制御対象のシーケンスのひとつ以上のストリームの位置を変更する。
+
+    6 Default behavior: Returns pos_type(off_type(-1)).
+
+    6 デフォルトの挙動: pos_type(off_type(-1)) を呼び出しその結果を返す。
+
+int sync();
+
+    7 Effects: Synchronizes the controlled sequences with the arrays. That is, if pbase() is non-null the characters between pbase() and pptr() are written to the controlled sequence. The pointers may then be reset as appropriate.
+
+    7 効果: 制御対象のシーケンスを配列に同期する。つまり pbase() が非空値である場合、 pbase() と pptr() の間にある文字を制御対象のシーケンスに書き出す。ポインターは必要に応じて再設定される。
+
+    8 Returns:-1 on failure. What constitutes failure is determined by each derived class (27.9.1.5).
+
+    8 戻り値: 失敗した場合 -1 を返す。何が失敗であるかは各々の派生クラスによって決定される ( 27.9.1.5 ) 。
+
+    9 Default behavior: Returns zero.
+
+    9 デフォルトの挙動: 零を返す。
+

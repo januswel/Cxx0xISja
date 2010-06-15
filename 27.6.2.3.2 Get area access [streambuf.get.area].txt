@@ -1,0 +1,32 @@
+27.6.2.3.2 Get area access [streambuf.get.area]
+
+char_type* eback() const;
+
+    1 Returns: The beginning pointer for the input sequence.
+
+    1 戻り値: 入力シーケンスに対する始点ポインターを返す。
+
+char_type* gptr() const;
+
+    2 Returns: The next pointer for the input sequence.
+
+    2 戻り値: 入力シーケンスに対する次点ポインターを返す。
+
+char_type* egptr() const;
+
+    3 Returns: The end pointer for the input sequence.
+
+    3 戻り値: 入力シーケンスに対する終点ポインターを返す。
+
+void gbump(int n);
+
+    4 Effects: Adds n to the next pointer for the input sequence.
+
+    4 効果: 入力シーケンスに対する次点ポインターに n を加える。
+
+void setg(char_type* gbeg, char_type* gnext, char_type* gend);
+
+    5 Postconditions: gbeg == eback(), gnext == gptr(), and gend == egptr().
+
+    5 呼び出し後の状態: gbeg == eback() 、 gnext == gptr() 、 gend == egptr() 。
+

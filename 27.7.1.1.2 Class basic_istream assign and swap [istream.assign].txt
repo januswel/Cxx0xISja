@@ -1,0 +1,25 @@
+27.7.1.1.2 Class basic_istream assign and swap [istream.assign]
+
+basic_istream& operator=(basic_istream&& rhs);
+
+    1 Effects: swap(rhs);.
+
+    1 効果: swap(rhs); を実行する。
+
+    2 Returns: *this.
+
+    2 戻り値: *this を返す。
+
+void swap(basic_istream& rhs);
+
+    3 Effects: Calls basic_ios<charT, traits>::swap(rhs). Exchanges the values returned by gcount() and rhs.gcount().
+
+    3 効果: basic_ios<charT, traits>::swap(rhs) を呼び出す。 gcount() の呼び出し結果と rhs.gcount() を取り替える。
+
+<del>template <class charT, class traits></del>
+  <del>void swap(basic_istream<charT, traits>& x, basic_istream<charT, traits>& y);</del>
+
+    <del>Effects: x.swap(y).</del>
+
+    <del>効果: x.swap(y) を実行する。</del>
+

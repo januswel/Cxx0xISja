@@ -1,0 +1,112 @@
+27.6.2 Class template basic_streambuf<charT,traits> [streambuf]
+
+namespace std {
+  template <class charT, class traits = char_traits<charT> >
+  class basic_streambuf {
+  public:
+
+    // types:
+    typedef charT                     char_type;
+    typedef typename traits::int_type int_type;
+    typedef typename traits::pos_type pos_type;
+    typedef typename traits::off_type off_type;
+    typedef traits                    traits_type;
+
+    virtual ~basic_streambuf();
+
+    // 27.6.2.2.1 locales:
+    locale   pubimbue(const locale& loc);
+    locale   getloc() const;
+
+    // 27.6.2.2.2 buffer and positioning:
+    basic_streambuf<char_type,traits>*
+       pubsetbuf(char_type* s, streamsize n);
+    pos_type pubseekoff(off_type off, ios_base::seekdir way,
+      ios_base::openmode which =
+          ios_base::in | ios_base::out);
+    pos_type pubseekpos(pos_type sp,
+      ios_base::openmode which =
+          ios_base::in | ios_base::out);
+    int      pubsync();
+
+    // Get and put areas:
+    // 27.6.2.2.3 Get area:
+    streamsize in_avail();
+    int_type snextc();
+    int_type sbumpc();
+    int_type sgetc();
+    streamsize sgetn(char_type* s, streamsize n);
+
+    // 27.6.2.2.4 Putback:
+    int_type sputbackc(char_type c);
+    int_type sungetc();
+
+    // 27.6.2.2.5 Put area:
+    int_type sputc(char_type c);
+    streamsize sputn(const char_type* s, streamsize n);
+
+  protected:
+    basic_streambuf();
+    basic_streambuf(const basic_streambuf& rhs);
+    basic_streambuf& operator=(const basic_streambuf& rhs);
+
+    void swap(basic_streambuf& rhs);
+
+    // 27.6.2.3.2 Get area:
+    char_type* eback() const;
+    char_type* gptr()  const;
+    char_type* egptr() const;
+    void       gbump(int n);
+    void       setg(char_type* gbeg, char_type* gnext, char_type* gend);
+
+    // 27.6.2.3.3 Put area:
+    char_type* pbase() const;
+    char_type* pptr() const;
+    char_type* epptr() const;
+    void       pbump(int n);
+    void       setp(char_type* pbeg, char_type* pend);
+
+    // 27.6.2.4 virtual functions:
+    // 27.6.2.4.1 Locales:
+    virtual void imbue(const locale& loc);
+
+    // 27.6.2.4.2 Buffer management and positioning:
+    virtual basic_streambuf<char_type,traits>*
+         setbuf(char_type* s, streamsize n);
+    virtual pos_type seekoff(off_type off, ios_base::seekdir way,
+         ios_base::openmode which = ios_base::in | ios_base::out);
+    virtual pos_type seekpos(pos_type sp,
+         ios_base::openmode which = ios_base::in | ios_base::out);
+    virtual int      sync();
+
+    // 27.6.2.4.3 Get area:
+    virtual streamsize showmanyc();
+    virtual streamsize xsgetn(char_type* s, streamsize n);
+    virtual int_type   underflow();
+    virtual int_type   uflow();
+
+    // 27.6.2.4.4 Putback:
+    virtual int_type   pbackfail(int_type c = traits::eof());
+
+    // 27.6.2.4.5 Put area:
+    virtual streamsize xsputn(const char_type* s, streamsize n);
+    virtual int_type   overflow (int_type c = traits::eof());
+  };
+}
+
+1 The class template basic_streambuf<charT,traits> serves as an abstract base class for deriving various stream buffers whose objects each control two character sequences:
+
+- a character input sequence;
+- a character output sequence.
+
+<del>[ Note: This paragraph is intentionally empty. -end note ]</del>
+<del>[ Note: This paragraph is intentionally empty. -end note ]</del>
+
+1 クラステンプレート basic_streambuf<charT,traits> はそのオブジェクトが二つの文字シーケンスを各々操作する様々なストリームバッファーを派生するための抽象基本クラスを提供する。
+
+- 文字の入力シーケンス
+- 文字の出力シーケンス
+
+<del>[ 注: この段落は意図的に何も書いていない。 ]</del>
+<del>[ 注: この段落は意図的に何も書いていない。 ]</del>
+

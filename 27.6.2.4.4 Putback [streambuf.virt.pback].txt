@@ -1,0 +1,30 @@
+27.6.2.4.4 Putback [streambuf.virt.pback]
+
+int_type pbackfail(int_type c = traits::eof());
+
+    1 Remarks: The public functions of basic_streambuf call this virtual function only when gptr() is null, gptr() == eback(), or traits::eq(traits::to_char_type(c),gptr()[-1]) returns false.  Other calls shall also satisfy that constraint.  The pending sequence is defined as for underflow(), with the modifications that
+
+        - If traits::eq_int_type(c,traits::eof()) returns true, then the input sequence is backed up one character before the pending sequence is determined.
+        - If traits::eq_int_type(c,traits::eof()) return false, then c is prepended. Whether the input sequence is backed up or modified in any other way is unspecified.
+
+    1 備考: basic_streambuf の public 関数が gptr() が空値であるか、 gptr() == eback() であるか、もしくは traits::eq(traits::to_char_type(c),gptr()[-1]) が偽を返すときにのみこの仮想関数を呼ぶ。他の呼び出しもこの制約を満たしていなければならない。保留シーケンスは underflow() での定義に以下の修正が加えられる。
+
+        - traits::eq_int_type(c,traits::eof()) が真を返す場合、保留シーケンスを決定する前に入力シーケンスを一文字後退する。
+        - traits::eq_int_type(c,traits::eof()) が偽を返す場合、 c が先頭に追加される。入力シーケンスを一文字後退させるかその他の方法で変更するかは明示されない。
+
+    2 Postcondition: On return, the constraints of gptr(), eback(), and pptr() are the same as for underflow().
+
+    2 呼び出し後の状態: 値を返す際の gptr() 、 eback() 、 pptr() の制約は underflow() と同様である。
+
+    3 Returns: traits::eof() to indicate failure. Failure may occur because the input sequence could not be backed up, or if for some other reason the pointers could not be set consistent with the constraints.  pbackfail() is called only when put back has really failed.
+
+    3 戻り値: 失敗を示すには traits::eof() を返す。入力シーケンスが後退できない、もしくはポインターが制約の一貫性を満足できないなどその他の理由のために失敗する可能性がある。 pbackfail() は戻す操作が本当に失敗した場合にのみ呼び出される。
+
+    4 Returns some value other than traits::eof() to indicate success.
+
+    4 成功を示すには traits::eof() 以外の値を返す。
+
+    5 Default behavior: Returns traits::eof().
+
+    5 デフォルトの挙動: traits::eof() を返す。
+

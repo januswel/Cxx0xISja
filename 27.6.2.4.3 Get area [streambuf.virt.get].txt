@@ -1,0 +1,120 @@
+27.6.2.4.3 Get area [streambuf.virt.get]
+
+streamsize showmanyc(); 313
+
+313) The morphemes of showmanycare "es-how-many-see", not "show-manic".
+
+313) showmanycare の形態素 「エス、ハウ、メニィ、シー」であり、「ショウ、マニク」ではない。
+
+    1 Returns: an estimate of the number of characters available in the sequence, or -1. If it returns a positive value, then successive calls to underflow() will not return traits::eof() until at least that number of characters have been extracted from the stream. If showmanyc() returns -1, then calls to underflow() or uflow() will fail.314
+
+    314) underflow or uflow might fail by throwing an exception prematurely. The intention is not only that the calls will not return eof() but that they will return "immediately."
+
+    1 戻り値: そのシーケンスにおいて利用可能な文字数の推量、もしくは -1 を返す。正の数を返す場合、そのストリームから少なくともその文字数が引き抜かれるまで連続した underflow() の呼び出しは traits::eof() を返さないだろう。 showmanyc() が -1 を返す場合、 underflow() もしくは uflow() の呼び出しは失敗するだろう 314 。
+
+    314) 早めに例外を投げてしまうと underflow もしくは uflow が失敗するかもしれない。目的は呼び出しが eof() を返さないだけでなく「すぐに」返すことだ。
+
+    2 Default behavior: Returns zero.
+
+    2 デフォルトの挙動: 零を返す。
+
+    3 Remarks: Uses traits::eof().
+
+    3 備考: traits::eof() を使う。
+
+streamsize xsgetn(char_type* s, streamsize n);
+
+    4 Effects: Assigns up to n characters to successive elements of the array whose first element is designated by s. The characters assigned are read from the input sequence as if by repeated calls to sbumpc().  Assigning stops when either n characters have been assigned or a call to sbumpc() would return traits::eof().
+
+    4 効果: n 以下の文字を最初の要素が s によって指定される配列の連続した要素に代入する。代入された文字は sbumpc() を繰り返し呼び出したかのように入力シーケンスから読み込まれる。 n 文字が代入されるかもしくは sbumpc() の呼び出しが traits::eof() を返したとき代入は停止する。
+
+    5 Returns: The number of characters assigned.315
+
+    315) Classes derived from basic_streambuf can provide more efficient ways to implement xsgetn() and xsputn() by overriding these definitions from the base class.
+
+    5 戻り値: 代入された文字数を返す 315 。
+
+    315) basic_streambuf から派生したクラスは基底クラスの定義をオーバーライドした xsgetn() と xsputn() を実行することでより効率的な方法を提供することができる。
+
+    6 Remarks: Uses traits::eof().
+
+    6 備考: traits::eof() を使う。
+
+int_type underflow();
+
+    7 Remarks: The public members of basic_streambuf call this virtual function only if gptr() is null or gptr() >= egptr()
+
+    7 備考: gptr() が空値もしくは gptr() >= egptr() が真である場合に限り basic_streambuf の public なメンバーがこの仮想関数を呼び出す。
+
+    8 Returns: traits::to_int_type(c), where c is the first character of the pending sequence, without moving the input sequence position past it. If the pending sequence is null then the function returns traits::eof() to indicate failure.
+
+    8 戻り値: c が保留シーケンスの最初の文字であるとき、入力シーケンスの位置を動かすことなく traits::to_int_type(c) を返す。保留シーケンスが空値である場合、関数は失敗を表わす traits::eof() を返す。
+
+    9 The pending sequence of characters is defined as the concatenation of:
+
+        a) If gptr() is non- NULL, then the egptr() - gptr() characters starting at gptr(), otherwise the empty sequence.
+        b) Some sequence (possibly empty) of characters read from the input sequence.
+
+    9 文字の保留シーケンスは以下の連結として定義される。
+
+        a) gptr() が NULL 値でない場合、 egptr() - gptr() 個の文字は gptr() から始まる。そうでない場合空のシーケンスである。
+        b) 文字の ( 場合により空の ) シーケンスは入力シーケンスから読み込まれる。
+
+    10 The result character is
+
+        a) If the pending sequence is non-empty, the first character of the sequence.
+        b) If the pending sequence is empty then the next character that would be read from the input sequence.
+
+    10 結果の文字は、
+
+        a) 保留シーケンスが空でない場合、シーケンスの最初の文字である。
+        b) 保留シーケンスが空の場合、入力シーケンスから読み込まれるだろう次の文字である。
+
+    11 The backup sequence is defined as the concatenation of:
+
+        a) If eback() is null then empty,
+        b) Otherwise the gptr() - eback() characters beginning at eback().
+
+    11 予備シーケンスは以下の連結として定義される。
+
+        a) eback() が空値である場合空である。
+        b) そうでない場合 gptr() - eback() 個の文字は eback() から始まる。
+
+    12 Effects: The function sets up the gptr() and egptr() satisfying one of:
+
+        a) If the pending sequence is non-empty, egptr() is non-null and egptr() - gptr() characters starting at gptr() are the characters in the pending sequence
+        b) If the pending sequence is empty, either gptr() is null or gptr() and egptr() are set to the same non-NULL pointer.
+
+    12 効果: この関数は以下のうちどちらかひとつの条件を満たすように gptr() と egptr() を調整する。
+
+        a) 保留シーケンスが空でない場合、 egptr() は空値でなく gptr() から始まる egptr() - gptr() 個の文字が保留シーケンスにおける文字である。
+        b) 保留シーケンスが空の場合、 gptr() が空値もしくは gptr() と egptr() が同じ NULL でないポインターに設定される。
+
+    13 If eback() and gptr() are non-null then the function is not constrained as to their contents, but the "usual backup condition" is that either:
+
+        a) If the backup sequence contains at least gptr() - eback() characters, then the gptr() - eback() characters starting at eback() agree with the last gptr() - eback() characters of the backup sequence.
+        b) Or the n characters starting at gptr() - n agree with the backup sequence (where n is the length of the backup sequence)
+
+    13 eback() と gptr() が非空値である場合、この関数はその内容については制限されないが、「通常予備条件」は以下のうちどちらかでなければならない。
+
+        a) 予備シーケンスが少なくとも gptr() - eback() 個の文字を保持している場合、 eback() から始まる gptr() - eback() 個の文字は予備シーケンスの最後の gptr() - eback() 個の文字と一致している。
+        b) もしくは gptr() - n から始まる n 文字が予備シーケンスと一致する ( ここで n は予備シーケンスの長さである ) 。
+
+    14 Default behavior: Returns traits::eof().
+
+    14 デフォルトの挙動: traits::eof() を返す。
+
+int_type uflow();
+
+    15 Requires: The constraints are the same as for underflow(), except that the result character shall be transferred from the pending sequence to the backup sequence, and the pending sequence shall not be empty before the transfer.
+
+    15 要求: 結果の文字が保留シーケンスから予備シーケンスへ転送されなければならないことと転送以前に保留シーケンスが空であってはならないことを除いて制約は underflow() と同じ。
+
+    16 Default behavior: Calls underflow(). If underflow() returns traits::eof(), returns traits::eof().  Otherwise, returns the value of traits::to_int_type(*gptr()) and increment the value of the next pointer for the input sequence.
+
+    16 デフォルトの挙動: underflow() を呼び出す。 underflow() が traits::eof() を返す場合、 traits::eof() を返す。そうでない場合、 traits::to_int_type(*gptr()) の値を返し入力シーケンスに対する次点ポインターの値をひとつ進める。
+
+    17 Returns: traits::eof() to indicate failure.
+
+    17 戻り値: 失敗を示すには traits::eof() を返す。
+

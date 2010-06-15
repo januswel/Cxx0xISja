@@ -1,0 +1,72 @@
+27.7.1.2.2 Arithmetic Extractors [istream.formatted.arithmetic]
+
+operator>>(unsigned short& val);
+operator>>(unsigned int& val);
+operator>>(long& val);
+operator>>(unsigned long& val);
+operator>>(long long& val);
+operator>>(unsigned long long& val);
+operator>>(float& val);
+operator>>(double& val);
+operator>>(long double& val);
+operator>>(bool& val);
+operator>>(void*& val);
+
+    1 As in the case of the inserters, these extractors depend on the locale's num_get<> (22.4.2.1) object to perform parsing the input stream data. These extractors behave as formatted input functions (as described in 27.7.1.2.1). After a sentry object is constructed, the conversion occurs as if performed by the following code fragment:
+
+        typedef num_get< charT,istreambuf_iterator<charT,traits> > numget;
+        iostate err = iostate::goodbit;
+        use_facet< numget >(loc).get(*this, 0, *this, err, val);
+        setstate(err);
+
+    In the above fragment, loc stands for the private member of the basic_ios class. [ Note: The first argument provides an object of the istreambuf_iterator class which is an iterator pointed to an input stream. It bypasses istreams and uses streambufs directly. -end note ] Class locale relies on this type as its interface to istream, so that it does not need to depend directly on istream.
+
+    1 挿入子としてみた場合、これらの抽出子はロカールの入力ストリームのデータを解析する num_get<> ( 22.4.2.1 ) オブジェクトに依存する。これらの抽出子は整形あり入力関数 ( 27.7.1.2.1 で述べている ) として振る舞う。番兵オブジェクトが構築されたあと、以下のコードを実行したかのように変換が行われる。
+
+        typedef num_get< charT,istreambuf_iterator<charT,traits> > numget;
+        iostate err = iostate::goodbit;
+        use_facet< numget >(loc).get(*this, 0, *this, err, val);
+        setstate(err);
+
+    上記のコードの中で、 loc は basic_ios クラスの private メンバーを表わしている。 [ 注: 最初の引数に入力ストリームを指す反復子である istreambuf_iterator クラスのオブジェクトを与えている。これは istream を迂回し streambuf を直接使う。 ] locale クラスは istream に直接依存せず、 istream へのインターフェイスとしてこの型に依存する。
+
+operator>>(short& val);
+
+    2 The conversion occurs as if performed by the following code fragment (using the same notation as for the preceding code fragment):
+
+    2 以下のコードを実行したかのように変換が行われる。( 上記のコードと同じ条件である ) 。
+
+        typedef num_get<charT,istreambuf_iterator<charT,traits> > numget;
+        iostate err = ios_base::goodbit;
+        long lval;
+        use_facet<numget>(loc).get(*this, 0, *this, err, lval);
+        if (lval < numeric_limits<short>::min()) {
+          err |= ios_base::failbit;
+          val = numeric_limits<short>::min();
+        } else if (numeric_limits<short>::max() < lval) {
+          err |= ios_base::failbit;
+          val = numeric_limits<short>::max();
+        } else
+          val = static_cast<short>(lval);
+        setstate(err);
+
+operator>>(int& val);
+
+    3 The conversion occurs as if performed by the following code fragment (using the same notation as for the preceding code fragment):
+
+    3 以下のコードを実行したかのように変換が行われる。( 上記のコードと同じ条件である ) 。
+
+        typedef num_get<charT,istreambuf_iterator<charT,traits> > numget;
+        iostate err = ios_base::goodbit;
+        long lval;
+        use_facet<numget>(loc).get(*this, 0, *this, err, lval);
+        if (lval < numeric_limits<int>::min()) {
+          err |= ios_base::failbit;
+          val = numeric_limits<int>::min();
+        } else if (numeric_limits<int>::max() < lval) {
+          err |= ios_base::failbit;
+          val = numeric_limits<int>::max();
+        } else
+          val = static_cast<int>(lval);
+        setstate(err);
+

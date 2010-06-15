@@ -1,0 +1,59 @@
+27.7 Formatting and manipulators [iostream.format]
+
+Header <istream> synopsis
+
+namespace std {
+  template <class charT, class traits = char_traits<charT> >
+    class basic_istream;
+  typedef basic_istream<char> istream;
+  typedef basic_istream<wchar_t> wistream;
+
+  template <class charT, class traits = char_traits<charT> >
+    class basic_iostream;
+  typedef basic_iostream<char> iostream;
+  typedef basic_iostream<wchar_t> wiostream;
+
+  template <class charT, class traits>
+    basic_istream<charT,traits>& ws(basic_istream<charT,traits>& is);
+
+  template <class charT, class traits, class T>
+    basic_istream<charT, traits>&
+    operator>>(basic_istream<charT, traits>&& is, T& x);
+}
+
+Header <ostream> synopsis
+
+namespace std {
+  template <class charT, class traits = char_traits<charT> >
+    class basic_ostream;
+  typedef basic_ostream<char> ostream;
+  typedef basic_ostream<wchar_t> wostream;
+
+  template <class charT, class traits>
+    basic_ostream<charT,traits>& endl(basic_ostream<charT,traits>& os);
+  template <class charT, class traits>
+    basic_ostream<charT,traits>& ends(basic_ostream<charT,traits>& os);
+  template <class charT, class traits>
+    basic_ostream<charT,traits>& flush(basic_ostream<charT,traits>& os);
+
+  template <class charT, class traits, class T>
+    basic_ostream<charT, traits>&
+    operator<<(basic_ostream<charT, traits>&& os, const T& x);
+}
+
+Header <iomanip> synopsis
+
+namespace std {
+  // types T1, T2, ... are unspecified implementation types
+  T1 resetiosflags(ios_base::fmtflags mask);
+  T2 setiosflags (ios_base::fmtflags mask);
+  T3 setbase(int base);
+  template<charT> T4 setfill(charT c);
+  T5 setprecision(int n);
+  T6 setw(int n);
+  template <class moneyT> T7 get_money(moneyT& mon, bool intl = false);
+  template <class moneyT> T8 put_money(const moneyT& mon, bool intl = false);
+  template <class charT> T9 get_time(struct tm* tmb, const charT* fmt);
+  template <class charT> T10 put_time(const struct tm* tmb, const charT* fmt);
+}
+

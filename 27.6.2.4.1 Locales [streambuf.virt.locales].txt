@@ -1,0 +1,16 @@
+27.6.2.4.1 Locales [streambuf.virt.locales]
+
+void imbue(const locale&)
+
+    1 Effects: Change any translations based on locale.
+
+    1 効果: ロカールに基づいてすべての翻訳を変更する。
+
+    2 Remarks: Allows the derived class to be informed of changes in locale at the time they occur. Between invocations of this function a class derived from streambuf can safely cache results of calls to locale functions and to members of facets so obtained.
+
+    2 備考: ロカールが変更された際にそのことを派生クラスに通達することを許可する。 streambuf から派生したクラスは、この関数の起動間にロカール関数の呼び出し結果と得られたファセットメンバーを安全にキャッシュする。
+
+    3 Default behavior: Does nothing.
+
+    3 デフォルトの挙動: 何もしない。
+

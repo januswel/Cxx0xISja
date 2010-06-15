@@ -1,0 +1,36 @@
+27.6.2.2.3 Get area [streambuf.pub.get]
+
+streamsize in_avail();
+
+    1 Returns: If a read position is available, returns egptr() - gptr(). Otherwise returns showmanyc() (27.6.2.4.3).
+
+    1 戻り値: 読み込み位置が利用可能な場合 egptr() - gptr() を返す。そうでない場合 showmanyc() ( 27.6.2.4.3 ) を呼び出しその結果を返す。
+
+int_type snextc();
+
+    2 Effects: Calls sbumpc().
+
+    2 効果: sbumpc() を呼び出す。
+
+    3 Returns: if that function returns traits::eof(), returns traits::eof(). Otherwise, returns sgetc().
+
+    3 戻り値: その関数が traits::eof() を返す場合 traits::eof() を返す。 そうでない場合、 sgetc() を返す。
+
+int_type sbumpc();
+
+    4 Returns: If the input sequence read position is not available, returns uflow(). Otherwise, returns traits::to_int_type(*gptr()) and increments the next pointer for the input sequence.
+
+    4 戻り値: 入力シーケンスの読み込み位置が利用可能でない場合、 uflow() を呼び出しその結果を返す。そうでない場合、 traits::to_int_type(*gptr()) を返し入力シーケンスの次点ポインターをひとつ進める。
+
+int_type sgetc();
+
+    5 Returns: If the input sequence read position is not available, returns underflow(). Otherwise, returns traits::to_int_type(*gptr()).
+
+    5 戻り値: 入力シーケンスの読み込み位置が利用可能でない場合、 underflow() を呼び出しその結果を返す。そうでない場合、 traits::to_int_type(*gptr()) を返す。
+
+streamsize sgetn(char_type* s, streamsize n);
+
+    6 Returns: xsgetn(s, n).
+
+    6 戻り値: xsgetn(s, n) を呼び出しその結果を返す。
+

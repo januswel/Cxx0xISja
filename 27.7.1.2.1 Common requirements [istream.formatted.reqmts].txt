@@ -1,0 +1,10 @@
+27.7.1.2.1 Common requirements [istream.formatted.reqmts]
+
+1 Each formatted input function begins execution by constructing an object of class sentry with the noskipws (second) argument false. If the sentry object returns true, when converted to a value of type bool, the function endeavors to obtain the requested input. If an exception is thrown during input then ios::badbit is turned on320 in *this's error state. If (exceptions()&badbit) != 0 then the exception is rethrown.  In any case, the formatted input function destroys the sentry object. If no exception has been thrown, it returns *this.
+
+320) This is done without causing an ios::failure to be thrown.
+
+1 各々の整形あり入力関数は noskipws ( 二番目の ) 引数に偽を指定して sentry クラスのオブジェクトを構築するところから実行が始まる。 sentry オブジェクトが bool 型の値へ変換したときに真を返す場合、関数は要求された入力を得ようとする。入力の最中に例外が投げられた場合、 *this のエラー状態に ios::badbit が設定される 320 。 (exceptions()&badbit) != 0 が真である場合、例外が再度投げられる。どんな状況でも整形あり入力関数は sentry オブジェクトを破壊する。何も例外が投げられなかった場合、 *this を返す。
+
+320) これは ios::failure が投げられることなく行われる。
+

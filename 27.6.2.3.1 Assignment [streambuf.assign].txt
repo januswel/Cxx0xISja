@@ -1,0 +1,30 @@
+27.6.2.3.1 Assignment [streambuf.assign]
+
+basic_streambuf& operator=(const basic_streambuf& rhs);
+
+    1 Effects: Assigns the data members of rhs to *this.
+
+    1 効果: rhs のデータメンバーを *this に代入する。
+
+    2 Postconditions:
+
+    2 呼び出し後の状態:
+
+        - eback() == rhs.eback()
+        - gptr() == rhs.gptr()
+        - egptr() == rhs.egptr()
+        - pbase() == rhs.pbase()
+        - pptr() == rhs.pptr()
+        - epptr() == rhs.epptr()
+        - getloc() == rhs.getloc()
+
+    3 Returns: *this.
+
+    3 戻り値: *this を返す。
+
+void swap(basic_streambuf& rhs);
+
+    4 Effects: Swaps the data members of rhs and *this.
+
+    4 効果: rhs と *this のデータメンバーを交換する。
+

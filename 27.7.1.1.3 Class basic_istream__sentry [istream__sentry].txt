@@ -1,0 +1,69 @@
+27.7.1.1.3 Class basic_istream::sentry [istream::sentry]
+
+namespace std {
+  template <class charT,class traits = char_traits<charT> >
+  class basic_istream<charT,traits>::sentry {
+    typedef traits traits_type;
+    bool ok_; // exposition only
+  public:
+    explicit sentry(basic_istream<charT,traits>& is, bool noskipws = false);
+    ~sentry();
+    explicit operator bool() const { return ok_; }
+    sentry(const sentry&) = delete;
+    sentry& operator=(const sentry&) = delete;
+  };
+}
+
+    1 The class sentry defines a class that is responsible for doing exception safe prefix and suffix operations.
+
+    1 sentry クラスは操作の前後で例外安全な処理に責任を持つクラスを定義する。
+
+explicit sentry(basic_istream<charT,traits>& is, bool noskipws = false);
+
+    2 Effects: If is.good() is false, calls is.setstate(failbit). Otherwise, prepares for formatted or unformatted input. First, if is.tie() is not a null pointer, the function calls is.tie()->flush() to synchronize the output sequence with any associated external C stream. Except that this call can be suppressed if the put area of is.tie() is empty. Further an implementation is allowed to defer the call to flush until a call of is.rdbuf()->underflow() occurs. If no such call occurs before the sentry object is destroyed, the call to flush may be eliminated entirely.318 If noskipws is zero and is.flags() & ios_base::skipws is nonzero, the function extracts and discards each character as long as the next available input character c is a whitespace character. If is.rdbuf()->sbumpc() or is.rdbuf()->sgetc() returns traits::eof(), the function calls setstate(failbit | eofbit) (which may throw ios_base::failure).
+
+    318) This will be possible only in functions that are part of the library. The semantics of the constructor used in user code is as specified.
+
+    2 効果: is.good() が偽の場合、 is.setstate(failbit) を呼び出す。そうでない場合、整形ありもしくは整形なしの入力に備える。まずはじめに、 is.tie() が空値ポインターでない場合、関数は何らかの外部の C ストリームと関連づけられている出力シーケンスと同期するために is.tie()->flush() を呼び出す。ただし出力側の is.tie() が空である場合、この呼び出しは行われない。さらに is.rdbuf()->underflow() の呼び出しまで flush の呼び出しを遅延するための実装が許可される。 sentry オブジェクトが破壊される前にそういった呼び出しがない場合、 flush の呼び出しは完全に無視される可能性がある 318 。 noskipws が零かつ is.flags() & ios_base::skipws が非零である場合、関数は次の利用可能な入力文字 c が空白文字である間各々の文字を抽出し捨てる。 is.rdbuf()->sbumpc() もしくは is.rdbuf()->sgetc() が traits::eof() を返す場合、関数は ( ios_base::failure を投げるかもしれない ) setstate(failbit | eofbit) を呼び出す。
+
+    318) これは関数がライブラリーの一部である場合のみ可能だろう。利用者コードの中で使われているコンストラクターの動作は示されている通りである。
+
+    3 Remarks: The constructor explicit sentry(basic_istream<charT,traits>& is, bool noskipws = false) uses the currently imbued locale in is, to determine whether the next input character is whitespace or not.
+
+    3 備考: コンストラクター explicit sentry(basic_istream<charT,traits>& is, bool noskipws = false) は次の入力文字が空白かどうかを決定するために現在設定されているロカールを使う。
+
+    4 To decide if the character c is a whitespace character, the constructor performs as if it executes the following code fragment:
+
+        const ctype<charT>& ctype = use_facet<ctype<charT> >(is.getloc());
+        if (ctype.is(ctype.space,c)!=0)
+          // c is a whitespace character.
+
+    4 文字 c が空白文字かどうかを決めるために、コンストラクターは以下のコードを実行したかのように動作する。
+
+        const ctype<charT>& ctype = use_facet<ctype<charT> >(is.getloc());
+        if (ctype.is(ctype.space,c)!=0)
+          // c は空白文字。
+
+    5 If, after any preparation is completed, is.good() is true, ok_ != false otherwise, ok_ == false.  During preparation, the constructor may call setstate(failbit) (which may throw ios_base::failure (27.5.4.3))319
+    <del>[ Note: This paragraph is intentionally empty. -end note ]</del>
+
+    319) The sentry constructor and destructor can also perform additional implementation-dependent operations.
+
+    5 すべての準備が整ったあとで、 is.good() が真の場合、 ok_ != false である。そうでない場合 ok_ == false である。
+    準備段階では、コンストラクターが ( ios_base::failure ( 27.5.4.3 ) を投げる可能性のある ) setstate(failbit) を呼ぶかもしれない 319 。
+    <del>[ 注: この段落は意図的に何も書いていない。 ]</del>
+
+    319) 番兵のコンストラクターとデストラクターは追加で処理系定義の操作を実行してもよい。
+
+~sentry();
+
+    6 Effects: None.
+
+    6 効果: 何もしない。
+
+explicit operator bool() const;
+
+    7 Effects: Returns ok_.
+
+    7 効果: ok_ を返す。
+

@@ -1,0 +1,32 @@
+27.6.2.3.3 Put area access [streambuf.put.area]
+
+char_type* pbase() const;
+
+    1 Returns: The beginning pointer for the output sequence.
+
+    1 戻り値: 出力シーケンスに対する始点ポインターを返す。
+
+char_type* pptr() const;
+
+    2 Returns: The next pointer for the output sequence.
+
+    2 戻り値: 出力シーケンスに対する次点ポインターを返す。
+
+char_type* epptr() const;
+
+    3 Returns: The end pointer for the output sequence.
+
+    3 戻り値: 出力シーケンスに対する終点ポインターを返す。
+
+void pbump(int n);
+
+    4 Effects: Adds n to the next pointer for the output sequence.
+
+    4 効果: 出力シーケンスに対する次点ポインターに n を加える。
+
+void setp(char_type* pbeg, char_type* pend);
+
+    5 Postconditions: pbeg == pbase(), pbeg == pptr(), and pend == epptr().
+
+    5 呼び出し後の状態: pbeg == pbase() 、 pbeg == pptr() 、 pend == epptr() 。
+

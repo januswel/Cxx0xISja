@@ -1,0 +1,7 @@
+27.7.1 Input streams [input.streams]
+
+1 The header <istream> defines two types and a function signature that control input from a stream buffer along with a function template that extracts from stream rvalues.
+
+1 <istream> ヘッダーはふたつの型とストリームの右辺値から取得する関数テンプレートに加えてストリームバッファーからの入力を制御する関数シグネチャを定義する。
+
+

@@ -1,0 +1,344 @@
+27.7.1.3 Unformatted input functions [istream.unformatted]
+
+1 Each unformatted input function begins execution by constructing an object of class sentry with the default argument noskipws (second) argument true. If the sentry object returns true, when converted to a value of type bool, the function endeavors to obtain the requested input. Otherwise, if the sentry constructor exits by throwing an exception or if the sentry object returns false, when converted to a value of type bool, the function returns without attempting to obtain any input. In either case the number of extracted characters is set to 0; unformatted input functions taking a character array of non-zero size as an argument shall also store a null character (using charT()) in the first location of the array. If an exception is thrown during input then ios::badbit is turned on323 in *this's error state. (Exceptions thrown from basic_ios<>::clear() are not caught or rethrown.) If (exceptions()&badbit) != 0 then the exception is rethrown. It also counts the number of characters extracted. If no exception has been thrown it ends by storing the count in a member object and returning the value specified. In any event the sentry object is destroyed before leaving the unformatted input function.
+
+323) This is done without causing an ios::failure to be thrown.
+
+1 各々の整形なし入力関数は noskipws ( 二番目の ) 引数に真を指定して sentry クラスのオブジェクトを構築することから実行をはじめる。 sentry オブジェクトが bool 型の値へ変換したときに真を返す場合、関数は要求された入力を得ようとする。そうではなく sentry のコンストラクターが例外を投げ終了するか sentry オブジェクトが bool 型の値へ変換したときに偽を返す場合、関数は全く入力を得ようとせずに return する。どちらにせよ抽出された文字は 0 に設定される。その際、引数として非零の大きさの文字配列を取る整形なし入力関数は配列の最初の位置に空値文字 ( char() を使う ) 格納しなければならない。入力中に例外が投げられた場合、 *this のエラー状態に ios::badbit が設定される 323 。 ( basic_ios<>::clear() から投げられる例外は捉えたり再度投げられたりされない。 ) (exceptions()&badbit) != 0 が真である場合、例外が再度投げられる。さらに抽出された文字数を数える。例外が投げられなかった場合、メンバーオブジェクトに文字数を格納し指定された値を返すことで終了する。どんな状態でも整形なし入力関数を終了する前に sentry オブジェクトは破壊される。
+
+323) これは ios::failure が投げられることなく行われる。
+
+streamsize gcount() const;
+
+    2 Effects: None. This member function does not behave as an unformatted input function (as described in 27.7.1.3, paragraph 1).
+
+    2 効果: 何もしない。このメンバー関数は整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞わない。
+
+    3 Returns: The number of characters extracted by the last unformatted input member function called for the object.
+
+    3 戻り値: そのオブジェクトの直前の整形なし入力関数の呼び出しによって抽出された文字数を返す。
+
+int_type get();
+
+    4 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, extracts a character c, if one is available. Otherwise, the function calls setstate(failbit), which may throw ios_base::failure (27.5.4.3),
+
+    4 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、文字 c が利用可能ならそれを抽出する。そうでない場合、関数は ios_base::failure ( 27.5.4.3 ) を投げる可能性のある setstate(failbit) を呼び出す。
+
+    5 Returns: c if available, otherwise traits::eof().
+
+    5 返り値: 利用可能な場合 c を、そうでない場合 traits::eof() を返す。
+
+basic_istream<charT,traits>& get(char_type& c);
+
+    6 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, extracts a character, if one is available, and assigns it to c.324 Otherwise, the function calls setstate(failbit) (which may throw ios_base::failure (27.5.4.3)).
+
+    324) Note that this function is not overloaded on types signed char and unsigned char.
+
+    6 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、文字が利用可能な場合それを抽出し、 c に代入する 324 。そうでない場合、関数は ( ios_base::failure ( 27.5.4.3 ) を投げる可能性のある ) setstate(failbit) を呼び出す。
+
+    324) この関数が signed char 型と unsigned char 型でオーバーロードされていないことに注意せよ。
+
+    7 Returns: *this.
+
+    7 返り値: *this を返す。
+
+basic_istream<charT,traits>& get(char_type* s, streamsize n,
+                  char_type delim );
+
+    8 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, extracts characters and stores them into successive locations of an array whose first element is designated by s.325 Characters are extracted and stored until any of the following occurs:
+
+        - n is less than one or n - 1 characters are stored;
+        - end-of-file occurs on the input sequence (in which case the function calls setstate(eofbit));
+        - traits::eq(c, delim) for the next available input character c (in which case c is not extracted).
+
+    325) Note that this function is not overloaded on types signed char and unsigned char.
+
+    8 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落に記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、文字を抽出し最初の要素が s で指定されている配列の連続した領域に格納する 325 。以下のいずれかが起こるまで文字を抽出し格納する。
+
+        - n が一以下であるもしくは n - 1 個の文字を格納した。
+        - 入力シーケンスにおいて end-of-file が発生した ( 関数が setstate(eofbit) を呼び出した場合 ) 。
+        - 次の利用可能な入力文字 c に対して traits::eq(c, delim) が真となった ( c が抽出されない場合 ) 。
+
+    325) この関数が signed char 型と unsigned char 型でオーバーロードされていないことに注意せよ。
+
+    9 If the function stores no characters, it calls setstate(failbit) (which may throw ios_base::failure (27.5.4.3)).  In any case, if n is greater than zero it then stores a null character into the next successive location of the array.
+
+    9 関数が文字を格納しなかった場合、 ( ios_base::failure (27.5.4.3) を投げる可能性のある ) setstate(failbit) を呼び出す。どんな場合でも、 n が零以上の場合空値文字を配列の次の連続する領域に格納する。
+
+    10 Returns: *this.
+
+    10 戻り値: *this を返す。
+
+basic_istream<charT,traits>& get(char_type* s, streamsize n)
+
+    11 Effects: Calls get(s,n,widen('\n'))
+
+    11 効果: get(s,n,widen('\n')) を呼び出す。
+
+    12 Returns: Value returned by the call.
+
+    12 戻り値: 呼び出した結果の値を返す。
+
+basic_istream<charT,traits>& get(basic_streambuf<char_type,traits>& sb,
+                  char_type delim );
+
+    13 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, extracts characters and inserts them in the output sequence controlled by sb. Characters are extracted and inserted until any of the following occurs:
+
+        - end-of-file occurs on the input sequence;
+        - inserting in the output sequence fails (in which case the character to be inserted is not extracted);
+        - traits::eq(c, delim) for the next available input character c (in which case c is not extracted);
+        - an exception occurs (in which case, the exception is caught but not rethrown).
+
+    13 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落に記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、文字を抽出し sb によって制御されている出力シーケンスに挿入する。以下のいずれかが起こるまで文字を抽出子挿入する。
+
+        - 入力シーケンスにおいて end-of-file が発生した。
+        - 出力シーケンスへの挿入が失敗した ( 挿入される文字が抽出されなかった場合 ) 。
+        - 次に利用可能な入力文字 c に対して traits::eq(c, delim) が真となった ( c が抽出されなかった場合 ) 。
+        - 例外が発生した ( 例外を捉えたが再度投げない場合 ) 。
+
+    14 If the function inserts no characters, it calls setstate(failbit), which may throw ios_base::failure (27.5.4.3).
+
+    14 関数が文字を挿入しなかった場合、 ios_base::failure ( 27.5.4.3 ) を投げる可能性のある setstate(failbit) を呼び出す。
+
+    15 Returns: *this.
+
+    15 返り値: *this を返す。
+
+basic_istream<charT,traits>& get(basic_streambuf<char_type,traits>& sb);
+
+    16 Effects: Calls get(sb, widen('\n'))
+
+    16 効果: get(sb, widen('\n')) を呼び出す。
+
+    17 Returns: Value returned by the call.
+
+    17 戻り値: 呼び出した結果の値を返す。
+
+basic_istream<charT,traits>& getline(char_type* s, streamsize n,
+                  char_type delim);
+
+    18 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, extracts characters and stores them into successive locations of an array whose first element is designated by s.326 Characters are extracted and stored until one of the following occurs:
+
+        1. end-of-file occurs on the input sequence (in which case the function calls setstate(eofbit));
+        2. traits::eq(c, delim) for the next available input character c (in which case the input character is extracted but not stored);327
+        3. n is less than one or n - 1 characters are stored (in which case the function calls setstate(failbit)).
+
+    326) Note that this function is not overloaded on types signed char and unsigned char.
+    327) Since the final input character is "extracted," it is counted in the gcount(), even though it is not stored.
+
+    18 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、文字を抽出し最初の要素が s によって指定されている配列の連続した領域に格納する 326 。以下のいずれかが起こるまで文字を抽出し格納する。
+
+        1. 入力シーケンスにおいて end-of-file が発生した ( 関数が setstate(eofbit) を呼び出した場合 ) 。
+        2. 次に利用可能な入力文字 c に対して traits::eq(c, delim) が真となった ( 入力文字が抽出されたが格納されなかった場合 ) 327 。
+        3. n が一以下であるもしくは n - 1 個の文字を格納した ( 関数が setstate(failbit) を呼び出した場合 ) 。
+
+    326) この関数が signed char 型と unsigned char 型でオーバーロードされていないことに注意せよ。
+    327) 最後の入力文字が格納されなかったとしても、「抽出した」ためにそれも gcount() に数えられる。
+
+    19 These conditions are tested in the order shown.328
+
+    328) This allows an input line which exactly fills the buffer, without setting failbit. This is different behavior than the historical AT&T implementation.
+
+    19 これらの条件は示されている順に評価される 328 。
+
+    328) これは failbit を設定することなく正確にバッファを満たした入力列に許可する。これは歴史的な AT&T の実装とは異なる挙動である。
+
+    20 If the function extracts no characters, it calls setstate(failbit) (which may throw ios_base::failure (27.5.4.3)).329
+
+    329) This implies an empty input line will not cause failbit to be set.
+
+    20 関数が文字を抽出しなかった場合、 ( ios_base::failure (27.5.4.3) を投げる可能性のある ) setstate(failbit) を呼び出す 329 。
+
+    329) これは空の入力列は failbit を設定しないことを暗示している。
+
+    21 In any case, if n is greater than zero, it then stores a null character (using charT()) into the next successive location of the array.
+
+    21 どんな状況でも n が零より大きい場合、配列の次の連続する領域に ( charT() を使う ) 空値文字を格納する。
+
+    22 Returns: *this.
+
+    22 返り値: *this を返す。
+
+    23 [ Example:
+
+    #include <iostream>
+
+    int main() {
+      using namespace std;
+      const int line_buffer_size = 100;
+
+      char buffer[line_buffer_size];
+      int line_number = 0;
+      while (cin.getline(buffer, line_buffer_size, '\n') || cin.gcount()) {
+        int count = cin.gcount();
+        if (cin.eof())
+          cout << "Partial final line";   // cin.fail() is false
+        else if (cin.fail()) {
+          cout << "Partial long line";
+          cin.clear(cin.rdstate() & ~ios_base::failbit);
+        } else {
+          count--;                        // Don't include newline in count
+          cout << "Line " << ++line_number;
+        }
+        cout << " (" << count << " chars): " << buffer << endl;
+      }
+    }
+
+    -end example ]
+
+    23 [ 例:
+
+    #include <iostream>
+
+    int main() {
+      using namespace std;
+      const int line_buffer_size = 100;
+
+      char buffer[line_buffer_size];
+      int line_number = 0;
+      while (cin.getline(buffer, line_buffer_size, '\n') || cin.gcount()) {
+        int count = cin.gcount();
+        if (cin.eof())
+          cout << "最後の行の一部";       // cin.fail() は偽
+        else if (cin.fail()) {
+          cout << "長い行の一部";
+          cin.clear(cin.rdstate() & ~ios_base::failbit);
+        } else {
+          count--;                        // 次の行を含まない
+          cout << "行 " << ++line_number;
+        }
+        cout << " (" << count << " 文字): " << buffer << endl;
+      }
+    }
+
+    ]
+
+basic_istream<charT,traits>& getline(char_type* s, streamsize n);
+
+    24 Returns: getline(s,n,widen('\n'))
+
+    24 返り値: getline(s,n,widen('\n'))
+
+basic_istream<charT,traits>&
+    ignore(streamsize n = 1, int_type delim = traits::eof());
+
+    25 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, extracts characters and discards them. Characters are extracted until any of the following occurs:
+
+        - if n != numeric_limits<streamsize>::max() (18.3.1), n characters are extracted
+        - end-of-file occurs on the input sequence (in which case the function calls setstate(eofbit), which may throw ios_base::failure (27.5.4.3));
+        - traits::eq_int_type(traits::to_int_type(c), delim) for the next available input character c (in which case c is extracted).
+
+    25 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落に記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、文字を抽出し捨てる。以下のいずれかが起こるまで文字を抽出する。
+
+        - n != numeric_limits<streamsize>::max() ( 18.3.1 ) が真である場合、 n 個の文字を抽出した。
+        - 入力シーケンスにおいて end-of-file が発生した ( 関数が ios_base::failure ( 27.5.4.3 ) を投げる可能性のある setstate(eofbit) 呼び出した場合 ) 。
+        - 次に利用可能な入力文字 c において traits::eq_int_type(traits::to_int_type(c), delim) が真となった ( c が抽出された場合 ) 。
+
+    26 Remarks: The last condition will never occur if traits::eq_int_type(delim, traits::eof()).
+
+    26 備考: traits::eq_int_type(delim, traits::eof()) が真である場合、最後の条件は決して満たされないだろう。
+
+    27 Returns: *this.
+
+    27 返り値: *this を返す。
+
+int_type peek();
+
+    28 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, reads but does not extract the current input character.
+
+    28 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落に記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、現在の入力文字を抽出せずに読む込む。
+
+    29 Returns: traits::eof() if good() is false. Otherwise, returns rdbuf()->sgetc().
+
+    29 返り値: good() が偽の場合 traits::eof() を、そうでない場合 rdbuf()->sgetc() を返す。
+
+basic_istream<charT,traits>& read(char_type* s, streamsize n);
+
+    30 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, if !good() calls setstate(failbit) which may throw an exception, and return. Otherwise extracts characters and stores them into successive locations of an array whose first element is designated by s.330 Characters are extracted and stored until either of the following occurs:
+
+        - n characters are stored;
+        - end-of-file occurs on the input sequence (in which case the function calls setstate(failbit|eofbit), which may throw ios_base::failure (27.5.4.3)).
+
+    30 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、 !good() が真である場合、例外を投げる化もしれない setstate(failbit) を呼び出し return する。そうでない場合、文字を抽出し最初の要素が s で指定されている配列の連続する領域に格納する 330 。以下のいずれかが起こるまで文字を抽出し格納する。
+
+        - n 文字を格納した。
+        - 入力シーケンスにおいて end-of-file が発生した ( ios_base::failure ( 27.5.4.3 ) を投げる可能性のある setstate(failbit|eofbit) を呼び出した場合 ) 。
+
+    330) この関数が signed char 型と unsigned char 型でオーバーロードされていないことに注意せよ。
+
+    31 Returns: *this.
+
+    31 返り値: *this を返す。
+
+streamsize readsome(char_type* s, streamsize n);
+
+    32 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, if !good() calls setstate(failbit) which may throw an exception, and return. Otherwise extracts characters and stores them into successive locations of an array whose first element is designated by s. If rdbuf()->in_avail() == -1, calls setstate(eofbit) (which may throw ios_base::failure (27.5.4.3)), and extracts no characters;
+
+        - If rdbuf()->in_avail() == 0, extracts no characters
+        - If rdbuf()->in_avail() > 0, extracts min(rdbuf()->in_avail(),n)).
+
+    32 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、 !good() が真である場合、例外を投げる可能性のある setstate(failbit) を呼び出し return する。そうでない場合、文字を抽出し最初の要素が s で指定されている配列の連続する領域に格納する。 rdbuf()->in_avail() == -1 が真である場合、 ( ios_base::failure (27.5.4.3) を投げる可能性のある ) setstate(eofbit) を呼び出し、文字を抽出しない。
+
+        - rdbuf()->in_avail() == 0 が真である場合、文字を抽出しない。
+        - rdbuf()->in_avail() > 0 が真である場合、 min(rdbuf()->in_avail(),n)) 個の文字を抽出する。
+
+    33 Returns: The number of characters extracted.
+
+    33 返り値: 抽出した文字数を返す。
+
+basic_istream<charT,traits>& putback(char_type c);
+
+    34 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, if !good() calls setstate(failbit) which may throw an exception, and return. If rdbuf() is not null, calls rdbuf->sputbackc(). If rdbuf() is null, or if sputbackc() returns traits::eof(), calls setstate(badbit) (which may throw ios_base::failure (27.5.4.3)).  [ Note: this function extracts no characters, so the value returned by the next call to gcount() is 0.  -end note ]
+
+    34 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、 !good() が真である場合、例外を投げる可能性のある setstate(failbit) を呼び出し、 return する。 rdbuf() が空値でない場合 rdbuf->sputbackc() を呼び出す。 rdbuf() が空値であるか sputbackc() が traits::eof() を返す場合、 ( ios_base::failure (27.5.4.3) を投げる可能性のある ) setstate(badbit) を呼び出す。 [ 注: この関数は文字を抽出しないため、 gcount() の次回の呼び出しは 0 を返す。 ]
+
+    35 Returns: *this.
+
+    35 返り値: *this を返す。
+
+basic_istream<charT,traits>& unget();
+
+    36 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1). After constructing a sentry object, if !good() calls setstate(failbit) which may throw an exception, and return. If rdbuf() is not null, calls rdbuf()->sungetc(). If rdbuf() is null, or if sungetc() returns traits::eof(), calls setstate(badbit) (which may throw ios_base::failure (27.5.4.3)). [ Note: this function extracts no characters, so the value returned by the next call to gcount() is 0. -end note ]
+
+    36 効果: 整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、 !good() が真である場合、例外を投げる可能性のある setstate(failbit) を呼び出し、 return する。 rdbuf() が空値でない場合、 rdbuf()->sungetc() を呼び出す。 rdbuf() が空値であるか sungetc() が traits::eof() を返した場合、 ( ios_base::failure ( 27.5.4.3 ) を投げる可能性のある ) setstate(badbit) を呼び出す。 [ 注: この関数は文字を抽出しないため、 gcount() の次回の呼び出しは 0 を返す。 ]
+
+    37 Returns: *this.
+
+    37 返り値: *this を返す。
+
+int sync();
+
+    38 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1), except that it does not count the number of characters extracted and does not affect the value returned by subsequent calls to gcount(). After constructing a sentry object, if rdbuf() is a null pointer, returns -1 . Otherwise, calls rdbuf()->pubsync() and, if that function returns -1 calls setstate(badbit) (which may throw ios_base::failure (27.5.4.3), and returns -1. Otherwise, returns zero.
+
+    38 効果: 抽出された文字数を数えず、次回の gcount() の呼び出しに影響を与えない場合を除いて、整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、 rdbuf() が空値ポインターである場合、 -1 を返す。そうでない場合、 rdbuf()->pubsync() を呼び出し、 -1 が返ってきた場合 ( ios_base::failure ( 27.5.4.3 ) を投げる可能性のある ) setstate(badbit) を呼び出し -1 を返す。そうでない場合、零を返す。
+
+pos_type tellg();
+
+    39 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1), except that it does not count the number of characters extracted and does not affect the value returned by subsequent calls to gcount().
+
+    39 効果: 抽出された文字数を数えず、次回の gcount() の呼び出しに影響を与えない場合を除いて、整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。
+
+    40 Returns: After constructing a sentry object, if fail() != false, returns pos_type(-1) to indicate failure. Otherwise, returns rdbuf()->pubseekoff(0, cur, in).
+
+    40 返り値: sentry オブジェクトを構築したあと、 fail() != false が真である場合、失敗を示す pos_type(-1) を返す。そうでない場合、 rdbuf()->pubseekoff(0, cur, in) を返す。
+
+basic_istream<charT,traits>& seekg(pos_type pos);
+
+    41 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1), except that it does not count the number of characters extracted and does not affect the value returned by subsequent calls to gcount(). After constructing a sentry object, if fail() != true, executes rdbuf()->pubseekpos(pos, ios_base::in). In case of failure, the function calls setstate(failbit) (which may throw ios_base::failure).
+
+    41 効果: 抽出された文字数を数えず、次回の gcount() の呼び出しに影響を与えない場合を除いて、整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、 fail() != true が真である場合、  rdbuf()->pubseekpos(pos, ios_base::in) を実行する。失敗した場合、関数は ( ios_base::failure を投げる可能性のある ) setstate(failbit) を呼び出す。
+
+    42 Returns: *this.
+
+    42 返り値: *this を返す。
+
+basic_istream<charT,traits>& seekg(off_type off, ios_base::seekdir dir);
+
+    43 Effects: Behaves as an unformatted input function (as described in 27.7.1.3, paragraph 1), except that it does not count the number of characters extracted and does not affect the value returned by subsequent calls to gcount(). After constructing a sentry object, if fail() != true, executes rdbuf()->pubseekoff(off, dir, ios_base::in).
+
+    43 効果: 抽出された文字数を数えず、次回の gcount() の呼び出しに影響を与えない場合を除いて、整形なし入力関数 ( 27.7.1.3 の第 1 段落で記述されている ) として振る舞う。 sentry オブジェクトを構築したあと、 fail() != true が真である場合 rdbuf()->pubseekoff(off, dir, ios_base::in) を実行する。
+
+    44 Returns: *this.
+
+    44 返り値: *this を返す。
+

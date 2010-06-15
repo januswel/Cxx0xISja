@@ -1,0 +1,14 @@
+27.6.2.2.5 Put area [streambuf.pub.put]
+
+int_type sputc(char_type c);
+
+    1 Returns: If the output sequence write position is not available, returns overflow(traits::to_int_type(c)). Otherwise, stores c at the next pointer for the output sequence, increments the pointer, and returns traits::to_int_type(c).
+
+    1 戻り値: 出力シーケンスの書き出し位置が利用可能でない場合、 overflow(traits::to_int_type(c)) を呼び出しその結果を返す。そうでない場合、出力シーケンスに対する次点ポインターに c を格納しポインターをひとつ進め traits::to_int_type(c) を呼び出しその結果を返す。
+
+streamsize sputn(const char_type* s, streamsize n);
+
+    2 Returns: xsputn(s,n).
+
+    2 戻り値: xsputn(s,n) を呼び出しその結果を返す。
+

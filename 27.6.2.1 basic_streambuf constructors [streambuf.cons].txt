@@ -1,0 +1,54 @@
+27.6.2.1 basic_streambuf constructors [streambuf.cons]
+
+basic_streambuf();
+
+    1 Effects: Constructs an object of class basic_streambuf<charT,traits> and initializes:312
+
+        - all its pointer member objects to null pointers,
+        - the getloc() member to a copy the global locale, locale(), at the time of construction.
+
+    312) The default constructor is protected for class basic_streambuf to assure that only objects for classes derived from this class may be constructed.
+
+    1 効果: basic_streambuf<charT,traits> クラスのオブジェクトを構築し初期化する 312 。
+
+        - ポインターであるメンバーオブジェクトはすべて空値ポインターとなる。
+        - getloc() メンバーは構築時の大域ロカール locale() のコピーとなる。
+
+    312) basic_streambuf クラスから派生したクラスのオブジェクトのみが構築されてよいことを保証するためにこのクラスのデフォルトコンストラクターは protected である。
+
+    2 Remarks: Once the getloc() member is initialized, results of calling locale member functions, and of members of facets so obtained, can safely be cached until the next time the member imbue is called.  basic_streambuf(const basic_streambuf& rhs);
+
+    2 備考: 一度 getloc() メンバーが初期化されると、ロカールメンバー関数の呼び出し結果と得られるファセットは次に imbue メンバーが呼ばれるまで安全にキャッシュされる。
+
+basic_streambuf(const basic_streambuf& rhs);
+
+    3 Effects: Constructs a copy of rhs.
+
+    3 効果: rhs のコピーを構築する。
+
+    4 Postconditions:
+
+        - eback() == rhs.eback()
+        - gptr() == rhs.gptr()
+        - egptr() == rhs.egptr()
+        - pbase() == rhs.pbase()
+        - pptr() == rhs.pptr()
+        - epptr() == rhs.epptr()
+        - getloc() == rhs.getloc()
+
+    4 呼び出し後の状態:
+
+        - eback() == rhs.eback()
+        - gptr() == rhs.gptr()
+        - egptr() == rhs.egptr()
+        - pbase() == rhs.pbase()
+        - pptr() == rhs.pptr()
+        - epptr() == rhs.epptr()
+        - getloc() == rhs.getloc()
+
+~basic_streambuf();
+
+    5 Effects: None.
+
+    5 効果: 何もしない。
+
